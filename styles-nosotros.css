@@ -1,0 +1,63 @@
+/* Paleta */
+:root {
+  --periwinkle: #C9C9EE;
+  --rose-quartz: #BAABBD;
+  --mauvelous: #9F838C;
+  --dark-purple: #240115;
+}
+
+body {
+  font-family: 'Nunito Sans';
+  background-color: #fafafa;
+  color: #333;
+}
+
+/* Quienes somos */
+.hero-section {
+  background: var(--mauvelous);
+}
+
+/* Section titles */
+.section-title {
+  font-family: 'Karla';
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: var(--dark-purple);
+  margin-bottom: 15px;
+}
+
+/* Section text */
+.section-text {
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+/* Valores */
+.value-card {
+  background: var(--periwinkle);
+  border-radius: 10px;
+}
+
+.bg-light-purple {
+  background: var(--periwinkle);
+}
+
+.bg-rose-quartz {
+  background: var(--rose-quartz);
+}
+
+/* Navbar y footer */
+.bg-dark-purple {
+  background-color: var(--dark-purple) !important;
+}
+
+/* Equipo */
+.team-card {
+  background: #fff;
+  border-radius: 10px;
+}
+
+.team-card .role {
+  font-weight: bold;
+  color: var(--dark-purple);
+}
