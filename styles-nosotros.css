@@ -9,6 +9,11 @@
 }
 
 /* ====== LOGO ====== */
+/* LOGO */
+.logo-navbar {
+  height: 50px;
+  width: auto;
+}
 .logo-text {
     font-size: 22px;
     font-weight: bold;
@@ -145,6 +150,34 @@ body {
   height: 150px; 
 } 
 
+/* Fade animations */
+.fade-in {
+  animation: fadeIn 1.3s ease forwards;
+}
 
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all .8s ease;
+}
 
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Keyframes */
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+/* Social icons */
+.icon-social {
+  width: 38px;
+  transition: transform .3s;
+}
+.icon-social:hover {
+  transform: scale(1.2);
+}
 
