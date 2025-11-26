@@ -20,3 +20,76 @@
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
+
+
+        /* JOHANA NAV */
+/* ====== HEADER ====== */
+.header-nav {
+    background-color: #240115;
+    padding: 12px 20px;
+    display: flex;
+   
+    border-bottom: 1px solid #b3b3b3;
+}
+
+/* ====== LOGO ====== */
+/* LOGO */
+.logo-navbar {
+  height: 50px;
+  width: auto;
+}
+.logo-text {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+}
+
+/* ====== CONTENEDOR DEL MENÚ ====== */
+.menu-container {
+    margin-top: 10px;
+}
+
+/* ====== LINKS DEL MENÚ ====== */
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 12px;
+    padding: 5px 4px;
+    font-size: 14px;
+    border-right: 1px solid #b3b3b3;
+}
+
+/* Último sin línea */
+.nav-links a:last-child {
+    border-right: none;
+}
+
+/* Hover subrayado */
+.nav-links a:hover {
+    border-bottom: 2px solid black;
+}
+
+/* ====== CÍRCULO USUARIO ====== */
+.user-circle {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: white;
+    border: 2px solid #ffffff;
+    cursor: pointer;
+}
+
+/* ADRIAN */
+/* Paleta */
+:root {
+  --periwinkle: #C9C9EE;
+  --rose-quartz: #BAABBD;
+  --mauvelous: #9F838C;
+  --dark-purple: #240115;
+}
+
+body {
+  font-family: 'Nunito Sans';
+  background-color: #fafafa;
+  color: #333;
+}
