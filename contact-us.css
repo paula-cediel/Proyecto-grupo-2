@@ -1,0 +1,22 @@
+
+        /* Estilo para mensajes de error */
+        .error {
+            color: red;
+            font-size: 0.9rem;
+        }
+
+        /* Fondo elegante en la cabecera */
+        .header-contacto {
+            background: linear-gradient(to right, #161616, #3a3a3a);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        /* Sombra al formulario */
+        .form-container {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
