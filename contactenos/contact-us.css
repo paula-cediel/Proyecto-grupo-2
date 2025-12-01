@@ -1,0 +1,151 @@
+
+        /* Estilo para mensajes de error */
+        .error {
+            color: red;
+            font-size: 0.9rem;
+        }
+
+        /* Fondo elegante en la cabecera */
+        .header-contacto {
+            background: linear-gradient(to right, #161616, #3a3a3a);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        /* Sombra al formulario */
+        .form-container {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+
+        /* JOHANA NAV */
+/* ====== HEADER ====== */
+.header-nav {
+    background-color: #240115 !important;
+    padding: 12px 20px;
+    display: flex;
+   
+    border-bottom: 1px solid #b3b3b3;
+}
+
+/* ====== LOGO ====== */
+/* LOGO */
+.logo-navbar {
+  height: 50px;
+  width: auto;
+}
+.logo-text {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+}
+
+/* ====== CONTENEDOR DEL MENÚ ====== */
+.menu-container {
+    margin-top: 10px;
+}
+
+/* ====== LINKS DEL MENÚ ====== */
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 12px;
+    padding: 5px 4px;
+    font-size: 14px;
+    border-right: 1px solid #b3b3b3;
+}
+
+/* Último sin línea */
+.nav-links a:last-child {
+    border-right: none;
+}
+
+/* Hover subrayado */
+.nav-links a:hover {
+    border-bottom: 2px solid black;
+}
+
+/* ====== CÍRCULO USUARIO ====== */
+.user-circle {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: white;
+    border: 2px solid #ffffff;
+    cursor: pointer;
+}
+
+/* ADRIAN */
+/* Paleta */
+:root {
+  --periwinkle: #C9C9EE;
+  --rose-quartz: #BAABBD;
+  --mauvelous: #9F838C;
+  --dark-purple: #240115;
+}
+
+body {
+  font-family: 'Nunito Sans';
+  background-color: #fafafa;
+  color: #333;
+}
+
+/* === FOOTER ESTILO IGUAL A LA IMAGEN === */
+
+footer {
+    background-color: #000;   /* Fondo negro */
+    color: white;             /* Texto blanco */
+    padding: 40px 0;
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+}
+
+footer h5 {
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+footer p {
+    max-width: 300px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+footer ul li a {
+    text-decoration: none;
+    color: white;
+    transition: 0.3s;
+}
+
+footer ul li:hover a {
+    opacity: 0.7;
+}
+
+footer .list-inline-item a {
+    font-size: 20px;
+    padding: 5px;
+}
+
+/* Línea separadora */
+footer hr {
+    border-color: #333;
+    width: 90%;
+    margin: 25px auto;
+}
+/* ADRIAN */
+/* Paleta */
+:root {
+  --periwinkle: #C9C9EE;
+  --rose-quartz: #BAABBD;
+  --mauvelous: #9F838C;
+  --dark-purple: #240115;
+}
+
+.bg-dark-purple {
+  background-color: var(--dark-purple) !important;
+}
