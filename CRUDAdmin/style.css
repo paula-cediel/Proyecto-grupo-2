@@ -11,4 +11,96 @@ body {
 .card img {
     height: 200px;
     object-fit: cover;
+
+}
+
+/* JOHANA NAV */
+/* ====== HEADER ====== */
+.header-nav {
+    background-color: #240115;
+    padding: 12px 20px;
+    display: flex;
+   
+    border-bottom: 1px solid #b3b3b3;
+}
+
+/* ====== LOGO ====== */
+/* LOGO */
+.logo-navbar {
+  height: 50px;
+  width: auto;
+}
+.logo-text {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+}
+
+/* ====== CONTENEDOR DEL MENÚ ====== */
+.menu-container {
+    margin-top: 10px;
+}
+
+/* ====== LINKS DEL MENÚ ====== */
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 12px;
+    padding: 5px 4px;
+    font-size: 14px;
+    border-right: 1px solid #b3b3b3;
+}
+
+/* Último sin línea */
+.nav-links a:last-child {
+    border-right: none;
+}
+
+/* Hover subrayado */
+.nav-links a:hover {
+    border-bottom: 2px solid black;
+}
+
+/* === FOOTER ESTILO IGUAL A LA IMAGEN === */
+
+footer {
+    background-color: #240115;   /* Fondo negro */
+    color: white;             /* Texto blanco */
+    padding: 40px 0;
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+}
+
+footer h5 {
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+footer p {
+    max-width: 300px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+footer ul li a {
+    text-decoration: none;
+    color: white;
+    transition: 0.3s;
+}vv
+
+footer ul li:hover a {
+    opacity: 0.7;
+}
+
+footer .list-inline-item a {
+    font-size: 20px;
+    padding: 5px;
+}
+
+/* Línea separadora */
+footer hr {
+    border-color: #333;
+    width: 90%;
+    margin: 25px auto;
 }
