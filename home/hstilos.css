@@ -90,3 +90,17 @@ html, body {
     height: 500px;
     object-fit: contain;
 }
+/* Se marca cuando se seleccione */
+.producto.seleccionado {
+  border: 3px solid #f1c40f;
+  background: #fff8d5;
+}
+
+/* Caja de seleccionados */
+.zona-seleccionados {
+  margin: 30px 0;
+  padding: 15px;
+  border: 2px solid #ccc;
+  background: #f9f9f9;
+  min-height: 150px;
+}
