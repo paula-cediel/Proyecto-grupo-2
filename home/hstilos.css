@@ -1,82 +1,88 @@
-/* ======================
-      RESET GENERAL
+//* ======================
+   RESET GENERAL
 ====================== */
 html, body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: sans-serif;
-    overflow-x: hidden;   /* por si algún elemento se pasa 1px */
+    overflow-x: hidden;
 }
 
 /* ======================
-      HEADER / NAVBAR
+   HEADER / NAVBAR
 ====================== */
 .header-nav {
-    background-color: #240115 !important;
-    padding: 12px 0; /* sin padding lateral */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;          /* <- ya no 100vw */
-    margin: 0;            /* <- sin calc */
+    background-color: #240115;
     border-bottom: 1px solid #b3b3b3;
+}
+
+/* Color real del navbar de Bootstrap */
+.bg-dark-purple {
+    background-color: #240115 !important;
 }
 
 /* LOGO */
 .logo-navbar {
     height: 70px;
     width: auto;
-    margin-left: 20px;
 }
 
 /* LINKS DEL MENÚ */
-.nav-links a {
+.nav-links .nav-link {
     color: white;
     text-decoration: none;
     margin: 0 12px;
     padding: 5px 4px;
     font-size: 14px;
-    border-right: 1px solid #b3b3b3;
+  
 }
 
 /* Último sin línea */
-.nav-links a:last-child {
+.nav-links .nav-item:last-child .nav-link {
     border-right: none;
 }
 
 /* Hover subrayado */
-.nav-links a:hover {
+.nav-links .nav-link:hover {
     border-bottom: 2px solid black;
 }
 
 /* ======================
-      HERO FULL WIDTH
+   HERO FULL WIDTH
 ====================== */
 .hero {
     display: flex;
     align-items: center;
     justify-content: space-between;
     background: #dbceeb;
-    width: 100%;          /* <- ya no 100vw */
-    margin: 0;            /* <- sin calc */
-
+    width: 100%;
+    margin: 0;
 }
 
+/* Contenedor de texto */
+.hero-content {
+    max-width: 60%;
+}
 
+/* Título */
 .hero h1 {
     font-size: 80px;
     font-weight: bold;
+    color: #333;
+    margin-left: 40px;
 }
 
+/* Botón */
 .hero-btn {
-
     padding: 12px 25px;
     background: #240115;
+    color: #fff;
     border: none;
     cursor: pointer;
     font-weight: bold;
     border-radius: 8px;
+    margin-left: 40px;
 }
 
 /* Imagen del hero */
