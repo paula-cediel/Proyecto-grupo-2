@@ -25,20 +25,9 @@ html, body {
 
 /* LOGO */
 .logo-navbar {
-    height: 50px;
+    height: 70px;
     width: auto;
-}
-
-.logo-text {
-    font-size: 22px;
-    font-weight: bold;
-    color: white;
     margin-left: 20px;
-}
-
-/* CONTENEDOR DEL MENÚ */
-.menu-container {
-    margin-right: 20px;
 }
 
 /* LINKS DEL MENÚ */
