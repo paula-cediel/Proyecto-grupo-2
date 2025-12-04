@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,114 +10,121 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <header class="header-nav">
-    <div class="container-fluid">
-        <!-- Fila superior: Logo + Círculo -->
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark-purple shadow-sm">
-        <div class="top-bar d-flex justify-content-between align-items-center">
-          <a class="navbar-brand d-flex  justify-content-start" href="#">
-            <img src="images/LogoLetra.png" alt="Letal Cosplay Logo" class="logo-navbar">
-          </a>
-        </div>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <!-- Fila inferior: Menú -->
-        <div class="collapse navbar-collapse justify-content-center" id="navMenu">
-          <ul class="nav-links text-center mt-3 navbar-nav ms-auto ">
-            <li class="nav-item"><a class="nav-link" href="/home/home.html">Inicio</a></li>
-              <li class="nav-item"><a class="nav-link" href="/acerca_de_nosotros/about.html">Sobre nosotros</a></li>
-              <li class="nav-item"><a class="nav-link" href="/nav.html">Productos</a></li>
-              <li class="nav-item"><a class="nav-link" href="/CRUDAdmin/main.html">Perfil</a></li>
-              <li class="nav-item"><a class="nav-link" href="/contactenos/contact-us.html">Contáctenos</a></li>
-          </ul>
-        </div>
-        <!-- 
+        <div class="container-fluid">
+            <!-- Fila superior: Logo + Círculo -->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark-purple shadow-sm">
+                <div class="top-bar d-flex justify-content-between align-items-center">
+                    <a class="navbar-brand d-flex  justify-content-start" href="#">
+                        <img src="images/LogoLetra.png" alt="Letal Cosplay Logo" class="logo-navbar">
+                    </a>
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- Fila inferior: Menú -->
+                <div class="collapse navbar-collapse justify-content-center" id="navMenu">
+                    <ul class="nav-links text-center mt-3 navbar-nav ms-auto ">
+                        <li class="nav-item"><a class="nav-link" href="/home/home.html">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/acerca_de_nosotros/about.html">Sobre
+                                nosotros</a></li>
+                                                <li class="nav-item"><a class="nav-link" href="/Productos/productos.html">Productos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/CRUDAdmin/main.html">Perfil</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/contactenos/contact-us.html">Contáctenos</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 
         <a class="d-flex justify-content-end" href="registro.html">
                 <div class="user-circle"></div>
         </a>
         -->
-      </nav>
+            </nav>
 
-    </div>
-      
-    
-</header>
-<div class="container py-4">
-    <h1 class="text-center mb-4">Crear productos</h1>
-    <div class="card mb-4 shadow">
-        <div class="card-header bg-primary create text-white fw-bold">
-            Crear nueva publicación
         </div>
-        <div class="card-body">
-            <form id="postForm">
-                <div class="mb-3">
-                    <label class="form-label">Nombre producto</label>
-                    <input type="text" id="title" class="form-control" maxlength="20" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Precio</label>
-                    <input type="number" id="cost" class="form-control" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Descripción</label>
-                    <textarea id="description" class="form-control" rows="3" required></textarea>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Existencias</label>
-                    <input type="number" id="stock" class="form-control" required>
-                </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Imagen</label>
-                    <input type="file" id="image" accept="image/*" class="form-control" required>
-                </div>
-                <button type="submit" class="btn  post w-100">Publicar</button>
-            </form>
+
+    </header>
+    <div class="container py-4">
+        <h1 class="text-center mb-4">Crear productos</h1>
+        <div class="card mb-4 shadow">
+            <div class="card-header bg-primary create text-white fw-bold">
+                Crear nueva publicación
+            </div>
+            <div class="card-body">
+                <form id="postForm">
+                    <div class="mb-3">
+                        <label class="form-label">Nombre producto</label>
+                        <input type="text" id="title" class="form-control" maxlength="20" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Precio</label>
+                        <input type="number" id="cost" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Descripción</label>
+                        <textarea id="description" class="form-control" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Existencias</label>
+                        <input type="number" id="stock" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Imagen</label>
+                        <input type="file" id="image" accept="image/*" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn  post w-100">Publicar</button>
+                </form>
+            </div>
         </div>
+        <h3 class="mb-3">Publicaciones recientes</h3>
+        <div id="feed" class="row g-4"></div>
     </div>
-    <h3 class="mb-3">Publicaciones recientes</h3>
-    <div id="feed" class="row g-4"></div>
-</div>
     <footer class="mt-auto">
-    <div>
+        <div>
 
-        <div class="row">
+            <div class="row">
 
-            <div class="col-md-4 mb-3">
-                <h5 class="text-uppercase">Letal cosplay</h5>
-                <p>Letal Cosplay ofrece productos de alta calidad a precios accesibles, con opciones personalizadas y acabados profesionales que se adaptan a cada cliente.</p>
+                <div class="col-md-4 mb-3">
+                    <h5 class="text-uppercase">Letal cosplay</h5>
+                    <p>Letal Cosplay ofrece productos de alta calidad a precios accesibles, con opciones personalizadas
+                        y acabados profesionales que se adaptan a cada cliente.</p>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <h5 class="text-uppercase">Secciones</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#productos-destacados">Inicio</a></li>
+                        <li><a href="#Productos">Productos</a></li>
+                        <li><a href="#QuienesSomos">Quienes Somos</a></li>
+                        <li><a href="#Contactenos">Contactenos</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <h5 class="text-uppercase">Síguenos</h5>
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><a href="https://www.facebook.com/profile.php?id=61579635025362"><i
+                                    class="bi bi-facebook"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="bi bi-twitter"></i></a></li>
+                        <li class="list-inline-item"><a href="https://www.instagram.com/letalcosplay/"><i
+                                    class="bi bi-instagram"></i></a></li>
+                    </ul>
+                </div>
+
             </div>
 
-            <div class="col-md-4 mb-3">
-                <h5 class="text-uppercase">Secciones</h5>
-                <ul class="list-unstyled">
-                    <li><a href="#productos-destacados">Inicio</a></li>
-                    <li><a href="#Productos">Productos</a></li>
-                    <li><a href="#QuienesSomos">Quienes Somos</a></li>
-                    <li><a href="#Contactenos">Contactenos</a></li>
-                </ul>
-            </div>
+            <hr class="mb-4">
 
-            <div class="col-md-4 mb-3">
-                <h5 class="text-uppercase">Síguenos</h5>
-                <ul class="list-inline">
-                    <li class="list-inline-item"><a href="https://www.facebook.com/profile.php?id=61579635025362"><i class="bi bi-facebook"></i></a></li>
-                    <li class="list-inline-item"><a href="#"><i class="bi bi-twitter"></i></a></li>
-                    <li class="list-inline-item"><a href="https://www.instagram.com/letalcosplay/"><i class="bi bi-instagram"></i></a></li>
-                </ul>
-            </div>
+            <p>&copy; 2025 Letal Cosplay, todos los derechos reservados.</p>
 
         </div>
-
-        <hr class="mb-4">
-
-        <p>&copy; 2025 Letal Cosplay, todos los derechos reservados.</p>
-
-    </div>
-</footer>
+    </footer>
     <script src="script.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </body>
+
 </html>
