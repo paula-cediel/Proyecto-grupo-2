@@ -122,6 +122,18 @@ footer hr {
     color:WHITE;
 }
 
+.editar:hover{
+    background-color: #591c32;
+    color:WHITE;
+}
+
 .eliminar{
     background-color: #591c32;
+    color: white;
+} 
+
+.eliminar:hover{
+    background-color: #240115;
+    color:WHITE;
+
 }

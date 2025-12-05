@@ -14,6 +14,11 @@ body {
 
 }
 
+
+#btnCarrito{
+    background-color: #9F838C;
+    border-color: #591c32;
+}
 /* JOHANA NAV */
 /* ====== HEADER ====== */
 .header-nav {
