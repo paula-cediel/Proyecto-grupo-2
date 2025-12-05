@@ -116,3 +116,12 @@ footer hr {
 .create{
     background-color: #591c32 !important;
 }
+
+.editar{
+    background-color: #240115;
+    color:WHITE;
+}
+
+.eliminar{
+    background-color: #591c32;
+}

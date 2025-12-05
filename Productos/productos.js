@@ -14,7 +14,8 @@ function mostrarProductos() {
     listaProductos.innerHTML = "";
 
     productos.forEach(prod => {
-        //const itemCarrito = carrito.find(p => p.id === prod.id);
+        const itemCarrito = carrito.find(p => p.id === prod.id);
+        /*
         function encontrarItem(carrito, prod) {
             for (let i = 0; i < carrito.length; i++) {
                 if (carrito[i].id === prod.id) {
@@ -24,14 +25,14 @@ function mostrarProductos() {
             return undefined; // Si no se encuentra ningún elemento, devuelve undefined
         }
 
-        const itemCarrito = encontrarItem(carrito, prod);
-        //const cantidadCompra = itemCarrito ? itemCarrito.cantidadCompra : 0;
-        let cantidadCompra;
+        const itemCarrito = encontrarItem(carrito, prod);*/
+        const cantidadCompra = itemCarrito ? itemCarrito.cantidadCompra : 0;
+        /*let cantidadCompra;
         if (itemCarrito) {
             cantidadCompra = itemCarrito.cantidadCompra;
         } else {
             cantidadCompra = 0;
-        }
+        }*/
         const card = document.createElement("div");
         card.classList.add("col-12", "col-sm-6", "col-lg-4");
 
