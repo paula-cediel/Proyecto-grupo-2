@@ -5,8 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="hstilos.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="styles-productos.css">
   <title>Letal Cosplay</title>
 </head>
 
@@ -88,6 +90,30 @@
     <!-- Aquí aparecerán los productos seleccionados AUTOMÁTICAMENTE -->
   </section>
 
+  <!-- CAROUSEL EVENTOS -->
+  <h2 class="text-center mb-3">Eventos</h2>
+  <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active" data-bs-interval="2000">
+        <img src="/home/imagenes/baner1.png" class="d-block w-100 img-fluid" style="object-fit: contain; height: 600px" alt="EventoCosplayer_1">
+      </div>
+      <div class="carousel-item" data-bs-interval="2000">
+        <img src="/home/imagenes/banner2.jpg" class="d-block w-100 img-fluid" style="object-fit: contain; height: 600px" alt="EventoCosplayer_2">
+      </div>
+      <div class="carousel-item" data-bs-interval="2000">
+        <img src="/home/imagenes/banner3.png" class="d-block w-100 img-fluid" style="object-fit: contain; height: 600px" alt="EventoCosplayer_3">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+      <span class="botones-flecha carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+      <span class="botones-flecha carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
     <footer class="mt-auto">
         <div>
 
@@ -128,8 +154,11 @@
 
         </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="productos.js"></script>
+
+  <script src="Script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 
 </body>
+
 </html>
