@@ -6,10 +6,6 @@ const mayusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 const numeros = "0123456789".split("");
 const simbolos = "@$!%*?&".split("");
 
-
-
-//Variables para verificacion de contenidos
-
 //Funcion-boton para capturar la info del fomulario
 formulario.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -39,7 +35,7 @@ formulario.addEventListener("submit", function (event) {
     }
     if (isNaN(telefono)) {
     return Swal.fire("Error", "El teléfono solo debe contener números.", "error");
-}
+    }
     if (contrasena.length < 8 || contrasena.includes(" ")) {
         return Swal.fire("Error", "La contraseña debe tener mínimo 8 caracteres y no tener espacios", "error");
     }
