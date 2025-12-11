@@ -15,6 +15,7 @@ formulario.addEventListener("submit", function (event) {
     const telefono = document.getElementById("telefono").value.trim();
     const email = document.getElementById("email").value.trim();
     const contrasena = document.getElementById("contrasena").value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     //Variables para validacion de correo
     let min = false;
@@ -22,7 +23,7 @@ formulario.addEventListener("submit", function (event) {
     let num = false;
     let sim = false;
 
-    //Validaciones con SweetAlert
+    //Validaciones y alertas con SweetAlert
     if (nombre === "" || telefono === "" || email === "" || contrasena === "" ) {
             Swal.fire("Error", "Todos los campos son obligatorios", "error");
             return;
@@ -36,8 +37,11 @@ formulario.addEventListener("submit", function (event) {
     if (isNaN(telefono)) {
     return Swal.fire("Error", "El teléfono solo debe contener números.", "error");
     }
+    if (!emailRegex.test(email)) {
+    return Swal.fire("Error", "Ingresa un correo válido.", "error");
+    }
     if (contrasena.length < 8 || contrasena.includes(" ")) {
-        return Swal.fire("Error", "La contraseña debe tener mínimo 8 caracteres y no tener espacios", "error");
+        return Swal.fire("Error", "La contraseña debe tener mínimo 8 caracteres y no debe tener espacios", "error");
     }
     if (contrasena === nombre) {
     return Swal.fire("Error", "La contraseña no puede ser igual al usuario.", "error");
@@ -67,7 +71,7 @@ formulario.addEventListener("submit", function (event) {
         }
     }
     if (!min || !may || !num || !sim) {
-        Swal.fire("Error", "La contraseña debe tener una minúscula, una mayúscula, un número y un símbolo especial.", "error");
+        Swal.fire("Error", "La contraseña debe tener al menos una minúscula, una mayúscula, un número y un símbolo.", "error");
         return;
     }
 
