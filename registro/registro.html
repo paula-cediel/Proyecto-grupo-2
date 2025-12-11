@@ -6,10 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
 
-    <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <!-- Bootstrap y estilos del header/footer -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="registro.css">
@@ -25,7 +23,7 @@
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark-purple shadow-sm">
                 <div class="top-bar d-flex justify-content-between align-items-center">
                     <a class="navbar-brand d-flex justify-content-start" href="#">
-                        <img src="imagenes/LogoLetra.png" alt="Letal Cosplay Logo" class="logo-navbar">
+                        <img src="images/LogoLetra.png" alt="Letal Cosplay Logo" class="logo-navbar">
                     </a>
                 </div>
 
@@ -38,6 +36,7 @@
                         <li class="nav-item"><a class="nav-link" href="/home/home.html">Inicio</a></li>
                         <li class="nav-item"><a class="nav-link" href="/acerca_de_nosotros/about.html">Sobre nosotros</a></li>
                         <li class="nav-item"><a class="nav-link" href="/Productos/productos.html">Productos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/registro/registro.html">Registro</a></li>
                         <li class="nav-item"><a class="nav-link" href="/CRUDAdmin/main.html">Perfil</a></li>
                         <li class="nav-item"><a class="nav-link" href="/contactenos/contact-us.html">Contáctenos</a></li>
                     </ul>
@@ -47,35 +46,33 @@
     </header>
 
 
-    <!-- FORMULARIO CENTRADO (TU FORMULARIO ORIGINAL) -->
+    <!-- FORMULARIO -->
     <div class="form-wrapper">
         <div class="container-registro">
             <h2>Registro de Usuario</h2>
+            <form id="formulario">
 
-            <label>Nombre completo:</label>
-            <input type="text" id="nombre">
+                <label>Nombre completo:</label>
+                <input type="text" id="nombre">
 
-            <label>Número de teléfono:</label>
-            <input type="text" id="telefono">
+                <label>Número de teléfono:</label>
+                <input type="text" id="telefono">
 
-            <label>Email (nombre de usuario):</label>
-            <input type="email" id="email">
+                <label>Email (nombre de usuario):</label>
+                <input type="email" id="email">
 
-            <label>Contraseña:</label>
-            <div class="password-container">
-                <input type="password" id="password">
-                <span class="ojito" onclick="togglePassword()">👁️</span>
-            </div>
-
-            <button onclick="registrar()">Registrar</button>
-
-            <div class="resultado" id="resultado"></div>
+                <label>Contraseña:</label>
+                <div class="password-container">
+                    <input type="password" id="contrasena">
+                    <span class="ojito" onclick="togglePassword()">👁️</span>
+                </div>
+                <button type="submit">Registrar</button>
+            </form>
         </div>
     </div>
 
-
     <!-- FOOTER -->
-    <footer class="mt-auto bg-dark text-light p-4" style="margin-top: 60px;">
+    <footer class="mt-auto text-light p-4" style="margin-top: 60px;">
         <div class="container">
 
             <div class="row">
@@ -114,8 +111,6 @@
         </div>
     </footer>
 
-
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="registro.js"></script>
 </body>

@@ -71,6 +71,7 @@ body {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     margin-bottom: 40px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
 }
 
 input {
@@ -120,7 +121,7 @@ button:hover {
 }
 
 footer {
-    background-color: #240115;   /* Fondo negro */
+    background-color: #240115 !important;   /* Fondo negro */
     color: white;             /* Texto blanco */
     padding: 40px 0;
     font-family: "Poppins", sans-serif;
