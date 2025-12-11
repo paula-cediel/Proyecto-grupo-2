@@ -1,0 +1,155 @@
+/* ======================
+   RESET GENERAL
+====================== */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    overflow-x: hidden;
+}
+
+/* JOHANA NAV */
+/* ====== HEADER ====== */
+.header-nav {
+    background-color: #240115;
+    padding: 12px 20px;
+    display: flex;
+
+    border-bottom: 1px solid #b3b3b3;
+}
+
+/* ====== LOGO ====== */
+/* LOGO */
+.logo-navbar {
+    height: 50px;
+    width: auto;
+}
+
+.logo-text {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+}
+
+/* ====== CONTENEDOR DEL MENÚ ====== */
+.menu-container {
+    margin-top: 10px;
+}
+
+/* ====== LINKS DEL MENÚ ====== */
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 12px;
+    padding: 5px 4px;
+    font-size: 14px;
+    border-right: 1px solid #b3b3b3;
+}
+
+/* Último sin línea */
+.nav-links a:last-child {
+    border-right: none;
+}
+
+/* Hover subrayado */
+.nav-links a:hover {
+    border-bottom: 2px solid black;
+}
+
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.container-registro {
+    background: white;
+    padding: 25px;
+    width: 380px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 40px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    box-sizing: border-box;
+}
+
+.password-container {
+    position: relative;
+}
+
+.ojito {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 20px;
+    user-select: none;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #45a049;
+}
+
+.resultado {
+    margin-top: 20px;
+    background: #e6ffe6;
+    padding: 10px;
+    border-radius: 5px;
+    display: none;
+}
+
+footer {
+    background-color: #240115;   /* Fondo negro */
+    color: white;             /* Texto blanco */
+    padding: 40px 0;
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+}
+
+footer h5 {
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+footer p {
+    max-width: 300px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+footer ul li a {
+    text-decoration: none;
+    color: white;
+    transition: 0.3s;
+}vv
+
+footer ul li:hover a {
+    opacity: 0.7;
+}
+
+footer .list-inline-item a {
+    font-size: 20px;
+    padding: 5px;
+}
