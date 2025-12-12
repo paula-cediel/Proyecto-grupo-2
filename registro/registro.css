@@ -72,6 +72,7 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     margin-bottom: 40px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+    font-weight : bold;
 }
 
 input {
@@ -87,7 +88,7 @@ input {
     position: relative;
 }
 
-.ojito {
+/* .ojito {
     position: absolute;
     right: 12px;
     top: 50%;
@@ -95,7 +96,7 @@ input {
     cursor: pointer;
     font-size: 20px;
     user-select: none;
-}
+} */
 
 button {
     width: 100%;
