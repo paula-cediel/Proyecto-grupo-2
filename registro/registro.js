@@ -1,10 +1,97 @@
-const formulario = document.getElementById("formulario");
-
 //Variables para recorrer y hacer validaciones
 const minusculas = "abcdefghijklmnopqrstuvwxyz".split("");
 const mayusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 const numeros = "0123456789".split("");
 const simbolos = "@$!%*?&".split("");
+
+const nombre = document.getElementById("nombre");
+const telefono = document.getElementById("telefono");
+const correo = document.getElementById("email");
+const password = document.getElementById("contrasena");
+const formulario = document.getElementById("formulario");
+
+const errorNombre = document.getElementById("errorNombre");
+const errorCorreo = document.getElementById("errorCorreo");
+const errorPassword = document.getElementById("errorPassword");
+
+/* ESTE NO EXISTE EN HTML, LO CREAMOS DINÁMICAMENTE */
+let errorTelefono = document.createElement("small");
+errorTelefono.className = "error";
+telefono.insertAdjacentElement("afterend", errorTelefono);
+
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+// VALIDAR NOMBRE
+nombre.addEventListener("input", () => {
+  if (nombre.value.trim() === "") {
+    errorNombre.textContent = "El nombre es obligatorio";
+  } else if (!isNaN(nombre.value)) {
+    errorNombre.textContent = "El nombre no puede ser solo números";
+  } else if (nombre.value.length < 3) {
+    errorNombre.textContent = "Debe tener al menos 3 caracteres";
+  } else {
+    errorNombre.textContent = "";
+  }
+});
+
+// VALIDAR TELÉFONO
+telefono.addEventListener("input", () => {
+  if (telefono.value.trim() === "") {
+    errorTelefono.textContent = "El teléfono es obligatorio";
+  } else if (telefono.value.includes(" ")) {
+    errorTelefono.textContent = "No debe contener espacios";
+  } else if (isNaN(telefono.value)) {
+    errorTelefono.textContent = "Solo números";
+  } else if (telefono.value.length !== 10) {
+    errorTelefono.textContent = "Debe tener 10 números";
+  } else {
+    errorTelefono.textContent = "";
+  }
+});
+
+// VALIDAR CORREO
+correo.addEventListener("input", () => {
+  if (correo.value.trim() === "") {
+    errorCorreo.textContent = "El correo es obligatorio";
+  } else if (!emailRegex.test(correo.value)) {
+    errorCorreo.textContent = "Correo no válido";
+  } else {
+    errorCorreo.textContent = "";
+  }
+});
+
+// VALIDAR CONTRASEÑA (con tus arrays)
+password.addEventListener("input", () => {
+  let min = false, may = false, num = false, sim = false;
+
+  const value = password.value;
+
+  if (value.length < 8) {
+    errorPassword.textContent = "Mínimo 8 caracteres";
+    return;
+  }
+
+  for (let c of value) {
+    if (minusculas.includes(c)) min = true;
+    else if (mayusculas.includes(c)) may = true;
+    else if (numeros.includes(c)) num = true;
+    else if (simbolos.includes(c)) sim = true;
+  }
+
+  if (!min || !may || !num || !sim) {
+    errorPassword.textContent =
+      "Debe incluir mayúscula, minúscula, número y símbolo";
+  } else {
+    errorPassword.textContent = "";
+  }
+});
+
+ 
+// EVITAR ENVÍO SI HAY ERRORES
+formulario.addEventListener("submit", (e) => {
+  e.preventDefault();
+  alert("Formulario enviado correctamente ✅");
+});
 
 //Funcion-boton para capturar la info del fomulario
 formulario.addEventListener("submit", function (event) {
