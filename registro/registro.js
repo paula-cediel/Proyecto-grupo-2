@@ -90,13 +90,24 @@ password.addEventListener("input", () => {
     errorPassword.textContent = "";
   }
 });
-
  
-// // EVITAR ENVÍO SI HAY ERRORES
-// formulario.addEventListener("submit", (e) => {
-//   e.preventDefault();
-//   alert("Formulario enviado correctamente ✅");
-// });
+// EVITAR ENVÍO SI HAY ERRORES
+formulario.addEventListener("submit", (e) => {
+  e.preventDefault();
+  alert("Formulario enviado correctamente ✅");
+});
+
+// Funcion para mostrar u ocultar la contraseña
+let mostrar = false;
+function mostrarPassword(){
+  if(mostrar){
+    contrasena.type = "password";
+    mostrar = false;
+  }else{
+    contrasena.type = "text"
+    mostrar = true;
+  }
+}
 
 //Funcion-boton para capturar la info del fomulario
 formulario.addEventListener("submit", function (event) {
