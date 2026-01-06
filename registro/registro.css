@@ -88,7 +88,11 @@ input {
     position: relative;
 }
 
-/* .ojito {
+.error{
+    color: red;
+}
+
+.ojito {
     position: absolute;
     right: 12px;
     top: 50%;
@@ -96,7 +100,7 @@ input {
     cursor: pointer;
     font-size: 20px;
     user-select: none;
-} */
+}
 
 button {
     width: 100%;

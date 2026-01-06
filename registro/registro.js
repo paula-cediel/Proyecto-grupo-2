@@ -1,8 +1,8 @@
 //Variables para recorrer y hacer validaciones
-const minusculas = "abcdefghijklmnopqrstuvwxyz".split("");
-const mayusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-const numeros = "0123456789".split("");
-const simbolos = "@$!%*?&".split("");
+let minusculas = "abcdefghijklmnopqrstuvwxyz".split("");
+let mayusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+let numeros = "0123456789".split("");
+let simbolos = "@$!%*?&#._-".split("");
 
 const nombre = document.getElementById("nombre");
 const telefono = document.getElementById("telefono");
@@ -14,7 +14,6 @@ const errorNombre = document.getElementById("errorNombre");
 const errorCorreo = document.getElementById("errorCorreo");
 const errorPassword = document.getElementById("errorPassword");
 
-/* ESTE NO EXISTE EN HTML, LO CREAMOS DINÁMICAMENTE */
 let errorTelefono = document.createElement("small");
 errorTelefono.className = "error";
 telefono.insertAdjacentElement("afterend", errorTelefono);
@@ -60,7 +59,7 @@ correo.addEventListener("input", () => {
   }
 });
 
-// VALIDAR CONTRASEÑA (con tus arrays)
+// VALIDAR CONTRASEÑA
 password.addEventListener("input", () => {
   let min = false, may = false, num = false, sim = false;
 
@@ -72,26 +71,32 @@ password.addEventListener("input", () => {
   }
 
   for (let c of value) {
-    if (minusculas.includes(c)) min = true;
-    else if (mayusculas.includes(c)) may = true;
-    else if (numeros.includes(c)) num = true;
-    else if (simbolos.includes(c)) sim = true;
+    if (minusculas.includes(c)){
+      min = true;
+    }else if (mayusculas.includes(c)){
+      may = true;
+    }else if (numeros.includes(c)){
+      num = true;
+    } 
+    else if (simbolos.includes(c)){
+      sim = true;
+    } 
   }
 
   if (!min || !may || !num || !sim) {
     errorPassword.textContent =
-      "Debe incluir mayúscula, minúscula, número y símbolo";
+      "Debe incluir al menos una mayúscula una minúscula un número y un símbolo";
   } else {
     errorPassword.textContent = "";
   }
 });
 
  
-// EVITAR ENVÍO SI HAY ERRORES
-formulario.addEventListener("submit", (e) => {
-  e.preventDefault();
-  alert("Formulario enviado correctamente ✅");
-});
+// // EVITAR ENVÍO SI HAY ERRORES
+// formulario.addEventListener("submit", (e) => {
+//   e.preventDefault();
+//   alert("Formulario enviado correctamente ✅");
+// });
 
 //Funcion-boton para capturar la info del fomulario
 formulario.addEventListener("submit", function (event) {
