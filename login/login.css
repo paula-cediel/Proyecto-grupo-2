@@ -1,0 +1,27 @@
+/* Errores */
+.error {
+    color: red;
+    font-size: 0.9rem;
+}
+
+/* Cabecera */
+.header-contacto {
+    background: linear-gradient(to right, #240115, #3a3a3a);
+    color: white;
+    padding: 60px 0;
+    text-align: center;
+}
+
+/* Contenedor formulario */
+.form-container {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px #240115;
+}
+
+/* Botón */
+.post {
+    background-color: #240115 !important;
+    border: none;
+}
