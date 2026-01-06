@@ -76,19 +76,28 @@ form.addEventListener("submit", function (e) {
     );
 
     if (!usuario) {
-        alert("Usuario no registrado o contraseña incorrecta");
+        Swal.fire("Lo sentimos", "Usuario no registrado o contraseña incorrecta", "error");
         return;
     }
 
+    Swal.fire("Bienvenido", "Ingreso exitoso", "success");
+    
     // Guardar sesión
     localStorage.setItem("usuarioActivo", JSON.stringify(usuario));
-
-    // Redirecciones
-    if (usuario.rol === "admin") {
-        window.location.href = "/CRUDAdmin/main.html";
-    } else {
-        window.location.href = "../home/home.html";
-    }
+    
+    Swal.fire({
+        title: "Bienvenido",
+        text: "Ingreso exitoso",
+        icon: "success",
+        confirmButtonText: "Continuar"
+    }).then(() => {
+        // Redirecciones
+        if (usuario.rol === "admin") {
+            window.location.href = "/CRUDAdmin/main.html";
+        } else {
+            window.location.href = "../home/home.html";
+        }
+    });
 });
 
 const logoutBtn = document.getElementById("logoutBtn");
