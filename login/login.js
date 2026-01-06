@@ -8,6 +8,8 @@ const passwordInput = document.getElementById("password");
 if (!localStorage.getItem("usuarios")) {
     const usuarios = [
         {
+            nombre: "Administrador",
+            telefono: "0000000000",
             correo: "admin@letalcosplay.com",
             password: "Admin123",
             rol: "admin"
@@ -50,6 +52,12 @@ function validarPassword() {
     }
 }
 
+const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));
+
+if (usuarioActivo) {
+    logoutBtn.classList.remove("d-none");
+}
+
 // ==========================
 // LOGIN
 // ==========================
@@ -61,7 +69,8 @@ form.addEventListener("submit", function (e) {
     const correo = correoInput.value.trim();
     const password = passwordInput.value.trim();
 
-    const usuarios = JSON.parse(localStorage.getItem("usuarios"));
+    const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
     const usuario = usuarios.find(
         u => u.correo === correo && u.password === password
     );
@@ -81,5 +90,14 @@ form.addEventListener("submit", function (e) {
         window.location.href = "../home/home.html";
     }
 });
+
+const logoutBtn = document.getElementById("logoutBtn");
+
+if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+        localStorage.removeItem("usuarioActivo");
+        window.location.href = "/login/login.html";
+    });
+}
 
 
