@@ -25,3 +25,61 @@
     background-color: #240115 !important;
     border: none;
 }
+
+/* ======================
+   RESET GENERAL
+====================== */
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    overflow-x: hidden;
+}
+
+/* JOHANA NAV */
+/* ====== HEADER ====== */
+.header-nav {
+    background-color: #240115;
+    padding: 12px 20px;
+    display: flex;
+   
+    border-bottom: 1px solid #b3b3b3;
+}
+
+/* ====== LOGO ====== */
+/* LOGO */
+.logo-navbar {
+  height: 50px;
+  width: auto;
+}
+.logo-text {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+}
+
+/* ====== CONTENEDOR DEL MENÚ ====== */
+.menu-container {
+    margin-top: 10px;
+}
+
+/* ====== LINKS DEL MENÚ ====== */
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 12px;
+    padding: 5px 4px;
+    font-size: 14px;
+    border-right: 1px solid #b3b3b3;
+}
+
+/* Último sin línea */
+.nav-links a:last-child {
+    border-right: none;
+}
+
+/* Hover subrayado */
+.nav-links a:hover {
+    border-bottom: 2px solid black;
+}
