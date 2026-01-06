@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar sesión</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Tu CSS -->
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+
+<header class="header-contacto">
+    <h1>Iniciar sesión</h1>
+    <p>Accede a tu cuenta</p>
+</header>
+
+<section class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 form-container">
+
+            <form id="loginForm" novalidate>
+
+                <div class="mb-3">
+                    <label class="form-label">Correo electrónico</label>
+                    <input type="email" id="correo" class="form-control" placeholder="correo@ejemplo.com">
+                    <span class="error" id="errorCorreo"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Contraseña</label>
+                    <input type="password" id="password" class="form-control" placeholder="********">
+                    <span class="error" id="errorPassword"></span>
+                </div>
+
+                <button type="submit" class="btn btn-dark w-100 post">
+                    Iniciar sesión
+                </button>
+
+            </form>
+
+        </div>
+    </div>
+</section>
+
+<script src="login.js"></script>
+</body>
+</html>
