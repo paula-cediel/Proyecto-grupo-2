@@ -55,6 +55,29 @@ html, body {
 .nav-links a:hover {
     border-bottom: 2px solid black;
 }
+
+/* Saludo cliente */
+#saludo{
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Botón cerrar sesión */
+#btn_cerrar_sesion {
+    background-color: #9F838C ;
+    color: black;
+    border: 1px solid #000;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#btn_cerrar_sesion:hover {
+    background-color: #591c32;
+    color:#f5f5f5;
+}
+
 /* ======================
    HERO FULL WIDTH
 ====================== */
