@@ -17,6 +17,7 @@ body {
 #btnCarrito{
     background-color: #9F838C;
     border-color: #591c32;
+    margin-left : 10px;
 }
 /* JOHANA NAV */
 /* ====== HEADER ====== */
@@ -70,6 +71,7 @@ body {
     color: white;
     font-size: 14px;
     font-weight: bold;
+    margin-left: 8px;
 }
 
 /* Botón cerrar sesión */

@@ -61,6 +61,7 @@ html, body {
     color: white;
     font-size: 14px;
     font-weight: bold;
+    margin-left: 8px;
 }
 
 /* Botón cerrar sesión */
