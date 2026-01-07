@@ -86,8 +86,22 @@ function mostrar() {
 
 
 
-
 const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
+
+if (!usuario) {
+  navPerfil.style.display = "none";
+  navLogout.style.display = "none";
+} else {
+  navLogin.style.display = "none";
+
+  if (usuario.rol !== "admin") {
+    navPerfil.style.display = "none";
+  }
+}
+
+
+
+
 
 if (!usuario || usuario.rol !== "admin") {
     alert("No tienes permiso para acceder a esta página");
