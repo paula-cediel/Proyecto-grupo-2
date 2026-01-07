@@ -84,4 +84,13 @@ function mostrar() {
     });
 }
 
+
+
+
+const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
+
+if (!usuario || usuario.rol !== "admin") {
+    alert("No tienes permiso para acceder a esta página");
+    window.location.href = "/login/login.html";
+}
 mostrar();
