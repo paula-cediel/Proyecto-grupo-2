@@ -10,6 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
   if (usuarioActivo && btnLogout) {
     saludo.textContent =  `Hola, ${usuarioActual.nombre} `
     btnLogout.style.display = "inline-block";
+  }else{
+    saludo.textContent = "";
+    btnLogout.style.display = "none";
   }
 
   // Cerrar sesión
