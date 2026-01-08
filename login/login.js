@@ -109,4 +109,17 @@ if (logoutBtn) {
     });
 }
 
+const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
 
+const usuario = usuarios.find(
+  u => u.correo === correo && u.password === password
+);
+
+
+localStorage.setItem("usuarioActivo", JSON.stringify(usuario));
+
+if (usuario.rol === "admin") {
+  window.location.href = "/CRUDAdmin/main.html";
+} else {
+  window.location.href = "/home/home.html";
+}
