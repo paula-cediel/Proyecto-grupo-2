@@ -1,14 +1,13 @@
 // Boton cerrar sesión
 document.addEventListener("DOMContentLoaded", () => {
   const btnLogout = document.getElementById("btn_cerrar_sesion");
-  const usuarioActivo = localStorage.getItem("usuarioActivo");
-  const usuarioActual = JSON.parse(localStorage.getItem("usuarioActivo"));
+  const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));
   const saludo = document.getElementById("saludo")
   
 
   // Mostrar u ocultar botón
   if (usuarioActivo && btnLogout) {
-    saludo.textContent =  `Hola, ${usuarioActual.nombre} `
+    saludo.textContent =  `Hola, ${usuarioActivo.nombre} `
     btnLogout.style.display = "inline-block";
   }else{
     saludo.textContent = "";
