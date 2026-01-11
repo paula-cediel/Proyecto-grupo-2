@@ -52,6 +52,18 @@ function validarPassword() {
     }
 }
 
+// Funcion para mostrar u ocultar la contraseña
+let mostrar = false;
+function mostrarPassword(){
+  if(mostrar){
+    password.type = "password";
+    mostrar = false;
+  }else{
+    password.type = "text"
+    mostrar = true;
+  }
+}
+
 const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));
 
 if (usuarioActivo) {

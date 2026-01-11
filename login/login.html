@@ -31,7 +31,7 @@
                         <li class="nav-item"><a class="nav-link" href="/acerca_de_nosotros/about.html">Sobre
                                 nosotros</a></li>
                         <li class="nav-item"><a class="nav-link" href="/Productos/productos.html">Productos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/registro/registro.html">Registro</a></li>
+                        <li class="nav-item" id = "navRegistro"><a class="nav-link" href="/registro/registro.html">Registro</a></li>
                         <li class="nav-item" id="navLogin"><a class="nav-link" href="/login/login.html">Iniciar sesión</a>
                         <li class="nav-item" id="navPerfil"><a class="nav-link" href="/CRUDAdmin/main.html">Perfil</a></li>
                         <li class="nav-item"><a class="nav-link" href="/contactenos/contact-us.html">Contáctenos</a></li>
@@ -63,12 +63,12 @@
                     <span class="error" id="errorCorreo"></span>
                 </div>
 
-                <div class="mb-3">
+                <div class="password-container mb-3">
                     <label class="form-label">Contraseña</label>
                     <input type="password" id="password" class="form-control" placeholder="********">
+                    <span class="ojito" onclick="mostrarPassword()">👁️</span>
                     <span class="error" id="errorPassword"></span>
                 </div>
-
                 <button type="submit" class="btn btn-dark w-100 post">
                     Iniciar sesión
                 </button>

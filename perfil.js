@@ -1,16 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
     const perfil = document.getElementById("navPerfil");
+    const registro = document.getElementById("navRegistro");
     const contenedor = document.getElementById("contenido_perfil"); 
     const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
 
     // Sin loguear
     if (!usuario) {
-        perfil.style = "d-none";
+        perfil.style.display = "none";
         return;
     }
 
     // Con administrador
-    if (usuario.rol === "admin") {
+    if (usuario.rol === "admin") {  
         contenedor.innerHTML = `
     <header class="header-nav">
         <div class="container-fluid">
@@ -31,15 +32,12 @@ document.addEventListener("DOMContentLoaded", () => {
                         <li class="nav-item"><a class="nav-link" href="/acerca_de_nosotros/about.html">Sobre
                                 nosotros</a></li>
                         <li class="nav-item"><a class="nav-link" href="/Productos/productos.html">Productos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/registro/registro.html">Registro</a></li>
-                        <li class="nav-item" id="navLogin"><a class="nav-link" href="/login/login.html">Iniciar sesión</a>
                         <li class="nav-item" id="navPerfil"><a class="nav-link" href="/CRUDAdmin/main.html">Perfil</a></li>
                         <li class="nav-item"><a class="nav-link" href="/contactenos/contact-us.html">Contáctenos</a>
                         </li>
                         <li class="nav-item d-flex align-items-center ms-2"><span id="saludo">Hola, Administrador</span>
                         </li>
-                        <li class="nav-item d-flex align-items-center ms-2"></li><button id="btn_cerrar_sesion"
-                            style="display:none;"> Cerrar sesión </button></li>
+                        <li class="nav-item d-flex align-items-center ms-2"></li><button id="btn_cerrar_sesion" style="display:none;"> Cerrar sesión </button></li>
                     </ul>
                 </div>
             </nav>
@@ -125,6 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
     </footer>
     `;
+     registro.style.display = "none"; 
     }
     // Con cliente
     else {
@@ -165,24 +164,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
         </div>
     </header>
-    <section class="profile">
-        <header class="profile__header">
+    
+    <section class="perfil">
+        <header class="header_perfil">
             <h1>Mi perfil</h1>
         </header>
 
-        <article class="profile__info">
+        <article class="info_perfil">
             <dl>
             <dt>Nombre</dt>
-            <dd id="perfilNombre"></dd>
+            <dd id="nombre_perfil"></dd>
 
             <dt>Correo</dt>
-            <dd id="perfilCorreo"></dd>
+            <dd id="correo_perfil"></dd>
 
             <dt>Teléfono</dt>
-            <dd id="perfilTelefono"></dd>
+            <dd id="telefono_perfil"></dd>
             </dl>
         </article>
     </section>
+
     <footer class="mt-auto">
         <div>
 
