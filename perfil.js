@@ -123,6 +123,15 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
     </footer>
     `;
+    const btnLogout = document.getElementById("btn_cerrar_sesion");
+    const saludo = document.getElementById("saludo");
+    if (btnLogout){
+        btnLogout.style.display = "inline-block";
+    } 
+    if (saludo){
+        saludo.textContent = `Hola, ${usuario.nombre}`;
+    } 
+
     }
     // Con cliente
     else {
