@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Sin loguear
     if (!usuario) {
-        // perfil.style.display = "none";
+        perfil.style.display = "none";
         return;
     }
 
@@ -225,4 +225,15 @@ document.addEventListener("DOMContentLoaded", () => {
     </footer>
     `;
     }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
+
+  // Informacion de usuario actual
+  document.getElementById("nombre_perfil").textContent = usuario.nombre;
+  document.getElementById("correo_perfil").textContent = usuario.correo;
+  document.getElementById("telefono_perfil").textContent = usuario.telefono || "No registrado";
+
 });
