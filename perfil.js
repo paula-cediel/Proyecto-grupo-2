@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Sin loguear
     if (!usuario) {
-        perfil.style.display = "none";
+        // perfil.style.display = "none";
         return;
     }
 
@@ -123,7 +123,6 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
     </footer>
     `;
-     registro.style.display = "none"; 
     }
     // Con cliente
     else {
