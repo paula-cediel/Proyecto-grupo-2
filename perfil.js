@@ -234,6 +234,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Informacion de usuario actual
   document.getElementById("nombre_perfil").textContent = usuario.nombre;
   document.getElementById("correo_perfil").textContent = usuario.correo;
-  document.getElementById("telefono_perfil").textContent = usuario.telefono || "No registrado";
+  document.getElementById("telefono_perfil").textContent = usuario.telefono;
 
 });
