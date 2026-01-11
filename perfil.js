@@ -5,10 +5,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
 
     // Sin loguear
-    if (!usuario) {
-        perfil.style.display = "none";
-        return;
-    }
+    // if (!usuario) {
+    //     perfil.style.display = "none";
+    //     return;
+    // }
 
     // Con administrador
     if (usuario.rol === "admin") {  
@@ -224,16 +224,10 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
     </footer>
     `;
+    // Informacion de usuario actual
+        document.getElementById("nombre_perfil").textContent = usuario.nombre;
+        document.getElementById("correo_perfil").textContent = usuario.correo;
+        document.getElementById("telefono_perfil").textContent = usuario.telefono;
     }
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-
-  const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
-
-  // Informacion de usuario actual
-  document.getElementById("nombre_perfil").textContent = usuario.nombre;
-  document.getElementById("correo_perfil").textContent = usuario.correo;
-  document.getElementById("telefono_perfil").textContent = usuario.telefono;
-
-});
