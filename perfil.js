@@ -1,8 +1,31 @@
 document.addEventListener("DOMContentLoaded", () => {
     const perfil = document.getElementById("navPerfil");
     const registro = document.getElementById("navRegistro");
+    const login = document.getElementById("navLogin");
     const contenedor = document.getElementById("contenido_perfil"); 
     const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
+
+    if (usuario) {
+        if (registro) {
+            registro.style.display = "none";
+        }    
+        if (login){
+            login.style.display = "none";
+        } 
+        if (perfil){
+            perfil.style.display = "block";
+        }
+    } else {
+        if (registro){
+            registro.style.display = "block";
+        } 
+        if (login){
+            login.style.display = "block";
+        }
+        if (perfil){
+            perfil.style.display = "none";
+        } 
+    }
 
     // Sin loguear
     if (!usuario) {
@@ -29,14 +52,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="collapse navbar-collapse justify-content-center" id="navMenu">
                     <ul class="nav-links text-center mt-3 navbar-nav ms-auto ">
                         <li class="nav-item"><a class="nav-link" href="/home/home.html">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/acerca_de_nosotros/about.html">Sobre
-                                nosotros</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/Productos/productos.html">Productos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/acerca_de_nosotros/about.html">Sobre nosotros</a></li>
+                        <li class="nav-item" id="navProductos"><a class="nav-link" href="/Productos/productos.html">Productos</a></li>
                         <li class="nav-item" id="navPerfil"><a class="nav-link" href="/CRUDAdmin/main.html">Perfil</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/contactenos/contact-us.html">Contáctenos</a>
-                        </li>
-                        <li class="nav-item d-flex align-items-center ms-2"><span id="saludo">Hola, Administrador</span>
-                        </li>
+                        <li class="nav-item"id="navContactenos"><a class="nav-link" href="/contactenos/contact-us.html">Contáctenos</a></li>
+                        <li class="nav-item d-flex align-items-center ms-2"><span id="saludo">Hola, Administrador</span></li>
                         <li class="nav-item d-flex align-items-center ms-2"></li><button id="btn_cerrar_sesion" style="display:none;"> Cerrar sesión </button></li>
                     </ul>
                 </div>
@@ -123,6 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
     </footer>
     `;
+    cerrarSesion();
     const btnLogout = document.getElementById("btn_cerrar_sesion");
     const saludo = document.getElementById("saludo");
     if (btnLogout){
@@ -154,20 +175,14 @@ document.addEventListener("DOMContentLoaded", () => {
                         <li class="nav-item"><a class="nav-link" href="/home/home.html">Inicio</a></li>
                         <li class="nav-item"><a class="nav-link" href="/acerca_de_nosotros/about.html">Sobre
                                 nosotros</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/Productos/productos.html">Productos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/registro/registro.html">Registro</a></li>
-                        <li class="nav-item" id="navLogin"><a class="nav-link" href="/login/login.html">Iniciar sesión</a>
+                        <li class="nav-item" id="navProductos"><a class="nav-link" href="/Productos/productos.html">Productos</a></li>
                         <li class="nav-item" id="navPerfil"><a class="nav-link" href="/CRUDAdmin/main.html">Perfil</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/contactenos/contact-us.html">Contáctenos</a>
-                        </li>
-                        <li class="nav-item d-flex align-items-center ms-2"><span id="saludo">Hola, Administrador</span>
-                        </li>
-                        <li class="nav-item d-flex align-items-center ms-2"></li><button id="btn_cerrar_sesion"
-                            style="display:none;"> Cerrar sesión </button></li>
+                        <li class="nav-item"id="navContactenos"><a class="nav-link" href="/contactenos/contact-us.html">Contáctenos</a></li>
+                        <li class="nav-item d-flex align-items-center ms-2"><span id="saludo">Hola, Administrador</span></li>
+                        <li class="nav-item d-flex align-items-center ms-2"></li><button id="btn_cerrar_sesion";"> Cerrar sesión </button></li>
                     </ul>
                 </div>
             </nav>
-            <button id="logoutBtn" class="btn btn-danger d-none">Cerrar sesión</button>
 
 
         </div>
@@ -233,10 +248,29 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
     </footer>
     `;
+    cerrarSesion();
     // Informacion de usuario actual
         document.getElementById("nombre_perfil").textContent = usuario.nombre;
         document.getElementById("correo_perfil").textContent = usuario.correo;
         document.getElementById("telefono_perfil").textContent = usuario.telefono;
     }
 });
+
+function cerrarSesion() {
+  const btnLogout = document.getElementById("btn_cerrar_sesion");
+
+  if (btnLogout) {
+    btnLogout.addEventListener("click", () => {
+      
+        // Eliminar usuario activo
+      localStorage.removeItem("usuarioActivo");
+
+      // Borrar carrito
+      localStorage.removeItem("carrito");
+
+      // Redirigir al home
+      window.location.href = "/home/home.html";
+    });
+  }
+}
 

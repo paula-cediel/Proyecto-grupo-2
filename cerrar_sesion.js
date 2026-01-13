@@ -1,4 +1,3 @@
-// Boton cerrar sesión
 document.addEventListener("DOMContentLoaded", () => {
   const btnLogout = document.getElementById("btn_cerrar_sesion");
   const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));

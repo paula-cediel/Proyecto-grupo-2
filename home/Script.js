@@ -90,17 +90,3 @@ card.querySelector(".like").onclick=()=>{
   }
 };
 
-
-const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
-
-if (!usuario) {
-  navPerfil.style.display = "none";
-  navLogout.style.display = "none";
-} else {
-  navLogin.style.display = "none";
-
-  if (usuario.rol !== "admin") {
-    navPerfil.style.display = "none";
-  }
-}
-
