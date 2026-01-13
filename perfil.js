@@ -178,7 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <li class="nav-item" id="navProductos"><a class="nav-link" href="/Productos/productos.html">Productos</a></li>
                         <li class="nav-item" id="navPerfil"><a class="nav-link" href="/CRUDAdmin/main.html">Perfil</a></li>
                         <li class="nav-item"id="navContactenos"><a class="nav-link" href="/contactenos/contact-us.html">Contáctenos</a></li>
-                        <li class="nav-item d-flex align-items-center ms-2"><span id="saludo">Hola, Administrador</span></li>
+                        <li class="nav-item d-flex align-items-center ms-2"><span id="saludo"></span></li>
                         <li class="nav-item d-flex align-items-center ms-2"></li><button id="btn_cerrar_sesion";"> Cerrar sesión </button></li>
                     </ul>
                 </div>
@@ -249,6 +249,15 @@ document.addEventListener("DOMContentLoaded", () => {
     </footer>
     `;
     cerrarSesion();
+    const btnLogout = document.getElementById("btn_cerrar_sesion");
+    const saludo = document.getElementById("saludo");
+    if (btnLogout){
+        btnLogout.style.display = "inline-block";
+    } 
+    if (saludo){
+        saludo.textContent = `Hola, ${usuario.nombre}`;
+    } 
+    
     // Informacion de usuario actual
         document.getElementById("nombre_perfil").textContent = usuario.nombre;
         document.getElementById("correo_perfil").textContent = usuario.correo;
