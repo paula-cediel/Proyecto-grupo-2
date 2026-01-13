@@ -5,12 +5,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
 
     // Sin loguear
-    // if (!usuario) {
-    //     perfil.style.display = "none";
-    //     return;
-    // }
+    if (!usuario) {
+        perfil.style.display = "none";
+        return;
+    }
 
-    // Con administrador
+    //Con administrador
     if (usuario.rol === "admin") {  
         contenedor.innerHTML = `
     <header class="header-nav">
