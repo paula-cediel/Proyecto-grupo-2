@@ -28,12 +28,15 @@
                 <div class="collapse navbar-collapse justify-content-center" id="navMenu">
                     <ul class="nav-links text-center mt-3 navbar-nav ms-auto ">
                         <li class="nav-item"><a class="nav-link" href="/home/home.html">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/acerca_de_nosotros/about.html">Sobre nosotros</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/acerca_de_nosotros/about.html">Sobre
+                                nosotros</a></li>
                         <li class="nav-item"><a class="nav-link" href="/Productos/productos.html">Productos</a></li>
                         <li class="nav-item"><a class="nav-link" href="/registro/registro.html">Registro</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/CRUDAdmin/main.html">Perfil</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/contactenos/contact-us.html">Contáctenos</a>
-                        </li>
+                        <li class="nav-item" id="navLogin"><a class="nav-link" href="/login/login.html">Iniciar sesión</a>
+                        <li class="nav-item" id="navPerfil"><a class="nav-link" href="/CRUDAdmin/main.html">Perfil</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/contactenos/contact-us.html">Contáctenos</a></li>
+                        <li class="nav-item d-flex align-items-center ms-2"><span id="saludo">Hola, Administrador</span></li>
+                        <li class="nav-item d-flex align-items-center ms-2"></li><button id="btn_cerrar_sesion" style="display:none;"> Cerrar sesión </button></li>
                     </ul>
                 </div>
                 <button id="btnCarrito" class="btn btn-warning position-relative"
@@ -48,6 +51,7 @@
         </a>
         -->
             </nav>
+            <button id="logoutBtn" class="btn btn-danger d-none">Cerrar sesión</button>
 
         </div>
 
@@ -118,6 +122,8 @@
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="productos.js"></script>
+    <script src="../cerrar_sesion.js"></script>
+    <script src="../perfil.js"></script>
 
 </body>
 

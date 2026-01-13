@@ -1,4 +1,18 @@
+const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
+
+if (!usuario) {
+  navPerfil.style.display = "none";
+  navLogout.style.display = "none";
+} else {
+  navLogin.style.display = "none";
+
+  if (usuario.rol !== "admin") {
+    navPerfil.style.display = "none";
+  }
+}
+
 // Animación suave al hacer scroll
+
 document.addEventListener("DOMContentLoaded", () => {
   const items = document.querySelectorAll(".section-title, .value-card, .team-card");
 
@@ -18,3 +32,5 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(el);
   });
 });
+
+

@@ -8,6 +8,8 @@ const passwordInput = document.getElementById("password");
 if (!localStorage.getItem("usuarios")) {
     const usuarios = [
         {
+            nombre: "Administrador",
+            telefono: "0000000000",
             correo: "admin@letalcosplay.com",
             password: "Admin123",
             rol: "admin"
@@ -50,6 +52,24 @@ function validarPassword() {
     }
 }
 
+// Funcion para mostrar u ocultar la contraseña
+let mostrar = false;
+function mostrarPassword(){
+  if(mostrar){
+    password.type = "password";
+    mostrar = false;
+  }else{
+    password.type = "text"
+    mostrar = true;
+  }
+}
+
+const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));
+
+if (usuarioActivo) {
+    logoutBtn.classList.remove("d-none");
+}
+
 // ==========================
 // LOGIN
 // ==========================
@@ -61,23 +81,42 @@ form.addEventListener("submit", function (e) {
     const correo = correoInput.value.trim();
     const password = passwordInput.value.trim();
 
-    const usuarios = JSON.parse(localStorage.getItem("usuarios"));
+    const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
     const usuario = usuarios.find(
         u => u.correo === correo && u.password === password
     );
 
     if (!usuario) {
-        alert("Usuario no registrado o contraseña incorrecta");
+        Swal.fire("Lo sentimos", "Usuario no registrado o contraseña incorrecta", "error");
         return;
     }
 
+    Swal.fire("Bienvenido", "Ingreso exitoso", "success");
+    
     // Guardar sesión
     localStorage.setItem("usuarioActivo", JSON.stringify(usuario));
-
-    // Redirecciones
-    if (usuario.rol === "admin") {
-        window.location.href = "/CRUDAdmin/main.html";
-    } else {
-        window.location.href = "/home/home.html";
-    }
+    
+    Swal.fire({
+        title: "Bienvenido",
+        text: "Ingreso exitoso",
+        icon: "success",
+        confirmButtonText: "Continuar"
+    }).then(() => {
+        // Redirecciones
+        if (usuario.rol === "admin") {
+            window.location.href = "/CRUDAdmin/main.html";
+        } else {
+            window.location.href = "../home/home.html";
+        }
+    });
 });
+
+const logoutBtn = document.getElementById("logoutBtn");
+
+if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+        localStorage.removeItem("usuarioActivo");
+        window.location.href = "/login/login.html";
+    });
+}
