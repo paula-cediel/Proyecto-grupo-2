@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.removeItem("usuarioActivo");
 
       //limpiar carrito
-      // localStorage.removeItem("carrito");
+      localStorage.removeItem("carrito");
 
       //llevar al home
       window.location.href = "/home/home.html";

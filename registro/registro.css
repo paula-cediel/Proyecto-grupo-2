@@ -110,25 +110,25 @@ input {
     position: relative;
     width: 100%;
 }
+
 .password-container input {
     width: 100%;
-    padding-right: 45px;
-    box-sizing: border-box;
+    padding-right: 40px;
+}
+
+.ojito {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
 }
 
 .error{
     color: red;
-}
-
-.ojito {
-  position: absolute;
-  right: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  font-size: 18px;
-  color: #555;
-  user-select: none;
+    font-weight: bold;
 }
 
 #boton_registro {
@@ -154,6 +154,9 @@ input {
     border-radius: 5px;
     display: none;
 }
+
+
+/* FOOTER */
 
 footer {
     background-color: #240115 !important;   /* Fondo negro */

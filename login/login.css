@@ -84,22 +84,23 @@ html, body {
     border-bottom: 2px solid black;
 }
 
-.password-container {
+/* Container constraseña y ojito */
+.input_ojito_wrapper {
+    display: flex;
+    align-items: center;
     position: relative;
-    width: 100%;
 }
-.password-container input {
-    width: 100%;
-    padding-right: 45px;
+
+.input_ojito_wrapper input {
+    flex: 1;
+    padding-right: 0;
+    height: 45px;
     box-sizing: border-box;
 }
-.ojito {
-    position: absolute;
-    right: 14px;
-    top: 50%;
-    transform: translateY(-50%);
+
+.input_ojito_wrapper .ojito {
+    width: 24px;
+    height: 24px;
+    margin-left: -35px;
     cursor: pointer;
-    font-size: 18px;
-    color: #555;
-    user-select: none;
 }
