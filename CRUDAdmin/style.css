@@ -1,13 +1,16 @@
 body {
     background-color: #f5f5f5;
 }
+
 .like-btn {
     cursor: pointer;
     transition: 0.3s;
 }
+
 .like-btn.liked {
     color: red;
 }
+
 .card img {
     height: 200px;
     object-fit: cover;
@@ -20,16 +23,17 @@ body {
     background-color: #240115;
     padding: 12px 20px;
     display: flex;
-   
+
     border-bottom: 1px solid #b3b3b3;
 }
 
 /* ====== LOGO ====== */
 /* LOGO */
 .logo-navbar {
-  height: 50px;
-  width: auto;
+    height: 50px;
+    width: auto;
 }
+
 .logo-text {
     font-size: 22px;
     font-weight: bold;
@@ -62,7 +66,7 @@ body {
 }
 
 /* Saludo cliente */
-#saludo{
+#saludo {
     color: white;
     font-size: 14px;
     font-weight: bold;
@@ -71,7 +75,7 @@ body {
 
 /* Botón cerrar sesión */
 #btn_cerrar_sesion {
-    background-color: #9F838C ;
+    background-color: #9F838C;
     color: black;
     border: 1px solid #000;
     border-radius: 5px;
@@ -81,65 +85,141 @@ body {
 
 #btn_cerrar_sesion:hover {
     background-color: #591c32;
-    color:#f5f5f5;
+    color: #f5f5f5;
 }
 
 /* PERFIL CLIENTE */
 
-/* CONTENEDOR PRINCIPAL */
-.perfil {
-  max-width: 720px;
-  margin: 3rem auto;
-  padding: 2rem;
-  background-color: #ffffff;
-  border-radius: 14px;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
-  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+.perfil-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5rem;
+    max-width: 1400px;
+    margin: 3rem auto;
+    padding: 0 2rem;
 }
 
-/* HEADER */
-.header_perfil {
-  border-bottom: 1px solid #e5e7eb;
-  padding-bottom: 1rem;
-  margin-bottom: 2rem;
+/* Cards */
+.perfil,
+.direccion,
+.carrito {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
-.header_perfil h1 {
-  font-size: 1.9rem;
-  font-weight: 600;
-  color: #111827;
+/* Titulos cards */
+.perfil h1,
+.direccion h1,
+.carrito h1 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #bcb6b6;
+    padding-bottom: 0.5rem;
 }
 
-/* INFO */
+/* Perfil */
 .info_perfil dl {
-  display: grid;
-  grid-template-columns: 140px 1fr;
-  row-gap: 1.25rem;
-  column-gap: 1rem;
-  margin: 0;
+    margin-bottom: 1rem;
 }
 
-/* ETIQUETAS */
 .info_perfil dt {
-  font-weight: 600;
-  color: #374151;
+    font-weight: 600;
+    margin-top: 0.75rem;
 }
 
-/* VALORES */
 .info_perfil dd {
-  margin: 0;
-  padding: 0.6rem 0.8rem;
-  background-color: #f9fafb;
-  border-radius: 8px;
-  color: #6b7280;
-  font-size: 0.95rem;
+    margin-left: 0;
+    color: #555;
 }
+
+/* Formulario dirección */
+#formDireccion {
+    display: flex;
+    flex-direction: column;
+}
+
+#formDireccion label {
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+
+#formDireccion input {
+    padding: 0.6rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-bottom: 0.75rem;
+}
+
+/* Lista direccion */
+#listaDirecciones {
+    list-style: none;
+    margin-top: 1rem;
+}
+
+#listaDirecciones li {
+    background: #f4f6f9;
+    padding: 0.6rem;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+/* Carrito */
+#carritoItems {
+    min-height: 80px;
+}
+
+#carritoItems .vacio {
+    color: #777;
+    font-style: italic;
+}
+
+.total {
+    margin-top: 1rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+#errorDireccion{
+    color: red;
+    font-weight: bold;
+}
+
+/* Botones */
+.btn {
+    display: inline-block;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    background-color: #240115;
+    color: white;
+    font-size: 1rem;
+}
+
+.btn:hover {
+    opacity: 0.9;
+    background-color: #591c32;
+    color: white;
+}
+
+#formDireccion .btn {
+    width: auto;
+    align-self: flex-start;
+}
+
 
 /* === FOOTER ESTILO IGUAL A LA IMAGEN === */
 
 footer {
-    background-color: #240115;   /* Fondo negro */
-    color: white;             /* Texto blanco */
+    background-color: #240115;
+    /* Fondo negro */
+    color: white;
+    /* Texto blanco */
     padding: 40px 0;
     font-family: "Poppins", sans-serif;
     text-align: center;
@@ -161,9 +241,9 @@ footer ul li a {
     text-decoration: none;
     color: white;
     transition: 0.3s;
-}vv
+}
 
-footer ul li:hover a {
+vv footer ul li:hover a {
     opacity: 0.7;
 }
 
@@ -179,35 +259,38 @@ footer hr {
     margin: 25px auto;
 }
 
-.post{
-    background-color: #9F838C ;
-}
-.post:hover{
-    background-color: #591c32;
-    color:#f5f5f5;
+.post {
+    background-color: #9F838C;
 }
 
-.create{
+.post:hover {
+    background-color: #591c32;
+    color: #f5f5f5;
+}
+
+.create {
     background-color: #591c32 !important;
 }
 
-.editar{
+.editar {
+    font-size: 20px;
+    margin-top: 15px;
     background-color: #240115;
-    color:WHITE;
+    color: WHITE;
 }
 
-.editar:hover{
+.editar:hover {
     background-color: #591c32;
-    color:WHITE;
+    color: WHITE;
 }
 
-.eliminar{
+.eliminar {
     background-color: #591c32;
     color: white;
-} 
+}
 
-.eliminar:hover{
+.eliminar:hover {
     background-color: #240115;
-    color:WHITE;
+    color: WHITE;
 
 }

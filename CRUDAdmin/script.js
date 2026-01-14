@@ -236,24 +236,53 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         </header>
         
-        <section class="perfil">
-            <header class="header_perfil">
-                <h1>Mi perfil</h1>
-            </header>
+        
+        <main class="perfil-grid">
+            <section class="perfil">
+                <header class="header_perfil">
+                    <h1>Mis datos</h1>
+                </header>
 
-            <article class="info_perfil">
-                <dl>
-                <dt>Nombre</dt>
-                <dd id="nombre_perfil"></dd>
+                <article class="info_perfil">
+                    <dl>
+                    <dt>Nombre</dt>
+                    <dd id="nombre_perfil"></dd>
+                    <dt>Correo</dt>
+                    <dd id="correo_perfil"></dd>
+                    <dt>Teléfono</dt>
+                    <dd id="telefono_perfil"></dd>
+                    </dl>
+                    <button class="btn primary editar_usuario">Editar</button>
+                </article>
+            </section>
 
-                <dt>Correo</dt>
-                <dd id="correo_perfil"></dd>
+            
+            <section class="direccion">
+                <h1>Mis direcciones</h1>
+                <form id="formDireccion">
+                    <label for="inputAddress">Dirección</label>
+                    <input type="text" id="inputAddress" placeholder="Ej: Calle 123 #45-67" required>
+                    <small class="error" id="errorDireccion"></small>
+                    <br>
+                    <button type="submit" class="btn primary">Agregar</button>
+                </form>
 
-                <dt>Teléfono</dt>
-                <dd id="telefono_perfil"></dd>
-                </dl>
-            </article>
-        </section>
+                <ul id="listaDirecciones">
+                    
+                </ul>
+            </section>
+
+            <section class="carrito">
+                <h1>Mi carrito</h1>
+                <div id="productosCarrito">
+                    <p class="vacio">Tu carrito está vacío</p>
+                </div>
+                <div class="total">
+                    Total: <span id="totalCarrito">$0</span>
+                </div>
+                <button type="submit" class="btn success btnPagar">Pagar</button>
+            </section>
+        </main>
 
         <footer class="mt-auto">
             <div>
@@ -298,6 +327,142 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
 
     cerrarSesion();
+
+    const btnEditar = document.querySelector(".editar_usuario");
+
+    if (btnEditar) {
+        btnEditar.addEventListener("click", () => {
+
+            const nuevoNombre = prompt("Nuevo nombre:", usuario.nombre);
+            const nuevoTelefono = prompt("Nuevo teléfono:", usuario.telefono);
+            const saludo = document.getElementById("saludo")
+
+            if (nuevoNombre === null || nuevoTelefono === null){
+                return;
+            } 
+
+            let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+            const i = usuarios.findIndex( u => u.correo === usuario.correo);
+
+            if (i === -1){
+                return;
+            } 
+
+            usuarios[i].nombre = nuevoNombre;
+            usuarios[i].telefono = nuevoTelefono;
+
+            usuario.nombre = nuevoNombre;
+            usuario.telefono = nuevoTelefono;
+
+            localStorage.setItem("usuarios", JSON.stringify(usuarios));
+            localStorage.setItem("usuarioActivo", JSON.stringify(usuario));
+
+            document.getElementById("nombre_perfil").textContent = nuevoNombre;
+            document.getElementById("telefono_perfil").textContent = nuevoTelefono;
+            saludo.textContent =  `Hola, ${nuevoNombre} `
+
+            Swal.fire("Buen trabajo", "Perfil actualizado correctamente", "success");
+        });
+    }  
+    
+    const formDireccion = document.getElementById("formDireccion");
+    const inputDireccion = document.getElementById("inputAddress");
+    const listaDirecciones = document.getElementById("listaDirecciones");
+
+    // Función mostrar las direcciones guardadas en localStorage
+    function mostrarDirecciones() {
+        
+        listaDirecciones.innerHTML = "";
+        const direcciones = JSON.parse(localStorage.getItem("direcciones")) || [];
+        if (direcciones.length === 0) {
+            listaDirecciones.innerHTML = `<li class="vacio">No hay direcciones guardadas</li>`;
+            return;
+        }
+        direcciones.forEach(direccion => {
+            const li = document.createElement("li");
+            li.textContent = direccion;
+            listaDirecciones.appendChild(li);
+        });
+    }
+
+    //Validaciones input dirección
+    const direccionInput = document.getElementById("inputAddress");
+    const errorDireccion = document.getElementById("errorDireccion");
+    direccionInput.addEventListener("input", () => {
+        if (direccionInput.value.trim() === "") {
+            errorDireccion.textContent = "No puede estar vacío";
+        } else if (!isNaN(direccionInput.value)) {
+            errorNombre.textContent = "El nombre no puede ser solo números";
+        } else if (direccionInput.value.length < 15) {
+            errorDireccion.textContent = "Debe tener al menos 15 caracteres";
+        } else {
+            errorDireccion.textContent = "";
+        }
+        });
+
+    // Función agregar dirección
+    formDireccion.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const direccion = inputDireccion.value.trim();
+        if (!direccion){
+            return;
+        } 
+
+        let direcciones = JSON.parse(localStorage.getItem("direcciones")) || [];
+
+        direcciones.push(direccion);
+        localStorage.setItem("direcciones", JSON.stringify(direcciones));
+        inputDireccion.value = "";
+
+        Swal.fire("Buen trabajo", "Dirección guardada correctamente", "success");
+
+        mostrarDirecciones();
+    });
+
+    mostrarDirecciones();
+
+    const productosCarrito = document.getElementById("productosCarrito");
+    const totalCarrito = document.getElementById("totalCarrito");
+
+    // Función mostrar carrito en cliente
+    function mostrarCarrito() {
+        productosCarrito.innerHTML = "";
+        const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+        if (carrito.length === 0) {
+            productosCarrito.innerHTML = `<p class="vacio">Tu carrito está vacío</p>`;
+            totalCarrito.textContent = "$0";
+            return;
+        }
+        let total = 0;
+        carrito.forEach(producto => {
+            const subtotal = producto.precio * producto.cantidad;
+            total += subtotal;
+            const div = document.createElement("div");
+            div.classList.add("producto-carrito");
+            div.innerHTML = `
+            <strong>${producto.titulo}</strong><br>
+            Cantidad: ${producto.cantidad}<br>
+            Precio: $${producto.precio.toLocaleString()}<br>
+            Subtotal: $${subtotal.toLocaleString()}
+            <hr>
+            `;
+            productosCarrito.appendChild(div);
+        });
+
+    totalCarrito.textContent = `$${total.toLocaleString()}`;
+    }
+    mostrarCarrito();
+
+    // Funcion pagar
+    const btnPagar = document.querySelector(".btnPagar");
+
+    if (btnPagar) {
+        btnPagar.addEventListener("click", () => {
+          Swal.fire("Lo sentimos", "Estamos trabajando en esto", "error");  
+        })
+    }
 
     const btnLogout = document.getElementById("btn_cerrar_sesion");
     const saludo = document.getElementById("saludo");
