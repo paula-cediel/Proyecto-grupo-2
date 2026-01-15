@@ -8,45 +8,49 @@
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="styles-productos.css">
   <title>Letal Cosplay</title>
 </head>
 
 <body>
 
-    <header class="header-nav">
-        <div class="container-fluid">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark-purple shadow-sm">
-                <div class="top-bar d-flex justify-content-between align-items-center">
-                    <a class="navbar-brand d-flex justify-content-start" href="#">
-                        <img src="imagenes/logoo.png" alt="Letal Cosplay Logo" class="logo-navbar">
-                    </a>
-                </div>
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse justify-content-center" id="navMenu">
-                    <ul class="nav-links text-center mt-3 navbar-nav ms-auto ">
-                        <li class="nav-item"><a class="nav-link" href="/home/home.html">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/acerca_de_nosotros/about.html">Sobre
-                                nosotros</a></li>
-                        <li class="nav-item" id="navProductos"><a class="nav-link" href="/Productos/productos.html">Productos</a></li>
-                        <li class="nav-item" id="navRegistro"><a class="nav-link" href="/registro/registro.html">Registro</a></li>
-                        <li class="nav-item" id="navLogin"><a class="nav-link" href="/login/login.html">Iniciar sesión</a>
-                        <li class="nav-item" id="navPerfil"><a class="nav-link" href="/CRUDAdmin/main.html">Perfil</a></li>
-                        <li class="nav-item"id="navContactenos"><a class="nav-link" href="/contactenos/contact-us.html">Contáctenos</a></li>
-                        <li class="nav-item d-flex align-items-center ms-2"><span id="saludo">Hola, Administrador</span></li>
-                        <li class="nav-item d-flex align-items-center ms-2"></li><button id="btn_cerrar_sesion" style="display:none;"> Cerrar sesión </button></li>
-                    </ul>
-                </div>
-            </nav>
-            <button id="logoutBtn" class="btn btn-danger d-none">Cerrar sesión</button>
-
-
+  <header class="header-nav">
+    <div class="container-fluid">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark-purple shadow-sm">
+        <div class="top-bar d-flex justify-content-between align-items-center">
+          <a class="navbar-brand d-flex justify-content-start" href="#">
+            <img src="imagenes/logoo.png" alt="Letal Cosplay Logo" class="logo-navbar">
+          </a>
         </div>
-    </header>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-center" id="navMenu">
+          <ul class="nav-links text-center mt-3 navbar-nav ms-auto ">
+            <li class="nav-item"><a class="nav-link" href="/home/home.html">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link" href="/acerca_de_nosotros/about.html">Sobre
+                nosotros</a></li>
+            <li class="nav-item" id="navProductos"><a class="nav-link" href="/Productos/productos.html">Productos</a>
+            </li>
+            <li class="nav-item" id="navRegistro"><a class="nav-link" href="/registro/registro.html">Registro</a></li>
+            <li class="nav-item" id="navLogin"><a class="nav-link" href="/login/login.html">Iniciar sesión</a>
+            <li class="nav-item" id="navPerfil"><a class="nav-link" href="/CRUDAdmin/main.html">Perfil</a></li>
+            <li class="nav-item" id="navContactenos"><a class="nav-link"
+                href="/contactenos/contact-us.html">Contáctenos</a></li>
+            <li class="nav-item d-flex align-items-center ms-2"><span id="saludo">Hola, Administrador</span></li>
+            <li class="nav-item d-flex align-items-center ms-2"></li><button id="btn_cerrar_sesion"
+              style="display:none;"> Cerrar sesión </button></li>
+          </ul>
+        </div>
+      </nav>
+      <button id="logoutBtn" class="btn btn-danger d-none">Cerrar sesión</button>
+
+
+    </div>
+  </header>
 
   <!-- HERO (FUERA DEL HEADER) -->
   <section class="hero">
@@ -60,7 +64,7 @@
 
   <!--Carrusel productos destacados-->
   <section class="container my-4">
-    <h2 class="text-center mb-3">Productos Destacados</h2>
+    <h2 class="text-center mt-5 mb-5">Productos Destacados</h2>
 
     <div id="CarruselProductos" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner" id="contenedor-carrusel">
@@ -77,20 +81,21 @@
     </div>
   </section>
 
-
-
   <!-- CAROUSEL EVENTOS -->
-  <h2 class="text-center mb-3">Eventos</h2>
+  <h2 class="text-center  mt-5 mb-5">Eventos</h2>
   <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
-      <div class="carousel-item active" data-bs-interval="2000">
-        <img src="/home/imagenes/baner1.png" class="d-block w-100 img-fluid" style="object-fit: contain; height: 600px" alt="EventoCosplayer_1">
+      <div class="carousel-item active" data-bs-interval="3000">
+        <img src="/home/imagenes/baner1.png" class="d-block w-100 img-fluid" style="object-fit: contain; height: 600px"
+          alt="EventoCosplayer_1">
       </div>
-      <div class="carousel-item" data-bs-interval="2000">
-        <img src="/home/imagenes/banner2.jpg" class="d-block w-100 img-fluid" style="object-fit: contain; height: 600px" alt="EventoCosplayer_2">
+      <div class="carousel-item" data-bs-interval="3000">
+        <img src="/home/imagenes/banner2.jpg" class="d-block w-100 img-fluid" style="object-fit: contain; height: 600px"
+          alt="EventoCosplayer_2">
       </div>
-      <div class="carousel-item" data-bs-interval="2000">
-        <img src="/home/imagenes/banner3.png" class="d-block w-100 img-fluid" style="object-fit: contain; height: 600px" alt="EventoCosplayer_3">
+      <div class="carousel-item" data-bs-interval="3000">
+        <img src="/home/imagenes/banner3.png" class="d-block w-100 img-fluid" style="object-fit: contain; height: 600px"
+          alt="EventoCosplayer_3">
       </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
@@ -102,181 +107,88 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<style>
-  body{background:#f5f5f5}
-  .card{width:420px;margin:20px auto;border-radius:15px}
-  .profile-pic{width:70px;height:70px;border-radius:50%;object-fit:cover;cursor:pointer;background:#ddd}
-  .star{font-size:26px;cursor:pointer;color:#ccc}
-  .star.active{color:gold}
-  .btn-actions{font-size:20px;cursor:pointer;margin-right:12px}
-  .comment{background:#eee;padding:6px 10px;border-radius:10px;margin-bottom:5px}
-</style>
-</head>
 
-<body>
+  <!-- CALIFICAR LA TIENDA -->
+  <section class="califica-tienda py-5">
+    <h2 class="text-center mb-5">Califica la tienda</h2>
+    <div class="container">
+      <div class="row justify-content-center align-items-start g-4">
+        <!-- Columna izquierda: formulario -->
+        <div class="col-md-5">
+          <div class="card p-3 shadow">
+            <h5 class="text-center mb-3">Danos tu opinión aquí</h5>
 
-<div class="card p-3 shadow">
-  <div class="text-center mb-2">
-    <label>
-      <input type="file" id="imgInput" hidden>
-      <img id="preview" class="profile-pic">
-    </label>
-  </div>
+            <input id="name" class="form-control mb-2" placeholder="Nombre">
+            <textarea id="desc" class="form-control mb-2" placeholder="Tu opinión"></textarea>
 
-  <input id="name" class="form-control mb-2" placeholder="Nombre">
-  <textarea id="desc" class="form-control mb-2" placeholder="Descripción"></textarea>
-
-  <div class="text-center mb-2">
-    <span class="star" data-v="1">★</span>
-    <span class="star" data-v="2">★</span>
-    <span class="star" data-v="3">★</span>
-    <span class="star" data-v="4">★</span>
-    <span class="star" data-v="5">★</span>
-  </div>
-
-  <button id="publicar" class="btn btn-dark w-100">Publicar</button>
-</div>
-
-<div id="posts"></div>
-
-<script>
-let rating = 0;
-
-document.querySelectorAll(".star").forEach(s=>{
-  s.onclick=()=>{
-    rating = s.dataset.v;
-    document.querySelectorAll(".star").forEach(x=>{
-      x.classList.toggle("active", x.dataset.v <= rating);
-    });
-  };
-});
-
-document.getElementById("imgInput").addEventListener("change", e=>{
-  const file=e.target.files[0];
-  const r=new FileReader();
-  r.onload=()=>document.getElementById("preview").src=r.result;
-  r.readAsDataURL(file);
-});
-
-document.getElementById("publicar").onclick=()=>{
-  const n=document.getElementById("name").value;
-  const d=document.getElementById("desc").value;
-  const img=document.getElementById("preview").src;
-
-  const card=document.createElement("div");
-  card.className="card p-3 shadow mb-3";
-
-  const stars="★".repeat(rating)+"☆".repeat(5-rating);
-
-  card.innerHTML=`
-    <div class="d-flex align-items-center mb-2">
-      <img class="profile-pic me-2" src="${img}">
-      <div><h5 class="m-0">${n}</h5><small>${stars}</small></div>
-    </div>
-
-    <p class="texto">${d}</p>
-
-    <div class="d-flex">
-      <span class="btn-actions like">❤️ <span class="like-count">0</span></span>
-      <span class="btn-actions comment-btn">💬</span>
-      <span class="btn-actions edit">✏️</span>
-      <span class="btn-actions delete">🗑️</span>
-    </div>
-
-    <div class="comment-box mt-2" style="display:none">
-      <input class="form-control comment-input" placeholder="Comentario...">
-      <button class="btn btn-sm btn-dark mt-1 send-comment">Enviar</button>
-    </div>
-
-    <div class="comments mt-2"></div>
-  `;
-
-  // ❤️ LIKE CON CONTADOR
-  card.querySelector(".like").onclick=()=>{
-    const likeBtn = card.querySelector(".like");
-    const count = card.querySelector(".like-count");
-
-    if (likeBtn.classList.contains("text-danger")) {
-      likeBtn.classList.remove("text-danger");
-      count.textContent = Number(count.textContent) - 1;
-    } else {
-      likeBtn.classList.add("text-danger");
-      count.textContent = Number(count.textContent) + 1;
-    }
-  };
-
-  card.querySelector(".comment-btn").onclick=()=>{
-    const box=card.querySelector(".comment-box");
-    box.style.display= box.style.display==="none" ? "block" : "none";
-  };
-
-  card.querySelector(".send-comment").onclick=()=>{
-    const txt=card.querySelector(".comment-input").value;
-    if(!txt.trim())return;
-    const c=document.createElement("div");
-    c.className="comment";
-    c.textContent=txt;
-    card.querySelector(".comments").appendChild(c);
-    card.querySelector(".comment-input").value="";
-  };
-
-  card.querySelector(".delete").onclick=()=>card.remove();
-
-  card.querySelector(".edit").onclick=()=>{
-    const nuevo=prompt("Nuevo texto:", card.querySelector(".texto").textContent);
-    if(nuevo?.trim()) card.querySelector(".texto").textContent=nuevo;
-  };
-
-  document.getElementById("posts").prepend(card);
-
-  document.getElementById("name").value="";
-  document.getElementById("desc").value="";
-  document.querySelectorAll(".star").forEach(s=>s.classList.remove("active"));
-  rating=0;
-  document.getElementById("preview").src="";
-};
-</script>
-    <footer class="mt-auto">
-        <div>
-
-            <div class="row">
-
-                <div class="col-md-4 mb-3">
-                    <h5 class="text-uppercase">Letal cosplay</h5>
-                    <p>Letal Cosplay ofrece productos de alta calidad a precios accesibles, con opciones personalizadas
-                        y acabados profesionales que se adaptan a cada cliente.</p>
-                </div>
-
-                <div class="col-md-4 mb-3">
-                    <h5 class="text-uppercase">Secciones</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#productos-destacados">Inicio</a></li>
-                        <li><a href="#Productos">Productos</a></li>
-                        <li><a href="#QuienesSomos">Quienes Somos</a></li>
-                        <li><a href="#Contactenos">Contactenos</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-md-4 mb-3">
-                    <h5 class="text-uppercase">Síguenos</h5>
-                    <ul class="list-inline">
-                        <li class="list-inline-item"><a href="https://www.facebook.com/profile.php?id=61579635025362"><i
-                                    class="bi bi-facebook"></i></a></li>
-                        <li class="list-inline-item"><a href="#"><i class="bi bi-twitter"></i></a></li>
-                        <li class="list-inline-item"><a href="https://www.instagram.com/letalcosplay/"><i
-                                    class="bi bi-instagram"></i></a></li>
-                    </ul>
-                </div>
-
+            <div class="text-center mb-2">
+              <span class="star" data-v="1">★</span>
+              <span class="star" data-v="2">★</span>
+              <span class="star" data-v="3">★</span>
+              <span class="star" data-v="4">★</span>
+              <span class="star" data-v="5">★</span>
             </div>
 
-            <hr class="mb-4">
-
-            <p>&copy; 2025 Letal Cosplay, todos los derechos reservados.</p>
-
+            <div class="text-center">
+              <button id="publicar" class="btn btn-dark w-50">Publicar</button>
+            </div>
+          </div>
         </div>
-    </footer>
+
+        <!-- Columna derecha: últimas 3 calificaciones -->
+        <div class="col-md-4">
+          <h5 class="text-center mb-3">Últimas calificaciones</h5>
+          <div id="ultimas-calificaciones">
+            <!-- Aquí solo se agregan las calificaciones con JS -->
+          </div>
+        </div>
+    </div>
+  </section>
+
+
+
+  <!-- FOOTER -->
+
+  <footer class="mt-auto">
+    <div>
+
+      <div class="row">
+
+        <div class="col-md-4 mb-3">
+          <h5 class="text-uppercase">Letal cosplay</h5>
+          <p>Letal Cosplay ofrece productos de alta calidad a precios accesibles, con opciones personalizadas
+            y acabados profesionales que se adaptan a cada cliente.</p>
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <h5 class="text-uppercase">Secciones</h5>
+          <ul class="list-unstyled">
+            <li><a href="#productos-destacados">Inicio</a></li>
+            <li><a href="#Productos">Productos</a></li>
+            <li><a href="#QuienesSomos">Quienes Somos</a></li>
+            <li><a href="#Contactenos">Contactenos</a></li>
+          </ul>
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <h5 class="text-uppercase">Síguenos</h5>
+          <ul class="list-inline">
+            <li class="list-inline-item"><a href="https://www.facebook.com/profile.php?id=61579635025362"><i
+                  class="bi bi-facebook"></i></a></li>
+            <li class="list-inline-item"><a href="#"><i class="bi bi-twitter"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.instagram.com/letalcosplay/"><i
+                  class="bi bi-instagram"></i></a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <hr class="mb-4">
+
+      <p>&copy; 2025 Letal Cosplay, todos los derechos reservados.</p>
+
+    </div>
+  </footer>
 
   <script src="Script.js"></script>
   <script src="../control_nav.js"></script>

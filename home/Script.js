@@ -77,16 +77,74 @@ document.addEventListener("DOMContentLoaded", () => {
             seleccionados.appendChild(copia);
         }
     });
-card.querySelector(".like").onclick=()=>{
-  const likeBtn = card.querySelector(".like");
-  const count = card.querySelector(".like-count");
 
-  if (likeBtn.classList.contains("text-danger")) {
-    likeBtn.classList.remove("text-danger");
-    count.textContent = Number(count.textContent) - 1;
-  } else {
-    likeBtn.classList.add("text-danger");
-    count.textContent = Number(count.textContent) + 1;
-  }
-};
+//Calificaciones a la tienda
+
+document.addEventListener("DOMContentLoaded", () => {
+    let rating = 0;
+
+    const publicarBtn = document.getElementById("publicar");
+    const ultimasDiv = document.getElementById("ultimas-calificaciones");
+
+    // Traer calificaciones del localStorage
+    let ultimasCalificaciones = JSON.parse(localStorage.getItem("ultimasCalificaciones")) || [];
+
+    // Función para renderizar las últimas calificaciones
+    const renderCalificaciones = () => {
+        ultimasDiv.innerHTML = "";
+        ultimasCalificaciones.forEach(c => {
+            const item = document.createElement("div");
+            item.className = "calificacion-item";
+            item.innerHTML = `<strong>${c.nombre}:</strong> ${c.estrellas}<br>${c.desc}`;
+            ultimasDiv.appendChild(item);
+        });
+    };
+
+    //Llamar a la función para que traiga las calificaciones y las muestre
+    renderCalificaciones();
+
+    // Control de estrellas
+    document.querySelectorAll(".star").forEach(s => {
+        s.addEventListener("click", () => {
+            rating = s.dataset.v;
+            document.querySelectorAll(".star").forEach(x => {
+                x.classList.toggle("active", x.dataset.v <= rating);
+            });
+        });
+    });
+
+    // Publicar nueva calificación
+    publicarBtn.addEventListener("click", () => {
+        const nombre = document.getElementById("name").value.trim();
+        const desc = document.getElementById("desc").value.trim();
+
+        if (!nombre || !desc || rating === 0) {
+            alert("Por favor ingresa nombre, descripción y selecciona una calificación");
+            return;
+        }
+
+        const estrellasTexto = "★".repeat(rating) + "☆".repeat(5 - rating);
+
+        // Crear objeto de calificación
+        const nuevaCalificacion = { nombre, desc, estrellas: estrellasTexto };
+
+        // Agregar al inicio y limitar a 3
+        ultimasCalificaciones.unshift(nuevaCalificacion);
+        if (ultimasCalificaciones.length > 3) ultimasCalificaciones.pop();
+
+        // Guardar en localStorage
+        localStorage.setItem("ultimasCalificaciones", JSON.stringify(ultimasCalificaciones));
+
+        // Renderizar
+        renderCalificaciones();
+
+        // Reset formulario
+        document.getElementById("name").value = "";
+        document.getElementById("desc").value = "";
+        rating = 0;
+        document.querySelectorAll(".star").forEach(s => s.classList.remove("active"));
+    });
+});
+
+
 
