@@ -23,10 +23,9 @@ body {
 /* ====== LOGO ====== */
 /* LOGO */
 .logo-navbar {
-    height: 50px;
-    width: auto;
+  height: 90px;
+  width: auto;
 }
-
 .logo-text {
     font-size: 22px;
     font-weight: bold;
