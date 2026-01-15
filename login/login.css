@@ -30,11 +30,17 @@
    RESET GENERAL
 ====================== */
 html, body {
+    height: 100%;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: sans-serif;
     overflow-x: hidden;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
 }
 
 /* JOHANA NAV */
@@ -43,16 +49,15 @@ html, body {
     background-color: #240115;
     padding: 12px 20px;
     display: flex;
-   
     border-bottom: 1px solid #b3b3b3;
 }
 
 /* ====== LOGO ====== */
-/* LOGO */
 .logo-navbar {
   height: 90px;
   width: auto;
 }
+
 .logo-text {
     font-size: 22px;
     font-weight: bold;
@@ -74,12 +79,10 @@ html, body {
     border-right: 1px solid #b3b3b3;
 }
 
-/* Último sin línea */
 .nav-links a:last-child {
     border-right: none;
 }
 
-/* Hover subrayado */
 .nav-links a:hover {
     border-bottom: 2px solid black;
 }
