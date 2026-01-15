@@ -10,6 +10,14 @@ body {
     overflow-x: hidden;
 }
 
+h2{
+    color: #240115 !important;
+}
+
+h2:hover{
+    color: #591c32 !important;
+}
+
 /* JOHANA NAV */
 /* ====== HEADER ====== */
 .header-nav {
@@ -229,7 +237,6 @@ body {
 
 .califica-tienda {
     background-color: #ffff;
-    /* opcional, para diferenciar la sección */
 }
 
 #ultimas-calificaciones {
@@ -247,7 +254,6 @@ body {
 
 @media (max-width: 768px) {
 
-    /* En móviles, apilar verticalmente */
     .row.justify-content-center>.col-md-5 {
         flex: 0 0 100%;
         max-width: 100%;
