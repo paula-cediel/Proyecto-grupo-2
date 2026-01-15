@@ -3,11 +3,17 @@
 ====================== */
 html,
 body {
+    height: 100%;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: sans-serif;
     overflow-x: hidden;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
 }
 
 /* JOHANA NAV */
@@ -16,7 +22,6 @@ body {
     background-color: #240115;
     padding: 12px 20px;
     display: flex;
-
     border-bottom: 1px solid #b3b3b3;
 }
 
@@ -59,7 +64,7 @@ body {
 }
 
 /* Saludo cliente */
-#saludo{
+#saludo {
     color: white;
     font-size: 14px;
     font-weight: bold;
@@ -67,7 +72,7 @@ body {
 }
 
 #btn_cerrar_sesion {
-    background-color: #9F838C ;
+    background-color: #9F838C;
     color: black;
     border: 1px solid #000;
     border-radius: 5px;
@@ -77,7 +82,7 @@ body {
 
 #btn_cerrar_sesion:hover {
     background-color: #591c32;
-    color:#f5f5f5;
+    color: #f5f5f5;
 }
 
 .form-wrapper {
@@ -91,10 +96,9 @@ body {
     padding: 25px;
     width: 380px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     margin-bottom: 40px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
-    font-weight : bold;
+    font-weight: bold;
 }
 
 input {
@@ -110,31 +114,32 @@ input {
     position: relative;
     width: 100%;
 }
+
 .password-container input {
     width: 100%;
     padding-right: 45px;
     box-sizing: border-box;
 }
 
-.error{
+.error {
     color: red;
 }
 
 .ojito {
-  position: absolute;
-  right: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  font-size: 18px;
-  color: #555;
-  user-select: none;
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    color: #555;
+    user-select: none;
 }
 
 #boton_registro {
     width: 100%;
     padding: 12px;
-    background-color: #9F838C ;
+    background-color: #9F838C;
     color: black;
     border: none;
     border-radius: 5px;
@@ -144,7 +149,7 @@ input {
 
 #boton_registro:hover {
     background-color: #591c32;
-    color:#f5f5f5;
+    color: #f5f5f5;
 }
 
 .resultado {
@@ -156,11 +161,12 @@ input {
 }
 
 footer {
-    background-color: #240115 !important;   /* Fondo negro */
-    color: white;             /* Texto blanco */
+    background-color: #240115 !important;
+    color: white;
     padding: 40px 0;
     font-family: "Poppins", sans-serif;
     text-align: center;
+    margin-top: auto;
 }
 
 footer h5 {
@@ -179,7 +185,7 @@ footer ul li a {
     text-decoration: none;
     color: white;
     transition: 0.3s;
-}vv
+}
 
 footer ul li:hover a {
     opacity: 0.7;

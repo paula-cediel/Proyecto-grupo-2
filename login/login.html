@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Iniciar sesión</title>
@@ -7,12 +8,14 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="login.css">
+    
 </head>
 
 <body>
 
-   <header class="header-nav">
+    <header class="header-nav">
         <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark-purple shadow-sm">
                 <div class="top-bar d-flex justify-content-between align-items-center">
@@ -31,17 +34,23 @@
                         <li class="nav-item"><a class="nav-link" href="/acerca_de_nosotros/about.html">Sobre
                                 nosotros</a></li>
                         <li class="nav-item"><a class="nav-link" href="/Productos/productos.html">Productos</a></li>
-                        <li class="nav-item" id = "navRegistro"><a class="nav-link" href="/registro/registro.html">Registro</a></li>
-                        <li class="nav-item" id="navLogin"><a class="nav-link" href="/login/login.html">Iniciar sesión</a>
-                        <li class="nav-item" id="navPerfil"><a class="nav-link" href="/CRUDAdmin/main.html">Perfil</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/contactenos/contact-us.html">Contáctenos</a></li>
-                        <li class="nav-item d-flex align-items-center ms-2"><span id="saludo">Hola, Administrador</span></li>
-                        <li class="nav-item d-flex align-items-center ms-2"></li><button id="btn_cerrar_sesion" style="display:none;"> Cerrar sesión </button></li>
+                        <li class="nav-item" id="navRegistro"><a class="nav-link"
+                                href="/registro/registro.html">Registro</a></li>
+                        <li class="nav-item" id="navLogin"><a class="nav-link" href="/login/login.html">Iniciar
+                                sesión</a>
+                        <li class="nav-item" id="navPerfil"><a class="nav-link" href="/CRUDAdmin/main.html">Perfil</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="/contactenos/contact-us.html">Contáctenos</a>
+                        </li>
+                        <li class="nav-item d-flex align-items-center ms-2"><span id="saludo">Hola, Administrador</span>
+                        </li>
+                        <li class="nav-item d-flex align-items-center ms-2"></li><button id="btn_cerrar_sesion"
+                            style="display:none;"> Cerrar sesión </button></li>
                     </ul>
                 </div>
             </nav>
             <button id="logoutBtn" class="btn btn-danger d-none">Cerrar sesión</button>
-            
+
 
 
         </div>
@@ -51,37 +60,77 @@
         <p>Accede a tu cuenta</p>
     </div>
 
-<section class="container my-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6 form-container">
+    <section class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 form-container">
 
-            <form id="loginForm" novalidate>
+                <form id="loginForm" novalidate>
 
-                <div class="mb-3">
-                    <label class="form-label">Correo electrónico</label>
-                    <input type="email" id="correo" class="form-control" placeholder="correo@ejemplo.com">
-                    <span class="error" id="errorCorreo"></span>
+                    <div class="mb-3">
+                        <label class="form-label">Correo electrónico</label>
+                        <input type="email" id="correo" class="form-control" placeholder="correo@ejemplo.com">
+                        <span class="error" id="errorCorreo"></span>
+                    </div>
+
+                    <div class="password-container mb-3">
+                        <label class="form-label">Contraseña</label>
+                        <input type="password" id="password" class="form-control" placeholder="********">
+                        <span class="ojito" onclick="mostrarPassword()">👁️</span>
+                        <span class="error" id="errorPassword"></span>
+                    </div>
+                    <button type="submit" class="btn btn-dark w-100 post">
+                        Iniciar sesión
+                    </button>
+
+                </form>
+
+            </div>
+        </div>
+    </section>
+    <footer class="mt-auto">
+        <div>
+
+            <div class="row">
+
+                <div class="col-md-4 mb-3">
+                    <h5 class="text-uppercase">Letal cosplay</h5>
+                    <p>Letal Cosplay ofrece productos de alta calidad a precios accesibles, con opciones personalizadas
+                        y acabados profesionales que se adaptan a cada cliente.</p>
                 </div>
 
-                <div class="password-container mb-3">
-                    <label class="form-label">Contraseña</label>
-                    <input type="password" id="password" class="form-control" placeholder="********">
-                    <span class="ojito" onclick="mostrarPassword()">👁️</span>
-                    <span class="error" id="errorPassword"></span>
+                <div class="col-md-4 mb-3">
+                    <h5 class="text-uppercase">Secciones</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#productos-destacados">Inicio</a></li>
+                        <li><a href="#Productos">Productos</a></li>
+                        <li><a href="#QuienesSomos">Quienes Somos</a></li>
+                        <li><a href="#Contactenos">Contactenos</a></li>
+                    </ul>
                 </div>
-                <button type="submit" class="btn btn-dark w-100 post">
-                    Iniciar sesión
-                </button>
 
-            </form>
+                <div class="col-md-4 mb-3">
+                    <h5 class="text-uppercase">Síguenos</h5>
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><a href="https://www.facebook.com/profile.php?id=61579635025362"><i
+                                    class="bi bi-facebook"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="bi bi-twitter"></i></a></li>
+                        <li class="list-inline-item"><a href="https://www.instagram.com/letalcosplay/"><i
+                                    class="bi bi-instagram"></i></a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <hr class="mb-4">
+
+            <p>&copy; 2025 Letal Cosplay, todos los derechos reservados.</p>
 
         </div>
-    </div>
-</section>
-
-<script src="login.js"></script>
-<script src="../perfil.js"></script>
-<script src="../cerrar_sesion.js"></script> 
+    </footer>
+    <script src="login.js"></script>
+    <script src="../perfil.js"></script>
+    <script src="../cerrar_sesion.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
 
+</html>

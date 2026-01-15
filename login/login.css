@@ -30,11 +30,17 @@
    RESET GENERAL
 ====================== */
 html, body {
+    height: 100%;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: sans-serif;
     overflow-x: hidden;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
 }
 
 /* JOHANA NAV */
@@ -43,16 +49,15 @@ html, body {
     background-color: #240115;
     padding: 12px 20px;
     display: flex;
-   
     border-bottom: 1px solid #b3b3b3;
 }
 
 /* ====== LOGO ====== */
-/* LOGO */
 .logo-navbar {
-  height: 50px;
-  width: auto;
+    height: 50px;
+    width: auto;
 }
+
 .logo-text {
     font-size: 22px;
     font-weight: bold;
@@ -74,12 +79,10 @@ html, body {
     border-right: 1px solid #b3b3b3;
 }
 
-/* Último sin línea */
 .nav-links a:last-child {
     border-right: none;
 }
 
-/* Hover subrayado */
 .nav-links a:hover {
     border-bottom: 2px solid black;
 }
@@ -88,11 +91,13 @@ html, body {
     position: relative;
     width: 100%;
 }
+
 .password-container input {
     width: 100%;
     padding-right: 45px;
     box-sizing: border-box;
 }
+
 .ojito {
     position: absolute;
     right: 14px;
@@ -102,4 +107,41 @@ html, body {
     font-size: 18px;
     color: #555;
     user-select: none;
+}
+
+/* === FOOTER ESTILO IGUAL A LA IMAGEN === */
+footer {
+    background-color: #240115;
+    color: white;
+    padding: 40px 0;
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    margin-top: auto;
+}
+
+footer h5 {
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+footer p {
+    max-width: 300px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+footer ul li a {
+    text-decoration: none;
+    color: white;
+    transition: 0.3s;
+}
+
+footer ul li:hover a {
+    opacity: 0.7;
+}
+
+footer .list-inline-item a {
+    font-size: 20px;
+    padding: 5px;
 }
