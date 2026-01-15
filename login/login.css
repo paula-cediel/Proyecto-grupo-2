@@ -54,8 +54,8 @@ body {
 
 /* ====== LOGO ====== */
 .logo-navbar {
-    height: 50px;
-    width: auto;
+  height: 90px;
+  width: auto;
 }
 
 .logo-text {
@@ -87,61 +87,23 @@ body {
     border-bottom: 2px solid black;
 }
 
-.password-container {
+/* Container constraseña y ojito */
+.input_ojito_wrapper {
+    display: flex;
+    align-items: center;
     position: relative;
-    width: 100%;
 }
 
-.password-container input {
-    width: 100%;
-    padding-right: 45px;
+.input_ojito_wrapper input {
+    flex: 1;
+    padding-right: 0;
+    height: 45px;
     box-sizing: border-box;
 }
 
-.ojito {
-    position: absolute;
-    right: 14px;
-    top: 50%;
-    transform: translateY(-50%);
+.input_ojito_wrapper .ojito {
+    width: 24px;
+    height: 24px;
+    margin-left: -35px;
     cursor: pointer;
-    font-size: 18px;
-    color: #555;
-    user-select: none;
-}
-
-/* === FOOTER ESTILO IGUAL A LA IMAGEN === */
-footer {
-    background-color: #240115;
-    color: white;
-    padding: 40px 0;
-    font-family: "Poppins", sans-serif;
-    text-align: center;
-    margin-top: auto;
-}
-
-footer h5 {
-    font-weight: 700;
-    letter-spacing: 1px;
-    margin-bottom: 20px;
-}
-
-footer p {
-    max-width: 300px;
-    margin: 0 auto;
-    line-height: 1.6;
-}
-
-footer ul li a {
-    text-decoration: none;
-    color: white;
-    transition: 0.3s;
-}
-
-footer ul li:hover a {
-    opacity: 0.7;
-}
-
-footer .list-inline-item a {
-    font-size: 20px;
-    padding: 5px;
 }
