@@ -18,7 +18,7 @@
 <body>
 
     <!-- HEADER -->
-   <header class="header-nav">
+    <header class="header-nav">
         <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark-purple shadow-sm">
                 <div class="top-bar d-flex justify-content-between align-items-center">
@@ -38,10 +38,14 @@
                                 nosotros</a></li>
                         <li class="nav-item"><a class="nav-link" href="/Productos/productos.html">Productos</a></li>
                         <li class="nav-item"><a class="nav-link" href="/registro/registro.html">Registro</a></li>
-                        <li class="nav-item" id="navLogin"><a class="nav-link" href="/login/login.html">Iniciar sesión</a>
-                        <li class="nav-item" id="navPerfil"><a class="nav-link" href="/CRUDAdmin/main.html">Perfil</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/contactenos/contact-us.html">Contáctenos</a></li>
-                        <li class="nav-item d-flex align-items-center ms-2"><span id="saludo">Hola, Administrador</span></li>
+                        <li class="nav-item" id="navLogin"><a class="nav-link" href="/login/login.html">Iniciar
+                                sesión</a>
+                        <li class="nav-item" id="navPerfil"><a class="nav-link" href="/CRUDAdmin/main.html">Perfil</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="/contactenos/contact-us.html">Contáctenos</a>
+                        </li>
+                        <li class="nav-item d-flex align-items-center ms-2"><span id="saludo">Hola, Administrador</span>
+                        </li>
                         <li class="nav-item d-flex align-items-center ms-2"></li>
                         <button id="btn_cerrar_sesion" style="display:none;"> Cerrar sesión </button></li>
                     </ul>
@@ -53,42 +57,42 @@
         </div>
     </header>
 
-  <div class="background"></div>
+    
 
-  <div class="content">
+    <div class="content">
 
-    <!-- aquí va tu formulario -->
+        <!-- aquí va tu formulario -->
 
-    <!-- FORMULARIO -->
-    <div class="form-wrapper">
-      <div class="container-registro">
-        <h2>Registro de Usuario</h2>
-        <form id="formulario">
+        <!-- FORMULARIO -->
+        <div class="form-wrapper">
+            <div class="container-registro">
+                <h2>Registro de Usuario</h2>
+                <form id="formulario">
 
-          <label>Nombre completo:</label>
-          <input type="text" id="nombre">
-          <small class="error" id="errorNombre"></small>
-          <br>
-          <label>Número de teléfono:</label>
-          <input type="text" id="telefono">
-          <small class="error" id="errorNombre"></small>
-          <br>
-          <label>Email (nombre de usuario):</label>
-          <input type="email" id="email">
-          <small class="error" id="errorCorreo"></small>
-          <br>
-          <label>Contraseña:</label>
-          <div class="password-container">
-            <input type="password" id="contrasena">
-            <img id="ojito" class="ojito" src="/images/ojo_abierto.png" alt="Mostrar contraseña" />
-          </div>
-          <small class="error" id="errorPassword"></small>
-          <button type="submit">Registrar</button>
-        </form>
-      </div>
+                    <label>Nombre completo:</label>
+                    <input type="text" id="nombre">
+                    <small class="error" id="errorNombre"></small>
+                    <br>
+                    <label>Número de teléfono:</label>
+                    <input type="text" id="telefono">
+                    <small class="error" id="errorNombre"></small>
+                    <br>
+                    <label>Email (nombre de usuario):</label>
+                    <input type="email" id="email">
+                    <small class="error" id="errorCorreo"></small>
+                    <br>
+                    <label>Contraseña:</label>
+                    <div class="password-container">
+                        <input type="password" id="contrasena">
+                        <img id="ojito" class="ojito" src="/images/ojo_abierto.png" alt="Mostrar contraseña" />
+                    </div>
+                    <small class="error" id="errorPassword"></small>
+                    <button type="submit">Registrar</button>
+                </form>
+            </div>
+        </div>
+
     </div>
-
-  </div>
 
     <!-- FOOTER -->
     <footer class="mt-auto text-light p-4" style="margin-top: 60px;">
@@ -105,19 +109,22 @@
                 <div class="col-md-4 mb-3">
                     <h5 class="text-uppercase">Secciones</h5>
                     <ul class="list-unstyled">
-                        <li><a href="#productos-destacados" class="text-light">Inicio</a></li>
-                        <li><a href="#Productos" class="text-light">Productos</a></li>
-                        <li><a href="#QuienesSomos" class="text-light">Quienes Somos</a></li>
-                        <li><a href="#Contactenos" class="text-light">Contactenos</a></li>
+                        <li><a href="/home/home.html">Inicio</a></li>
+                        <li><a href="/Productos/productos.html">Productos</a></li>
+                        <li><a href="/acerca_de_nosotros/about.html">Quienes Somos</a></li>
+                        <li><a href="/contactenos/contact-us.html">Contactenos</a></li>
                     </ul>
                 </div>
 
                 <div class="col-md-4 mb-3">
                     <h5 class="text-uppercase">Síguenos</h5>
                     <ul class="list-inline">
-                        <li class="list-inline-item"><a href="https://www.facebook.com/profile.php?id=61579635025362" class="text-light"><i class="bi bi-facebook"></i></a></li>
-                        <li class="list-inline-item"><a href="#" class="text-light"><i class="bi bi-twitter"></i></a></li>
-                        <li class="list-inline-item"><a href="https://www.instagram.com/letalcosplay/" class="text-light"><i class="bi bi-instagram"></i></a></li>
+                        <li class="list-inline-item"><a href="https://www.facebook.com/profile.php?id=61579635025362"
+                                class="text-light"><i class="bi bi-facebook"></i></a></li>
+                        <li class="list-inline-item"><a href="#" class="text-light"><i class="bi bi-twitter"></i></a>
+                        </li>
+                        <li class="list-inline-item"><a href="https://www.instagram.com/letalcosplay/"
+                                class="text-light"><i class="bi bi-instagram"></i></a></li>
                     </ul>
                 </div>
 
