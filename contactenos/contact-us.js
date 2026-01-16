@@ -63,32 +63,54 @@
         if (!valido) return;
 
         // ====== ENVÍO A FORMASPRE ======
-        const urlFormspree = "seanadrianvc@gmail.com"; // <- cambia este enlace
+        // const urlFormspree = "seanadrianvc@gmail.com"; 
 
-        const formData = {
+        // const formData = {
+        //     nombre,
+        //     correo,
+        //     celular,
+        //     tipoSolicitud: tipo,
+        //     mensaje
+        // };
+
+        // try {
+        //     const response = await fetch(urlFormspree, {
+        //         method: "POST",
+        //         headers: { "Content-Type": "application/json" },
+        //         body: JSON.stringify(formData)
+        //     });
+
+        //     if (response.ok) {
+        //         alert("Formulario enviado correctamente ✔");
+        //         form.reset();
+        //     } else {
+        //         alert("Error al enviar el formulario.");
+        //     }
+        // } catch (error) {
+        //     alert("No se pudo conectar con el servidor.");
+        // }
+
+        // SI NO ES VÁLIDO → no enviar
+        if (!valido){
+            return;
+        } 
+
+        Swal.fire("Envío exitoso", "Información enviada correctamente", "success");
+
+        // Guardar en el localstorage
+        const contacto = {
             nombre,
             correo,
             celular,
             tipoSolicitud: tipo,
-            mensaje
+            mensaje,
+            fecha: new Date().toISOString()
         };
 
-        try {
-            const response = await fetch(urlFormspree, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formData)
-            });
+        const contactosGuardados = JSON.parse(localStorage.getItem("contactos")) || [];
+        contactosGuardados.push(contacto);
+        localStorage.setItem("contactos", JSON.stringify(contactosGuardados));
 
-            if (response.ok) {
-                alert("Formulario enviado correctamente ✔");
-                form.reset();
-            } else {
-                alert("Error al enviar el formulario.");
-            }
-        } catch (error) {
-            alert("No se pudo conectar con el servidor.");
-        }
     });
 
 
