@@ -11,7 +11,7 @@
 /* ====== LOGO ====== */
 /* LOGO */
 .logo-navbar {
-  height: 90px;
+  height: 70px;
   width: auto;
 }
 .logo-text {
@@ -29,9 +29,9 @@
 .nav-links a {
     color: white;
     text-decoration: none;
-    margin: 0 12px;
+    margin: 0 5px;
     padding: 5px 4px;
-    font-size: 14px;
+    font-size: 16px;
     border-right: 1px solid #b3b3b3;
 }
 

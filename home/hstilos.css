@@ -6,7 +6,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: sans-serif;
+     font-family: "Nunito", sans-serif;
     overflow-x: hidden;
 }
 
@@ -22,21 +22,20 @@ h2:hover{
 /* ====== HEADER ====== */
 .header-nav {
     background-color: #240115;
-    padding: 12px 20px;
+    padding: 10px 20px;
     display: flex;
-
     border-bottom: 1px solid #b3b3b3;
 }
 
 /* ====== LOGO ====== */
 /* LOGO */
 .logo-navbar {
-    height: 90px;
+    height: 70px;
     width: auto;
 }
 
 .logo-text {
-    font-size: 22px;
+    font-size: 30px;
     font-weight: bold;
     color: white;
 }
@@ -50,9 +49,9 @@ h2:hover{
 .nav-links a {
     color: white;
     text-decoration: none;
-    margin: 0 12px;
+    margin: 0 5px;
     padding: 5px 4px;
-    font-size: 14px;
+    font-size: 16px;
     border-right: 1px solid #b3b3b3;
 }
 
