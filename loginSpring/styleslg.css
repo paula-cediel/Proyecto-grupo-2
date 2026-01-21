@@ -1,0 +1,333 @@
+/*body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+form {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#error-message {
+    color: red;
+}*/
+/* Errores */
+.error {
+    color: red;
+    font-size: 0.9rem;
+}
+
+/* Cabecera */
+.header-contacto {
+    background: linear-gradient(to right, #240115, #3a3a3a);
+    color: white;
+    padding: 60px 0;
+    text-align: center;
+}
+
+/* Contenedor formulario */
+.form-container {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px #240115;
+}
+
+/* Botón */
+.post {
+    background-color: #240115 !important;
+    border: none;
+}
+
+/* ======================
+   RESET GENERAL
+====================== */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    overflow-x: hidden;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* JOHANA NAV */
+/* ====== HEADER ====== */
+.header-nav {
+    background-color: #240115;
+    padding: 12px 20px;
+    display: flex;
+    border-bottom: 1px solid #b3b3b3;
+}
+
+/* ====== LOGO ====== */
+.logo-navbar {
+  height: 90px;
+  width: auto;
+}
+
+.logo-text {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+}
+
+/* ====== CONTENEDOR DEL MENÚ ====== */
+.menu-container {
+    margin-top: 10px;
+}
+
+/* ====== LINKS DEL MENÚ ====== */
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 12px;
+    padding: 5px 4px;
+    font-size: 14px;
+    border-right: 1px solid #b3b3b3;
+}
+
+.nav-links a:last-child {
+    border-right: none;
+}
+
+.nav-links a:hover {
+    border-bottom: 2px solid black;
+}
+
+/* Container constraseña y ojito */
+.input_ojito_wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.input_ojito_wrapper input {
+    flex: 1;
+    padding-right: 0;
+    height: 45px;
+    box-sizing: border-box;
+}
+
+.input_ojito_wrapper .ojito {
+    width: 24px;
+    height: 24px;
+    margin-left: -35px;
+    cursor: pointer;
+}
+
+/* === FOOTER ESTILO IGUAL A LA IMAGEN === */
+
+footer {
+    background-color: #240115;
+    /* Fondo negro */
+    color: white;
+    /* Texto blanco */
+    padding: 40px 0;
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+}
+
+footer h5 {
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+footer p {
+    max-width: 300px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+footer ul li a {
+    text-decoration: none;
+    color: white;
+    transition: 0.3s;
+}
+
+footer ul li:hover a {
+    opacity: 0.7;
+}
+
+footer .list-inline-item a {
+    font-size: 20px;
+    padding: 5px;
+}
+
+/* Errores */
+.error {
+    color: red;
+    font-size: 0.9rem;
+}
+
+/* Cabecera */
+.header-contacto {
+    background: linear-gradient(to right, #240115, #3a3a3a);
+    color: white;
+    padding: 60px 0;
+    text-align: center;
+}
+
+/* Contenedor formulario */
+.form-container {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px #240115;
+}
+
+/* Botón */
+.post {
+    background-color: #240115 !important;
+    border: none;
+}
+
+/* ======================
+   RESET GENERAL
+====================== */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    overflow-x: hidden;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* JOHANA NAV */
+/* ====== HEADER ====== */
+.header-nav {
+    background-color: #240115;
+    padding: 12px 20px;
+    display: flex;
+    border-bottom: 1px solid #b3b3b3;
+}
+
+/* ====== LOGO ====== */
+.logo-navbar {
+  height: 90px;
+  width: auto;
+}
+
+.logo-text {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+}
+
+/* ====== CONTENEDOR DEL MENÚ ====== */
+.menu-container {
+    margin-top: 10px;
+}
+
+/* ====== LINKS DEL MENÚ ====== */
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 12px;
+    padding: 5px 4px;
+    font-size: 14px;
+    border-right: 1px solid #b3b3b3;
+}
+
+.nav-links a:last-child {
+    border-right: none;
+}
+
+.nav-links a:hover {
+    border-bottom: 2px solid black;
+}
+
+/* Container constraseña y ojito */
+.input_ojito_wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.input_ojito_wrapper input {
+    flex: 1;
+    padding-right: 0;
+    height: 45px;
+    box-sizing: border-box;
+}
+
+.input_ojito_wrapper .ojito {
+    width: 24px;
+    height: 24px;
+    margin-left: -35px;
+    cursor: pointer;
+}
+
+/* === FOOTER ESTILO IGUAL A LA IMAGEN === */
+
+footer {
+    background-color: #240115;
+    /* Fondo negro */
+    color: white;
+    /* Texto blanco */
+    padding: 40px 0;
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+}
+
+footer h5 {
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+footer p {
+    max-width: 300px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+footer ul li a {
+    text-decoration: none;
+    color: white;
+    transition: 0.3s;
+}
+
+footer ul li:hover a {
+    opacity: 0.7;
+}
+
+footer .list-inline-item a {
+    font-size: 20px;
+    padding: 5px;
+}
