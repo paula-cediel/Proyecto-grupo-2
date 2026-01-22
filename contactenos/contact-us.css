@@ -171,3 +171,25 @@ footer hr {
 .bg-dark-purple {
   background-color: var(--dark-purple) !important;
 }
+
+/* === FORMULARIO CON IMAGEN === */
+
+/* Reduce ancho visual y lo corre a la izquierda */
+.form-left {
+    margin-left: 90px;
+}
+
+/* Imagen del formulario */
+.form-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+}
+
+/* En pantallas pequeñas centramos todo */
+@media (max-width: 768px) {
+    .form-left {
+        margin-left: 0;
+    }
+}
+
