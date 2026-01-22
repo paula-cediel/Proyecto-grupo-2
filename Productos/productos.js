@@ -7,6 +7,9 @@ const subtotal = document.getElementById("subtotal");
 const contador = document.getElementById("contador");
 const btnVaciar = document.getElementById("vaciar");
 
+// Asegurarse que todos los precios sean números al cargar
+productos = productos.map(p => ({ ...p, precio: Number(p.precio) }));
+
 mostrarProductos();
 actualizarCarrito();
 
@@ -15,24 +18,8 @@ function mostrarProductos() {
 
     productos.forEach(prod => {
         const itemCarrito = carrito.find(p => p.id === prod.id);
-        /*
-        function encontrarItem(carrito, prod) {
-            for (let i = 0; i < carrito.length; i++) {
-                if (carrito[i].id === prod.id) {
-                    return carrito[i]; // Devuelve el primer elemento que coincide
-                }
-            }
-            return undefined; // Si no se encuentra ningún elemento, devuelve undefined
-        }
-
-        const itemCarrito = encontrarItem(carrito, prod);*/
         const cantidadCompra = itemCarrito ? itemCarrito.cantidadCompra : 0;
-        /*let cantidadCompra;
-        if (itemCarrito) {
-            cantidadCompra = itemCarrito.cantidadCompra;
-        } else {
-            cantidadCompra = 0;
-        }*/
+
         const card = document.createElement("div");
         card.classList.add("col-12", "col-sm-6", "col-lg-4");
 
@@ -41,7 +28,7 @@ function mostrarProductos() {
             <img src="${prod.imagen}" class="card-img-top" alt="${prod.titulo}">
             <div class="card-body text-center">
                 <h5>${prod.titulo}</h5>
-                <p class="fw-bold">$${prod.precio}</p>
+                <p class="fw-bold">$${prod.precio.toFixed(2)}</p>
                 <p>${prod.descripcion}</p>
                 <p class="text-success fw-bold">Stock: ${prod.cantidad}</p>
 
@@ -141,11 +128,11 @@ function actualizarCarrito() {
         carritoContainer.innerHTML += `
         <div class="d-flex justify-content-between border-bottom p-2">
             <span>${item.titulo} x${item.cantidadCompra}</span>
-            <strong>$${item.precio * item.cantidadCompra}</strong>
+            <strong>$${(item.precio * item.cantidadCompra).toFixed(2)}</strong>
         </div>`;
     });
 
-    subtotal.textContent = total;
+    subtotal.textContent = total.toFixed(2);
     contador.textContent = items;
 }
 
@@ -155,16 +142,16 @@ btnVaciar.addEventListener("click", () => {
     mostrarProductos();
 });
 
-
+// Control de roles de usuario
 const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
 
 if (!usuario) {
-  navPerfil.style.display = "none";
-  navLogout.style.display = "none";
-} else {
-  navLogin.style.display = "none";
-
-  if (usuario.rol !== "admin") {
     navPerfil.style.display = "none";
-  }
+    navLogout.style.display = "none";
+} else {
+    navLogin.style.display = "none";
+
+    if (usuario.rol !== "admin") {
+        navPerfil.style.display = "none";
+    }
 }
