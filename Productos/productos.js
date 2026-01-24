@@ -120,17 +120,36 @@ function actualizarCarrito() {
     carritoContainer.innerHTML = "";
     let total = 0;
     let items = 0;
-
+//esto fue lo unico que toque para eliminar producto por producto hasta la linea 152
     carrito.forEach(item => {
-        total += item.precio * item.cantidadCompra;
-        items += item.cantidadCompra;
+    total += item.precio * item.cantidadCompra;
+    items += item.cantidadCompra;
 
-        carritoContainer.innerHTML += `
-        <div class="d-flex justify-content-between border-bottom p-2">
+    carritoContainer.innerHTML += `
+    <div class="d-flex justify-content-between align-items-center border-bottom p-2">
+        <div>
             <span>${item.titulo} x${item.cantidadCompra}</span>
+        </div>
+
+        <div class="d-flex align-items-center gap-2">
             <strong>$${(item.precio * item.cantidadCompra).toFixed(2)}</strong>
-        </div>`;
-    });
+            <button class="btn btn-sm btn-outline-danger btn-eliminar" data-id="${item.id}">
+                <i class="bi bi-trash"></i>
+            </button>
+        </div>
+    </div>`;
+});
+
+carritoContainer.addEventListener("click", (e) => {
+    const btn = e.target.closest(".btn-eliminar");
+    if (!btn) return;
+
+    const id = Number(btn.dataset.id);
+
+    carrito = carrito.filter(item => item.id !== id);
+    guardarCarrito();
+    mostrarProductos();
+});
 
     subtotal.textContent = total.toFixed(2);
     contador.textContent = items;
