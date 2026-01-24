@@ -1,80 +1,135 @@
-const API_URL = "http://localhost:8080/auth";
-
-// ELEMENTOS
-const form = document.getElementById("login-form");
+const form = document.getElementById("loginForm");
 const correoInput = document.getElementById("correo");
 const passwordInput = document.getElementById("password");
-const errorCorreo = document.getElementById("errorCorreo");
-const errorPassword = document.getElementById("errorPassword");
+const logoutBtn = document.getElementById("logoutBtn");
 
-// VALIDACIONES
-function validarCorreo() {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!regex.test(correoInput.value.trim())) {
-        errorCorreo.textContent = "Correo inválido";
-        return false;
-    }
-    errorCorreo.textContent = "";
-    return true;
-}
-
-function validarPassword() {
-    if (passwordInput.value.trim().length < 6) {
-        errorPassword.textContent = "Mínimo 6 caracteres";
-        return false;
-    }
-    errorPassword.textContent = "";
-    return true;
-}
-
+// ==========================
+// VALIDACIONES EN TIEMPO REAL
+// ==========================
 correoInput.addEventListener("input", validarCorreo);
 passwordInput.addEventListener("input", validarPassword);
 
-// LOGIN
-form.addEventListener("submit", async (e) => {
+function validarCorreo() {
+    const correo = correoInput.value.trim();
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (correo === "") {
+        errorCorreo.textContent = "El correo es obligatorio";
+        return false;
+    } else if (!regex.test(correo)) {
+        errorCorreo.textContent = "Correo inválido";
+        return false;
+    } else {
+        errorCorreo.textContent = "";
+        return true;
+    }
+}
+
+function validarPassword() {
+    const pass = passwordInput.value.trim();
+
+    if (pass.length < 6) {
+        errorPassword.textContent = "Mínimo 6 caracteres";
+        return false;
+    } else {
+        errorPassword.textContent = "";
+        return true;
+    }
+}
+
+// ==========================
+// MOSTRAR / OCULTAR PASSWORD
+// ==========================
+let mostrar = false;
+const password = document.getElementById("password");
+const ojito = document.getElementById("ojito");
+
+ojito.addEventListener("click", () => {
+    if (mostrar) {
+        password.type = "password";
+        ojito.src = "/images/ojo_abierto.png";
+        mostrar = false;
+    } else {
+        password.type = "text";
+        ojito.src = "/images/ojo_cerrado.png";
+        mostrar = true;
+    }
+});
+
+// ==========================
+// LOGIN CON BACKEND (JWT)
+// ==========================
+form.addEventListener("submit", async function (e) {
     e.preventDefault();
 
     if (!validarCorreo() || !validarPassword()) return;
 
+    const loginDTO = {
+        correo: correoInput.value.trim(),
+        password: passwordInput.value.trim()
+    };
+
     try {
-        const response = await fetch(`${API_URL}/loginConDTO`, {
+        const response = await fetch("http://localhost:8081/auth/loginConDTO", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                correo: correoInput.value.trim(),
-                password: passwordInput.value.trim()
-            })
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(loginDTO)
         });
 
         if (!response.ok) {
-            const msg = await response.text();
-            errorPassword.textContent = msg;
-            return;
+            throw new Error("Credenciales inválidas");
         }
 
-        // 👈 EL TOKEN VIENE COMO TEXTO
-        const token = await response.text();
+        const data = await response.json();
+        /**
+         * SE ESPERA QUE EL BACKEND DEVUELVA ALGO ASÍ:
+         * {
+         *   token: "JWT...",
+         *   correo: "admin@letalcosplay.com",
+         *   rol: "ADMIN"
+         * }
+         */
 
-        localStorage.setItem("jwt", token);
+        // ==========================
+        // GUARDAR TOKEN Y USUARIO
+        // ==========================
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("usuarioActivo", JSON.stringify({
+            correo: data.correo,
+            rol: data.rol
+        }));
 
-        Swal.fire("Bienvenido", "Login exitoso", "success").then(() => {
-            window.location.href = "../home/home.html";
+        Swal.fire({
+            title: "Bienvenido",
+            text: "Ingreso exitoso",
+            icon: "success",
+            confirmButtonText: "Continuar"
+        }).then(() => {
+            // ==========================
+            // REDIRECCIONES POR ROL
+            // ==========================
+            if (data.rol === "ADMIN") {
+                window.location.href = "../CRUDAdmin/main.html";
+            } else {
+                window.location.href = "../home/home.html";
+            }
         });
 
     } catch (error) {
+        Swal.fire("Error", "Usuario o contraseña incorrectos", "error");
         console.error(error);
-        errorPassword.textContent = "Error al conectar con el servidor";
     }
 });
 
-// MOSTRAR / OCULTAR CONTRASEÑA
-let mostrar = false;
-const ojito = document.getElementById("ojito");
-
-ojito.addEventListener("click", () => {
-    passwordInput.type = mostrar ? "password" : "text";
-    ojito.src = mostrar
-        ? "/images/ojo_abierto.png"
-        : "/images/ojo_cerrado.png";
-    mostrar = !mostrar;
-});
+// ==========================
+// LOGOUT
+// ==========================
+if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("usuarioActivo");
+        window.location.href = "/login/login.html";
+    });
+}
