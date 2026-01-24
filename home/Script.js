@@ -8,7 +8,7 @@ const productos = [
     { id: 6, nombre: "Lentes", precio: 120000, img: "imagenes/lentes.jpeg" },
     { id: 7, nombre: "Peluca Kira", precio: 150000, img: "imagenes/peluca kira.jpg" },
     { id: 8, nombre: "Lentes", precio: 200000, img: "imagenes/lentes2.jpeg" },
-    { id: 9, nombre: "Curly Hair", precio: 80000, img:"imagenes/dandan.png" },
+    { id: 9, nombre: "Curly Hair", precio: 80000, img: "imagenes/dandan.png" },
     { id: 10, nombre: "Choker", precio: 120000, img: "imagenes/choker.png" },
     { id: 11, nombre: "Adults Nezuko Kamado", precio: 150000, img: "imagenes/kimesu.png" },
     { id: 12, nombre: "Adult Tomioka Giyuu", precio: 200000, img: "imagenes/kimesu1.png" },
@@ -33,15 +33,17 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         html += `
-        <div class="col-md-3">
-            <div class="card">
-                <img src="${prod.img}" class="card-img-top">
-                <div class="card-body text-center">
-                    <h5>${prod.nombre}</h5>
-                    <p>$${prod.precio}</p>
-                </div>
+<div class="col-md-3">
+    <a href="/Productos/productos.html" class="text-decoration-none text-dark d-block h-100">
+        <div class="card h-100">
+            <img src="${prod.img}" class="card-img-top" alt="${prod.nombre}">
+            <div class="card-body text-center">
+                <h5>${prod.nombre}</h5>
+                <p>$${prod.precio}</p>
             </div>
-        </div>`;
+        </div>
+    </a>
+</div>`;
 
         contador++;
 
@@ -58,25 +60,25 @@ document.addEventListener("DOMContentLoaded", () => {
     contenedor.innerHTML = html;
 });
 
-    const seleccionados = document.getElementById('seleccionados');
+const seleccionados = document.getElementById('seleccionados');
 
-    // Espera a que los productos de tu compañero existan
+// Espera a que los productos de tu compañero existan
 
-    document.addEventListener('click', (e) => {
-        if (e.target.closest('.productos')) {
-            const prod = e.target.closest('.productos');
+document.addEventListener('click', (e) => {
+    if (e.target.closest('.productos')) {
+        const prod = e.target.closest('.productos');
 
-            // Marcar el producto original
-            prod.classList.add('seleccionado');
+        // Marcar el producto original
+        prod.classList.add('seleccionado');
 
-            // Clonar producto seleccionado
-            const copia = prod.cloneNode(true);
-            copia.classList.remove('seleccionado');
+        // Clonar producto seleccionado
+        const copia = prod.cloneNode(true);
+        copia.classList.remove('seleccionado');
 
-            // Enviar a la sección de seleccionados
-            seleccionados.appendChild(copia);
-        }
-    });
+        // Enviar a la sección de seleccionados
+        seleccionados.appendChild(copia);
+    }
+});
 
 //Calificaciones a la tienda
 
