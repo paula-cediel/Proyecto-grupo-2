@@ -90,10 +90,7 @@
         //     alert("No se pudo conectar con el servidor.");
         // }
 
-        // SI NO ES VÁLIDO → no enviar
-        if (!valido){
-            return;
-        } 
+
 
         Swal.fire("Envío exitoso", "Información enviada correctamente", "success");
 
