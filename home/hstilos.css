@@ -305,3 +305,59 @@ footer .list-inline-item a {
     font-size: 20px;
     padding: 5px;
 }
+
+/* === CARRUSEL PRODUCTOS DESTACADOS === */
+
+#CarruselProductos .carousel-item {
+    padding: 10px 0;
+}
+
+#CarruselProductos .card {
+    height: 100%;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+#CarruselProductos .card:hover {
+    transform: scale(1.03);
+}
+
+#CarruselProductos .card-img-top {
+    height: 250px;          /* 🔥 todas las imágenes igual */
+    object-fit: contain;   /* no se deforman */
+    padding: 10px;
+}
+
+#CarruselProductos .col-md-3 {
+    padding: 10px;         /* 🔥 separación entre cards */
+}
+
+#CarruselProductos .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 120px;
+}
+
+/* === FIX ESPACIADO CARRUSEL PRODUCTOS === */
+
+#CarruselProductos .row {
+    display: flex;
+    gap: 20px; /* 🔥 separación real entre cards */
+    justify-content: center;
+}
+
+#CarruselProductos .col-md-3 {
+    flex: 0 0 auto;
+    width: 22%; /* 🔥 antes era ~25% */
+}
+
+#CarruselProductos .card {
+    max-width: 260px; /* 🔥 controla tamaño */
+    margin: auto;
+}
+
+#CarruselProductos .card-img-top {
+    height: 220px;        /* antes 250 */
+    object-fit: contain;
+}

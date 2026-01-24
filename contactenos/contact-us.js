@@ -1,114 +1,91 @@
-    const form = document.getElementById("formContacto");
+const form = document.getElementById("formContacto");
 
-    // Permitir solo letras en nombre
-    document.getElementById("nombre").addEventListener("input", function () {
-        this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, "");
-    });
+const nombreInput = document.getElementById("nombre");
+const correoInput = document.getElementById("correo");
+const celularInput = document.getElementById("celular");
+const tipoInput = document.getElementById("tipoSolicitud");
+const mensajeInput = document.getElementById("mensaje");
 
-    // Solo números en celular
-    document.getElementById("celular").addEventListener("input", function () {
-        this.value = this.value.replace(/[^0-9]/g, "");
-    });
+const errorNombre = document.getElementById("errorNombre");
+const errorCorreo = document.getElementById("errorCorreo");
+const errorCelular = document.getElementById("errorCelular");
+const errorTipo = document.getElementById("errorTipo");
+const errorMensaje = document.getElementById("errorMensaje");
 
-    form.addEventListener("submit", async function(e) {
-        e.preventDefault();
+nombreInput.addEventListener("input", function () {
+  this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, "");
+  errorNombre.textContent =
+    this.value.trim().length < 3 ? "El nombre debe tener mínimo 3 caracteres." : "";
+});
 
-        let valido = true;
+celularInput.addEventListener("input", function () {
+  this.value = this.value.replace(/[^0-9]/g, "");
+  errorCelular.textContent =
+    this.value.length !== 10 ? "El celular debe tener exactamente 10 dígitos." : "";
+});
 
-        const nombre = document.getElementById("nombre").value.trim();
-        const correo = document.getElementById("correo").value.trim();
-        const celular = document.getElementById("celular").value.trim();
-        const tipo = document.getElementById("tipoSolicitud").value;
-        const mensaje = document.getElementById("mensaje").value.trim();
+correoInput.addEventListener("input", () => {
+  const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  errorCorreo.textContent =
+    !regexCorreo.test(correoInput.value.trim()) ? "Correo inválido." : "";
+});
 
-        // Limpiar errores
-        document.getElementById("errorNombre").textContent = "";
-        document.getElementById("errorCorreo").textContent = "";
-        document.getElementById("errorCelular").textContent = "";
-        document.getElementById("errorTipo").textContent = "";
-        document.getElementById("errorMensaje").textContent = "";
+tipoInput.addEventListener("change", () => {
+  errorTipo.textContent = tipoInput.value === "" ? "Selecciona una opción." : "";
+});
 
-        // Validar nombre
-        if (nombre.length < 3) {
-            document.getElementById("errorNombre").textContent = "El nombre debe tener mínimo 3 caracteres.";
-            valido = false;
-        }
+mensajeInput.addEventListener("input", () => {
+  errorMensaje.textContent =
+    mensajeInput.value.trim().length < 10 ? "El mensaje debe tener mínimo 10 caracteres." : "";
+});
 
-        // Validar correo
-        const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!regexCorreo.test(correo)) {
-            document.getElementById("errorCorreo").textContent = "Correo inválido.";
-            valido = false;
-        }
+form.addEventListener("submit", async function (e) {
+  e.preventDefault();
 
-        // Validar celular
-        if (celular.length !== 10) {
-            document.getElementById("errorCelular").textContent = "El celular debe tener exactamente 10 dígitos.";
-            valido = false;
-        }
+  let valido = true;
 
-        // Validar select
-        if (tipo === "") {
-            document.getElementById("errorTipo").textContent = "Selecciona una opción.";
-            valido = false;
-        }
+  if (nombreInput.value.trim().length < 3) {
+    errorNombre.textContent = "El nombre debe tener mínimo 3 caracteres.";
+    valido = false;
+  }
 
-        // Validar mensaje
-        if (mensaje.length < 10) {
-            document.getElementById("errorMensaje").textContent = "El mensaje debe tener mínimo 10 caracteres.";
-            valido = false;
-        }
+  const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!regexCorreo.test(correoInput.value.trim())) {
+    errorCorreo.textContent = "Correo inválido.";
+    valido = false;
+  }
 
-        // SI NO ES VÁLIDO → no enviar
-        if (!valido) return;
+  if (celularInput.value.length !== 10) {
+    errorCelular.textContent = "El celular debe tener exactamente 10 dígitos.";
+    valido = false;
+  }
 
-        // ====== ENVÍO A FORMASPRE ======
-        // const urlFormspree = "seanadrianvc@gmail.com"; 
+  if (tipoInput.value === "") {
+    errorTipo.textContent = "Selecciona una opción.";
+    valido = false;
+  }
 
-        // const formData = {
-        //     nombre,
-        //     correo,
-        //     celular,
-        //     tipoSolicitud: tipo,
-        //     mensaje
-        // };
+  if (mensajeInput.value.trim().length < 10) {
+    errorMensaje.textContent = "El mensaje debe tener mínimo 10 caracteres.";
+    valido = false;
+  }
 
-        // try {
-        //     const response = await fetch(urlFormspree, {
-        //         method: "POST",
-        //         headers: { "Content-Type": "application/json" },
-        //         body: JSON.stringify(formData)
-        //     });
+  if (!valido) return;
 
-        //     if (response.ok) {
-        //         alert("Formulario enviado correctamente ✔");
-        //         form.reset();
-        //     } else {
-        //         alert("Error al enviar el formulario.");
-        //     }
-        // } catch (error) {
-        //     alert("No se pudo conectar con el servidor.");
-        // }
+  Swal.fire("Envío exitoso", "Información enviada correctamente", "success");
 
+  const contacto = {
+    nombre: nombreInput.value.trim(),
+    correo: correoInput.value.trim(),
+    celular: celularInput.value.trim(),
+    tipoSolicitud: tipoInput.value,
+    mensaje: mensajeInput.value.trim(),
+    fecha: new Date().toISOString()
+  };
 
+  const contactosGuardados = JSON.parse(localStorage.getItem("contactos")) || [];
+  contactosGuardados.push(contacto);
+  localStorage.setItem("contactos", JSON.stringify(contactosGuardados));
 
-        Swal.fire("Envío exitoso", "Información enviada correctamente", "success");
-
-        // Guardar en el localstorage
-        const contacto = {
-            nombre,
-            correo,
-            celular,
-            tipoSolicitud: tipo,
-            mensaje,
-            fecha: new Date().toISOString()
-        };
-
-        const contactosGuardados = JSON.parse(localStorage.getItem("contactos")) || [];
-        contactosGuardados.push(contacto);
-        localStorage.setItem("contactos", JSON.stringify(contactosGuardados));
-
-    });
-
-
-
+  form.reset();
+});

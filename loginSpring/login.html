@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="styleslg.css">
     
+    
 </head>
 
 <body>
@@ -57,7 +58,7 @@
         <h1>Iniciar sesión</h1>
         <p>Accede a tu cuenta</p>
     </div>
-
+<!-- 
     <section class="container my-5">
         <div class="row justify-content-center">
             <div class="col-md-6 form-container">
@@ -65,8 +66,8 @@
                 <form id="login-form" novalidate>
 
                     <div class="mb-3">
-                        <label class="form-label" for="username">Correo electrónico</label>
-                        <input type="email" id="username" name="username" class="form-control" placeholder="correo@ejemplo.com" required>
+                        <label class="form-label" for="correo">Correo electrónico</label>
+                        <input type="email" id="correo" name="correo" class="form-control" placeholder="correo@ejemplo.com" required>
                         <span class="error" id="errorCorreo"></span>
                     </div>
 
@@ -87,6 +88,62 @@
             </div>
         </div>
     </section>
+ -->
+    <section class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 form-container">
+
+            <form id="login-form" >
+
+                <!-- CORREO -->
+                <div class="mb-3">
+                    <label class="form-label" for="correo">Correo electrónico</label>
+                    <input
+                        type="email"
+                        id="correo"
+                        name="correo"
+                        class="form-control"
+                        placeholder="correo@ejemplo.com"
+                        required
+                    >
+                    <span class="error text-danger" id="errorCorreo"></span>
+                </div>
+
+                <!-- CONTRASEÑA -->
+                <div class="mb-3 password-container">
+                    <label class="form-label" for="password">Contraseña</label>
+
+                    <div class="input-ojo-wrapper position-relative">
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            class="form-control"
+                            placeholder="********"
+                            required
+                        >
+                        <img
+                            id="ojito"
+                            class="ojito"
+                            src="/images/ojo_abierto.png"
+                            alt="Mostrar contraseña"
+                        >
+                    </div>
+
+                    <span class="error text-danger" id="errorPassword"></span>
+                </div>
+
+                <!-- BOTÓN -->
+                <button type="submit" class="btn btn-dark w-100">
+                    Iniciar sesión
+                </button>
+
+            </form>
+
+        </div>
+    </div>
+</section>
+
 
  
 
@@ -133,9 +190,10 @@
 
     
 
-    <script src="login.js"></script>
+    <script src="scriptSpring.js"></script>
     <script src="../control_nav.js"></script>
     <script src="../cerrar_sesion.js"></script>
+    
 </body>
 
 </html>
