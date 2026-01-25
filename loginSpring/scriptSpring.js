@@ -1,7 +1,10 @@
-const form = document.getElementById("loginForm");
+const form = document.getElementById("login-form");
 const correoInput = document.getElementById("correo");
 const passwordInput = document.getElementById("password");
 const logoutBtn = document.getElementById("logoutBtn");
+
+const errorCorreo = document.getElementById("errorCorreo");
+const errorPassword = document.getElementById("errorPassword");
 
 // ==========================
 // VALIDACIONES EN TIEMPO REAL
