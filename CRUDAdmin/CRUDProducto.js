@@ -2,58 +2,40 @@ document.addEventListener("DOMContentLoaded", async () => {
     const contenedor = document.getElementById("contenido_perfil");
     const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
     const token = localStorage.getItem("token");
+    
+    // Configuración de APIs
     const API_PRODUCTOS = "http://localhost:8081/productos";
-    const API_USUARIOS = "http://localhost:8081/usuarios"; // <-- falta definir
-    const userId = usuario?.id; // <-- id del usuario activo
+    const API_USUARIOS = "http://localhost:8081/usuarios"; 
+    const userId = usuario?.id;
     let rating = 0;
 
-    if (!token) {
-        alert("Sesión expirada");
+    // Validación de sesión
+    if (!token || !usuario) {
         window.location.href = "/loginSpring/login.html";
         return;
     }
 
-    /* ======================================================
-       ===============   ADMINISTRADOR   ====================
-       ====================================================== */
     if (usuario.rol === "ADMIN") {
-
+        /* ======================================================
+           ===============   ADMINISTRADOR   ====================
+           ====================================================== */
         contenedor.innerHTML = `
         <header class="header-nav">
-            <div class="container-fluid">
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark-purple shadow-sm">
-                    <div class="top-bar d-flex justify-content-between align-items-center">
-                        <a class="navbar-brand d-flex justify-content-start" href="#">
-                            <img src="images/LogoLetra.png" alt="Letal Cosplay Logo" class="logo-navbar">
-                        </a>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+                <div class="container">
+                    <a class="navbar-brand" href="#">Panel Admin</a>
+                    <div class="navbar-nav ms-auto">
+                        <span class="nav-link text-white">Hola, Administrador</span>
+                        <button id="btn_cerrar_sesion" class="btn btn-outline-light btn-sm ms-2">Cerrar sesión</button>
                     </div>
-
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div class="collapse navbar-collapse justify-content-center" id="navMenu">
-                        <ul class="nav-links text-center mt-3 navbar-nav ms-auto ">
-                            <li class="nav-item"><a class="nav-link" href="/home/home.html">Inicio</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/acerca_de_nosotros/about.html">Sobre nosotros</a></li>
-                            <li class="nav-item" id="navProductos"><a class="nav-link" href="/Productos/productos.html">Productos</a></li>
-                            <li class="nav-item" id="navPerfil"><a class="nav-link" href="/CRUDAdmin/main.html">Perfil</a></li>
-                            <li class="nav-item" id="navContactenos"><a class="nav-link" href="/contactenos/contact-us.html">Contáctenos</a></li>
-                            <li class="nav-item d-flex align-items-center ms-2"><span id="saludo"></span></li>
-                            <li class="nav-item d-flex align-items-center ms-2"><button id="btn_cerrar_sesion"> Cerrar sesión </button></li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
+                </div>
+            </nav>
         </header>
-       
+        
         <div class="container py-4">
             <h1 class="text-center mb-4">Gestión de Productos</h1>
-
             <div class="card mb-4 shadow">
-                <div class="card-header bg-primary text-white fw-bold">
-                    Crear producto
-                </div>
+                <div class="card-header bg-primary text-white fw-bold">Crear producto</div>
                 <div class="card-body">
                     <form id="productoForm">
                         <input class="form-control mb-2" id="nombre" placeholder="Nombre" required>
@@ -61,29 +43,27 @@ document.addEventListener("DOMContentLoaded", async () => {
                         <textarea class="form-control mb-2" id="descripcion" placeholder="Descripción" required></textarea>
                         <input class="form-control mb-2" id="stock" type="number" placeholder="Stock" required>
                         <input class="form-control mb-2" id="imagen" placeholder="URL Imagen" required>
-                        <button class="btn btn-success w-100">Guardar</button>
+                        <button class="btn btn-success w-100">Guardar Producto</button>
                     </form>
                 </div>
             </div>
-
             <h3>Productos publicados</h3>
             <div id="feed" class="row g-3"></div>
-        </div>
-        `;
+        </div>`;
 
         const form = document.getElementById("productoForm");
         const feed = document.getElementById("feed");
 
-        /* ===== LISTAR PRODUCTOS ===== */
         async function cargarProductos() {
-            const res = await fetch(API_PRODUCTOS, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
-            const productos = await res.json();
-            mostrarProductos(productos);
+            try {
+                const res = await fetch(API_PRODUCTOS, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                const productos = await res.json();
+                mostrarProductos(productos);
+            } catch (e) { console.error("Error cargando productos", e); }
         }
 
-        /* ===== MOSTRAR ===== */
         function mostrarProductos(productos) {
             feed.innerHTML = "";
             productos.forEach(p => {
@@ -91,84 +71,51 @@ document.addEventListener("DOMContentLoaded", async () => {
                 div.className = "col-md-4";
                 div.innerHTML = `
                 <div class="card h-100 shadow">
-                    <img src="${p.imagen}" class="card-img-top">
+                    <img src="${p.imagen}" class="card-img-top" style="height:200px; object-fit:cover;">
                     <div class="card-body">
                         <h5>${p.nombre}</h5>
-                        <p>${p.descripcion}</p>
-                        <p><b>$${p.precio}</b></p>
-                        <p>Stock: ${p.stock}</p>
-                        <button class="btn btn-warning btn-sm editar">Editar</button>
+                        <p class="small text-muted">${p.descripcion}</p>
+                        <p><b>$${p.precio}</b> | Stock: ${p.stock}</p>
                         <button class="btn btn-danger btn-sm eliminar">Eliminar</button>
                     </div>
                 </div>`;
-
-                /* ELIMINAR */
                 div.querySelector(".eliminar").onclick = async () => {
-                    await fetch(`${API_PRODUCTOS}/${p.idProducto}`, {
-                        method: "DELETE",
-                        headers: { Authorization: `Bearer ${token}` }
-                    });
-                    cargarProductos();
+                    if(confirm("¿Eliminar producto?")) {
+                        await fetch(`${API_PRODUCTOS}/${p.idProducto}`, {
+                            method: "DELETE",
+                            headers: { Authorization: `Bearer ${token}` }
+                        });
+                        cargarProductos();
+                    }
                 };
-
-                /* EDITAR */
-                div.querySelector(".editar").onclick = async () => {
-                    const actualizado = {
-                        nombre: prompt("Nombre", p.nombre),
-                        precio: Number(prompt("Precio", p.precio)),
-                        descripcion: prompt("Descripción", p.descripcion),
-                        stock: Number(prompt("Stock", p.stock)),
-                        imagen: p.imagen
-                    };
-
-                    await fetch(`${API_PRODUCTOS}/${p.idProducto}`, {
-                        method: "PUT",
-                        headers: {
-                            "Content-Type": "application/json",
-                            Authorization: `Bearer ${token}`
-                        },
-                        body: JSON.stringify(actualizado)
-                    });
-
-                    cargarProductos();
-                };
-
                 feed.appendChild(div);
             });
         }
 
-        /* ===== CREAR ===== */
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
-
-            const producto = {
-                nombre: nombre.value,
-                precio: Number(precio.value),
-                descripcion: descripcion.value,
-                stock: Number(stock.value),
-                imagen: imagen.value
+            const nuevoP = {
+                nombre: document.getElementById("nombre").value,
+                precio: Number(document.getElementById("precio").value),
+                descripcion: document.getElementById("descripcion").value,
+                stock: Number(document.getElementById("stock").value),
+                imagen: document.getElementById("imagen").value
             };
-
             await fetch(`${API_PRODUCTOS}/crear`, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`
-                },
-                body: JSON.stringify(producto)
+                headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+                body: JSON.stringify(nuevoP)
             });
-
             form.reset();
             cargarProductos();
         });
 
         cargarProductos();
-    }
 
-    /* ======================================================
-       ==================   CLIENTE   =======================
-       ====================================================== */
-    else {
+    } else {
+        /* ======================================================
+           ==================   CLIENTE   =======================
+           ====================================================== */
         contenedor.innerHTML = `
         <header class="header-nav">
             <div class="container-fluid">
@@ -208,10 +155,17 @@ document.addEventListener("DOMContentLoaded", async () => {
                     <dl>
                         <dt>Nombre</dt>
                         <dd id="nombre_perfil"></dd>
+                        <dt>Apellido</dt>
+                        <dd id="apellido_perfil"></dd>
+                        <dd id="telefono_perfil"></dd>
+                        <dt>Teléfono</dt>
                         <dt>Correo</dt>
                         <dd id="correo_perfil"></dd>
-                        <dt>Teléfono</dt>
-                        <dd id="telefono_perfil"></dd>
+                        <dt>Dirección</dt>
+                        <dd id="direccion_perfil"></dd>
+                        <dt>Password</dt>
+                        <dd id="password_perfil"></dd>
+    
                     </dl>
                     <button class="btn primary editar_usuario">Editar</button>
                 </article>
@@ -241,17 +195,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                         <button type="button" id="publicar" class="btn primary">Publicar</button>
                     </form>
                 </div>
-            </section>
-
-            <section class="carrito">
-                <h1>Mi carrito</h1>
-                <div id="productosCarrito">
-                    <p class="vacio">Tu carrito está vacío</p>
-                </div>
-                <div class="total">
-                    Total: <span id="totalCarrito">$0</span>
-                </div>
-                <button type="submit" class="btn success btnPagar">Pagar</button>
             </section>
         </main>
 
@@ -289,149 +232,71 @@ document.addEventListener("DOMContentLoaded", async () => {
         </footer>
         `;
 
-        // ================= PERFIL =================
+        let usuarioActual = null;
+
         async function cargarPerfil() {
             try {
                 const res = await fetch(`${API_USUARIOS}/${userId}`, {
                     headers: { "Authorization": `Bearer ${token}` }
                 });
-                if (!res.ok) throw new Error("No se pudo cargar el perfil");
-                const user = await res.json();
-
-                document.getElementById("nombre_perfil").textContent = user.nombre;
-                document.getElementById("correo_perfil").textContent = user.correo;
-                document.getElementById("telefono_perfil").textContent = user.telefono || "";
-                document.getElementById("saludo").textContent = `Hola, ${user.nombre}`;
-
-                return user;
-            } catch (err) {
-                console.error(err);
-            }
+                usuarioReal = await res.json();
+                document.getElementById("_perfil").textContent = usuarioActual.correo;
+                document.getElementById("telefono_perfil").textContent = usuarioActual.telefono || "No asignado";
+                document.getElementById("saludo").textContent = `Hola, ${usuarioActual.nombre}`;
+                document.getElementById("correo_perfil").textContent = usuarioActual.correo;
+                document.getElementById("telefono_perfil").textContent = usuarioActual.telefono || "No asignado";
+                document.getElementById("saludo").textContent = `Hola, ${usuarioActual.nombre}`;
+            } catch (err) { console.error(err); }
         }
 
-        const usuarioReal = await cargarPerfil();
+        await cargarPerfil();
 
-        // ================= EDITAR PERFIL =================
-        const btnEditar = document.querySelector(".editar_usuario");
-        if (btnEditar) {
-            btnEditar.addEventListener("click", async () => {
-                const nuevoNombre = prompt("Nuevo nombre:", usuarioReal.nombre);
-                const nuevoTelefono = prompt("Nuevo teléfono:", usuarioReal.telefono || "");
-                if (!nuevoNombre || !nuevoTelefono) return;
-
-                try {
-                    const res = await fetch(`${API_USUARIOS}/${userId}`, {
-                        method: "PUT",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": `Bearer ${token}`
-                        },
-                        body: JSON.stringify({ nombre: nuevoNombre, telefono: nuevoTelefono })
-                    });
-
-                    if (!res.ok) throw new Error("Error actualizando usuario");
-
-                    const actualizado = await res.json();
-                    document.getElementById("nombre_perfil").textContent = actualizado.nombre;
-                    document.getElementById("telefono_perfil").textContent = actualizado.telefono || "";
-                    document.getElementById("saludo").textContent = `Hola, ${actualizado.nombre}`;
-
-                    Swal.fire("Éxito", "Perfil actualizado correctamente", "success");
-
-                } catch (err) {
-                    console.error(err);
-                    Swal.fire("Error", "No se pudo actualizar el perfil", "error");
-                }
-            });
-        }
-
-        // ================= CALIFICACIÓN TIENDA =================
-        const stars = document.querySelectorAll(".stars .star");
+        // Lógica de estrellas
+        const stars = document.querySelectorAll(".star");
         stars.forEach(star => {
             star.addEventListener("click", () => {
                 rating = parseInt(star.dataset.v);
-                stars.forEach(s => s.classList.toggle("active", s.dataset.v <= rating));
+                stars.forEach(s => s.style.color = s.dataset.v <= rating ? "#ffc107" : "#ccc");
             });
         });
 
-        const publicarBtn = document.getElementById("publicar");
-        publicarBtn.addEventListener("click", async () => {
-            const nombre = document.getElementById("name").value.trim();
-            const descripcion = document.getElementById("desc").value.trim();
-
-            if (!nombre || !descripcion || rating === 0) {
-                Swal.fire("Atención", "Nombre, opinión y estrellas son obligatorios", "warning");
-                return;
-            }
+        // Publicar calificación
+        document.getElementById("publicar").addEventListener("click", async () => {
+            const desc = document.getElementById("desc").value;
+            if (!desc || rating === 0) return Swal.fire("Aviso", "Faltan datos", "warning");
 
             try {
-                const res = await fetch(`${API_USUARIOS}/${userId}/calificaciones`, {
+                await fetch(`${API_USUARIOS}/${userId}/calificaciones`, {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${token}`
-                    },
-                    body: JSON.stringify({ nombre, descripcion, estrellas: rating })
+                    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+                    body: JSON.stringify({ nombre: usuarioReal.nombre, descripcion: desc, estrellas: rating })
                 });
-
-                if (!res.ok) throw new Error("Error al guardar calificación");
-
                 Swal.fire("¡Gracias!", "Calificación guardada", "success");
-                document.getElementById("formCalifica").reset();
-                rating = 0;
-                stars.forEach(s => s.classList.remove("active"));
-
-            } catch (err) {
-                console.error(err);
-                Swal.fire("Error", "No se pudo guardar la calificación", "error");
-            }
+            } catch (e) { Swal.fire("Error", "No se pudo enviar", "error"); }
         });
 
-        // ================= CARRITO =================
-        const productosCarrito = document.getElementById("productosCarrito");
-        const totalCarrito = document.getElementById("totalCarrito");
-
-        function mostrarCarrito() {
-            productosCarrito.innerHTML = "";
-            const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-            if (carrito.length === 0) {
-                productosCarrito.innerHTML = `<p class="vacio">Tu carrito está vacío</p>`;
-                totalCarrito.textContent = "$0";
-                return;
+        // Botón Editar
+        document.querySelector(".editar_usuario").onclick = async () => {
+             const { value: formValues } = await Swal.fire({
+                title: 'Editar Perfil',
+                html: `<input id="sw-nom" class="swal2-input" value="${usuarioReal.nombre}">` +
+                     `<input id="sw-tel" class="swal2-input" value="${usuarioReal.telefono || ''}">`,
+                preConfirm: () => ({ nombre: document.getElementById('sw-nom').value, telefono: document.getElementById('sw-tel').value })
+            });
+            if (formValues) {
+                await fetch(`${API_USUARIOS}/${userId}`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+                    body: JSON.stringify({ ...usuarioReal, ...formValues })
+                });
+                cargarPerfil();
             }
-            let total = 0;
-            carrito.forEach(p => {
-                const subtotal = p.precio * p.cantidad;
-                total += subtotal;
-                const div = document.createElement("div");
-                div.classList.add("producto-carrito");
-                div.innerHTML = `
-                    <strong>${p.titulo}</strong><br>
-                    Cantidad: ${p.cantidad}<br>
-                    Precio: $${p.precio.toLocaleString()}<br>
-                    Subtotal: $${subtotal.toLocaleString()}
-                    <hr>
-                `;
-                productosCarrito.appendChild(div);
-            });
-            totalCarrito.textContent = `$${total.toLocaleString()}`;
-        }
-
-        mostrarCarrito();
-
-        const btnPagar = document.querySelector(".btnPagar");
-        if (btnPagar) btnPagar.addEventListener("click", () => {
-            Swal.fire("Lo sentimos", "Estamos trabajando en esto", "error");
-        });
-
-        // ================= CERRAR SESIÓN =================
-        const btnLogout = document.getElementById("btn_cerrar_sesion");
-        if (btnLogout) {
-            btnLogout.addEventListener("click", () => {
-                localStorage.removeItem("token");
-                localStorage.removeItem("usuarioActivo");
-                window.location.href = "/loginSpring/login.html";
-            });
-        }
+        };
     }
-});
+
+    // Evento cerrar sesión (común para ambos)
+    document.getElementById("btn_cerrar_sesion").onclick = () => {
+        localStorage.clear();
+        window.location.href = "/loginSpring/login.html";
+    };
+}); 
