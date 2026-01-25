@@ -1,15 +1,17 @@
-document.addEventListener("DOMContentLoaded", () => {
-
+document.addEventListener("DOMContentLoaded", async () => {
     const contenedor = document.getElementById("contenido_perfil");
     const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
     const token = localStorage.getItem("token");
-
-if (!token) {
-  alert("Sesión expirada");
-  window.location.href = "/loginSpring/login.html";
-}
-
     const API_PRODUCTOS = "http://localhost:8081/productos";
+    const API_USUARIOS = "http://localhost:8081/usuarios"; // <-- falta definir
+    const userId = usuario?.id; // <-- id del usuario activo
+    let rating = 0;
+
+    if (!token) {
+        alert("Sesión expirada");
+        window.location.href = "/loginSpring/login.html";
+        return;
+    }
 
     /* ======================================================
        ===============   ADMINISTRADOR   ====================
@@ -33,21 +35,18 @@ if (!token) {
                     <div class="collapse navbar-collapse justify-content-center" id="navMenu">
                         <ul class="nav-links text-center mt-3 navbar-nav ms-auto ">
                             <li class="nav-item"><a class="nav-link" href="/home/home.html">Inicio</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/acerca_de_nosotros/about.html">Sobre
-                                    nosotros</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/acerca_de_nosotros/about.html">Sobre nosotros</a></li>
                             <li class="nav-item" id="navProductos"><a class="nav-link" href="/Productos/productos.html">Productos</a></li>
                             <li class="nav-item" id="navPerfil"><a class="nav-link" href="/CRUDAdmin/main.html">Perfil</a></li>
-                            <li class="nav-item"id="navContactenos"><a class="nav-link" href="/contactenos/contact-us.html">Contáctenos</a></li>
+                            <li class="nav-item" id="navContactenos"><a class="nav-link" href="/contactenos/contact-us.html">Contáctenos</a></li>
                             <li class="nav-item d-flex align-items-center ms-2"><span id="saludo"></span></li>
-                            <li class="nav-item d-flex align-items-center ms-2"></li><button id="btn_cerrar_sesion";"> Cerrar sesión </button></li>
+                            <li class="nav-item d-flex align-items-center ms-2"><button id="btn_cerrar_sesion"> Cerrar sesión </button></li>
                         </ul>
                     </div>
                 </nav>
-
-
             </div>
         </header>
-        
+       
         <div class="container py-4">
             <h1 class="text-center mb-4">Gestión de Productos</h1>
 
@@ -170,380 +169,269 @@ if (!token) {
        ==================   CLIENTE   =======================
        ====================================================== */
     else {
-
         contenedor.innerHTML = `
-    <main class="perfil-grid container mt-4">
-        <div class="row">
-            <section class="col-md-6 mb-4">
-                <div class="card shadow">
-                    <div class="card-header bg-dark-purple text-white">
-                        <h2 class="h5 mb-0">Mis Datos Personales</h2>
+        <header class="header-nav">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark-purple shadow-sm">
+                    <div class="top-bar d-flex justify-content-between align-items-center">
+                        <a class="navbar-brand d-flex justify-content-start" href="#">
+                            <img src="images/LogoLetra.png" alt="Letal Cosplay Logo" class="logo-navbar">
+                        </a>
                     </div>
-                    <div class="card-body">
-                        <form id="formPerfil">
-                            <div class="mb-3">
-                                <label class="form-label">Nombre</label>
-                                <input type="text" id="edit_nombre" class="form-control" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Apellido</label>
-                                <input type="text" id="edit_apellido" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Correo (No editable)</label>
-                                <input type="email" id="edit_correo" class="form-control" readonly>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Teléfono</label>
-                                <input type="number" id="edit_telefono" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Dirección de Envío</label>
-                                <input type="text" id="edit_direccion" class="form-control" placeholder="Calle, Número, Ciudad">
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100">Guardar Cambios</button>
-                        </form>
-                    </div>
-                </div>
-            </section>
 
-            <section class="col-md-6 mb-4">
-                <div class="card shadow">
-                    <div class="card-header bg-dark-purple text-white">
-                        <h2 class="h5 mb-0">Califica nuestra tienda</h2>
-                    </div>
-                    <div class="card-body text-center">
-                        <p>Cuéntanos tu experiencia</p>
-                        <textarea id="calif_desc" class="form-control mb-3" placeholder="Tu opinión es muy importante..."></textarea>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-                        <div class="stars-container mb-3" style="font-size: 2rem; cursor: pointer;">
-                            <span class="star" data-v="1">★</span>
-                            <span class="star" data-v="2">★</span>
-                            <span class="star" data-v="3">★</span>
-                            <span class="star" data-v="4">★</span>
-                            <span class="star" data-v="5">★</span>
-                        </div>
-                        <button id="btn_publicar_calif" class="btn btn-dark w-50">Publicar Calificación</button>
+                    <div class="collapse navbar-collapse justify-content-center" id="navMenu">
+                        <ul class="nav-links text-center mt-3 navbar-nav ms-auto ">
+                            <li class="nav-item"><a class="nav-link" href="/home/home.html">Inicio</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/acerca_de_nosotros/about.html">Sobre nosotros</a></li>
+                            <li class="nav-item" id="navProductos"><a class="nav-link" href="/Productos/productos.html">Productos</a></li>
+                            <li class="nav-item" id="navPerfil"><a class="nav-link" href="/CRUDAdmin/main.html">Perfil</a></li>
+                            <li class="nav-item" id="navContactenos"><a class="nav-link" href="/contactenos/contact-us.html">Contáctenos</a></li>
+                            <li class="nav-item d-flex align-items-center ms-2"><span id="saludo"></span></li>
+                            <li class="nav-item d-flex align-items-center ms-2"><button id="btn_cerrar_sesion"> Cerrar sesión </button></li>
+                        </ul>
                     </div>
-                </div>
-            </section>
-        </div>
-
-        <section class="card shadow mb-4">
-            <div class="card-body">
-                <h3>Mi Carrito</h3>
-                <div id="productosCarrito"></div>
-                <div class="text-end mt-2">
-                    <strong>Total: <span id="totalCarrito">$0</span></strong>
-                </div>
+                </nav>
             </div>
-        </section>
-    </main>
-    `;
+        </header>
 
-    // 1. CARGAR DATOS EN EL FORMULARIO DESDE EL BACK
-async function cargarDatosPerfil() {
-    const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));
-    if (!usuarioActivo) return;
+        <main class="perfil-grid">
+            <section class="perfil">
+                <header class="header_perfil">
+                    <h1>Mis datos</h1>
+                </header>
 
-    try {
-        const resp = await fetch(`http://localhost:8081/usuarios/${usuarioActivo.id}`);
-        const data = await resp.json();
+                <article class="info_perfil">
+                    <dl>
+                        <dt>Nombre</dt>
+                        <dd id="nombre_perfil"></dd>
+                        <dt>Correo</dt>
+                        <dd id="correo_perfil"></dd>
+                        <dt>Teléfono</dt>
+                        <dd id="telefono_perfil"></dd>
+                    </dl>
+                    <button class="btn primary editar_usuario">Editar</button>
+                </article>
+            </section>
 
-        document.getElementById("edit_nombre").value = data.nombre || "";
-        document.getElementById("edit_apellido").value = data.apellido || "";
-        document.getElementById("edit_correo").value = data.correo || "";
-        document.getElementById("edit_telefono").value = data.telefono || "";
-        document.getElementById("edit_direccion").value = data.direccion || "";
-        
-        // Actualizar saludo en el nav
-        document.getElementById("saludo").textContent = `Hola, ${data.nombre}`;
-    } catch (err) {
-        console.error("Error cargando perfil", err);
-    }
-}
+            <section class="califica-tienda">
+                <h1>Califica la tienda</h1>
+                <div class="form-opinion">
+                    <form id="formCalifica">
+                        <label for="name">Nombre</label>
+                        <input type="text" id="name" placeholder="Tu nombre" required>
+                        
+                        <label for="desc">Tu opinión</label>
+                        <textarea id="desc" placeholder="Escribe aquí tu comentario..." rows="3"></textarea>
 
-// 2. ACTUALIZAR PERFIL (EVENTO SUBMIT)
-document.getElementById("formPerfil").addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));
+                        <div class="rating-container">
+                            <span>Puntuación:</span>
+                            <div class="stars">
+                                <span class="star" data-v="1">★</span>
+                                <span class="star" data-v="2">★</span>
+                                <span class="star" data-v="3">★</span>
+                                <span class="star" data-v="4">★</span>
+                                <span class="star" data-v="5">★</span>
+                            </div>
+                        </div>
 
-    const datosActualizados = {
-        nombre: document.getElementById("edit_nombre").value,
-        apellido: document.getElementById("edit_apellido").value,
-        telefono: document.getElementById("edit_telefono").value,
-        direccion: document.getElementById("edit_direccion").value,
-        correo: document.getElementById("edit_correo").value // El back lo necesita para no perderlo
-    };
+                        <button type="button" id="publicar" class="btn primary">Publicar</button>
+                    </form>
+                </div>
+            </section>
 
-    try {
-        const resp = await fetch(`http://localhost:8081/usuarios/${usuarioActivo.id}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(datosActualizados)
-        });
+            <section class="carrito">
+                <h1>Mi carrito</h1>
+                <div id="productosCarrito">
+                    <p class="vacio">Tu carrito está vacío</p>
+                </div>
+                <div class="total">
+                    Total: <span id="totalCarrito">$0</span>
+                </div>
+                <button type="submit" class="btn success btnPagar">Pagar</button>
+            </section>
+        </main>
 
-        if (resp.ok) {
-            Swal.fire("Éxito", "Perfil actualizado correctamente", "success");
-            cargarDatosPerfil(); // Recargar datos
+        <footer class="mt-auto">
+            <div>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <h5 class="text-uppercase">Letal cosplay</h5>
+                        <p>Letal Cosplay ofrece productos de alta calidad a precios accesibles, con opciones personalizadas y acabados profesionales que se adaptan a cada cliente.</p>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <h5 class="text-uppercase">Secciones</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#productos-destacados">Inicio</a></li>
+                            <li><a href="#Productos">Productos</a></li>
+                            <li><a href="#QuienesSomos">Quienes Somos</a></li>
+                            <li><a href="#Contactenos">Contactenos</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <h5 class="text-uppercase">Síguenos</h5>
+                        <ul class="list-inline">
+                            <li class="list-inline-item"><a href="https://www.facebook.com/profile.php?id=61579635025362"><i class="bi bi-facebook"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="bi bi-twitter"></i></a></li>
+                            <li class="list-inline-item"><a href="https://www.instagram.com/letalcosplay/"><i class="bi bi-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <hr class="mb-4">
+                <p>&copy; 2025 Letal Cosplay, todos los derechos reservados.</p>
+            </div>
+        </footer>
+        `;
+
+        // ================= PERFIL =================
+        async function cargarPerfil() {
+            try {
+                const res = await fetch(`${API_USUARIOS}/${userId}`, {
+                    headers: { "Authorization": `Bearer ${token}` }
+                });
+                if (!res.ok) throw new Error("No se pudo cargar el perfil");
+                const user = await res.json();
+
+                document.getElementById("nombre_perfil").textContent = user.nombre;
+                document.getElementById("correo_perfil").textContent = user.correo;
+                document.getElementById("telefono_perfil").textContent = user.telefono || "";
+                document.getElementById("saludo").textContent = `Hola, ${user.nombre}`;
+
+                return user;
+            } catch (err) {
+                console.error(err);
+            }
         }
-    } catch (err) {
-        Swal.fire("Error", "No se pudo actualizar", "error");
-    }
-});
 
-// 3. LOGICA DE CALIFICACIONES (HACIA EL BACKEND)
-let ratingSeleccionado = 0;
-document.querySelectorAll(".star").forEach(s => {
-    s.addEventListener("click", () => {
-        ratingSeleccionado = s.dataset.v;
-        document.querySelectorAll(".star").forEach(x => {
-            x.style.color = x.dataset.v <= ratingSeleccionado ? "#ffc107" : "#ccc";
-        });
-    });
-});
+        const usuarioReal = await cargarPerfil();
 
-document.getElementById("btn_publicar_calif").addEventListener("click", async () => {
-    const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));
-    const descripcion = document.getElementById("calif_desc").value;
+        // ================= EDITAR PERFIL =================
+        const btnEditar = document.querySelector(".editar_usuario");
+        if (btnEditar) {
+            btnEditar.addEventListener("click", async () => {
+                const nuevoNombre = prompt("Nuevo nombre:", usuarioReal.nombre);
+                const nuevoTelefono = prompt("Nuevo teléfono:", usuarioReal.telefono || "");
+                if (!nuevoNombre || !nuevoTelefono) return;
 
-    if (ratingSeleccionado === 0 || !descripcion) {
-        return Swal.fire("Atención", "Escribe tu opinión y selecciona estrellas", "warning");
-    }
+                try {
+                    const res = await fetch(`${API_USUARIOS}/${userId}`, {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`
+                        },
+                        body: JSON.stringify({ nombre: nuevoNombre, telefono: nuevoTelefono })
+                    });
 
-    const calificacionBody = {
-        nombre: usuarioActivo.nombre,
-        descripcion: descripcion,
-        estrellas: parseInt(ratingSeleccionado)
-    };
+                    if (!res.ok) throw new Error("Error actualizando usuario");
 
-    try {
-        // Usamos tu endpoint del Controller: POST /calificaciones/{userId}
-        const resp = await fetch(`http://localhost:8081/calificaciones/${usuarioActivo.id}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(calificacionBody)
-        });
+                    const actualizado = await res.json();
+                    document.getElementById("nombre_perfil").textContent = actualizado.nombre;
+                    document.getElementById("telefono_perfil").textContent = actualizado.telefono || "";
+                    document.getElementById("saludo").textContent = `Hola, ${actualizado.nombre}`;
 
-        if (resp.ok) {
-            Swal.fire("Gracias", "Tu calificación ha sido enviada", "success");
-            document.getElementById("calif_desc").value = "";
-            // Reset estrellas
+                    Swal.fire("Éxito", "Perfil actualizado correctamente", "success");
+
+                } catch (err) {
+                    console.error(err);
+                    Swal.fire("Error", "No se pudo actualizar el perfil", "error");
+                }
+            });
         }
-    } catch (err) {
-        Swal.fire("Error", "Ya has calificado o hubo un error", "error");
+
+        // ================= CALIFICACIÓN TIENDA =================
+        const stars = document.querySelectorAll(".stars .star");
+        stars.forEach(star => {
+            star.addEventListener("click", () => {
+                rating = parseInt(star.dataset.v);
+                stars.forEach(s => s.classList.toggle("active", s.dataset.v <= rating));
+            });
+        });
+
+        const publicarBtn = document.getElementById("publicar");
+        publicarBtn.addEventListener("click", async () => {
+            const nombre = document.getElementById("name").value.trim();
+            const descripcion = document.getElementById("desc").value.trim();
+
+            if (!nombre || !descripcion || rating === 0) {
+                Swal.fire("Atención", "Nombre, opinión y estrellas son obligatorios", "warning");
+                return;
+            }
+
+            try {
+                const res = await fetch(`${API_USUARIOS}/${userId}/calificaciones`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ nombre, descripcion, estrellas: rating })
+                });
+
+                if (!res.ok) throw new Error("Error al guardar calificación");
+
+                Swal.fire("¡Gracias!", "Calificación guardada", "success");
+                document.getElementById("formCalifica").reset();
+                rating = 0;
+                stars.forEach(s => s.classList.remove("active"));
+
+            } catch (err) {
+                console.error(err);
+                Swal.fire("Error", "No se pudo guardar la calificación", "error");
+            }
+        });
+
+        // ================= CARRITO =================
+        const productosCarrito = document.getElementById("productosCarrito");
+        const totalCarrito = document.getElementById("totalCarrito");
+
+        function mostrarCarrito() {
+            productosCarrito.innerHTML = "";
+            const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+            if (carrito.length === 0) {
+                productosCarrito.innerHTML = `<p class="vacio">Tu carrito está vacío</p>`;
+                totalCarrito.textContent = "$0";
+                return;
+            }
+            let total = 0;
+            carrito.forEach(p => {
+                const subtotal = p.precio * p.cantidad;
+                total += subtotal;
+                const div = document.createElement("div");
+                div.classList.add("producto-carrito");
+                div.innerHTML = `
+                    <strong>${p.titulo}</strong><br>
+                    Cantidad: ${p.cantidad}<br>
+                    Precio: $${p.precio.toLocaleString()}<br>
+                    Subtotal: $${subtotal.toLocaleString()}
+                    <hr>
+                `;
+                productosCarrito.appendChild(div);
+            });
+            totalCarrito.textContent = `$${total.toLocaleString()}`;
+        }
+
+        mostrarCarrito();
+
+        const btnPagar = document.querySelector(".btnPagar");
+        if (btnPagar) btnPagar.addEventListener("click", () => {
+            Swal.fire("Lo sentimos", "Estamos trabajando en esto", "error");
+        });
+
+        // ================= CERRAR SESIÓN =================
+        const btnLogout = document.getElementById("btn_cerrar_sesion");
+        if (btnLogout) {
+            btnLogout.addEventListener("click", () => {
+                localStorage.removeItem("token");
+                localStorage.removeItem("usuarioActivo");
+                window.location.href = "/loginSpring/login.html";
+            });
+        }
     }
 });
-
-//         cerrarSesion();
-
-//         const btnEditar = document.querySelector(".editar_usuario");
-
-//         if (btnEditar) {
-//             btnEditar.addEventListener("click", () => {
-
-//                 const nuevoNombre = prompt("Nuevo nombre:", usuario.nombre);
-//                 const nuevoTelefono = prompt("Nuevo teléfono:", usuario.telefono);
-//                 const saludo = document.getElementById("saludo")
-
-//                 if (nuevoNombre === null || nuevoTelefono === null) {
-//                     return;
-//                 }
-
-//                 let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
-
-//                 const i = usuarios.findIndex(u => u.correo === usuario.correo);
-
-//                 if (i === -1) {
-//                     return;
-//                 }
-
-//                 usuarios[i].nombre = nuevoNombre;
-//                 usuarios[i].telefono = nuevoTelefono;
-
-//                 usuario.nombre = nuevoNombre;
-//                 usuario.telefono = nuevoTelefono;
-
-//                 localStorage.setItem("usuarios", JSON.stringify(usuarios));
-//                 localStorage.setItem("usuarioActivo", JSON.stringify(usuario));
-
-//                 document.getElementById("nombre_perfil").textContent = nuevoNombre;
-//                 document.getElementById("telefono_perfil").textContent = nuevoTelefono;
-//                 saludo.textContent = `Hola, ${nuevoNombre} `
-
-//                 Swal.fire("Buen trabajo", "Perfil actualizado correctamente", "success");
-//             });
-//         }
-
-//         const formDireccion = document.getElementById("formDireccion");
-//         const inputDireccion = document.getElementById("inputAddress");
-//         const listaDirecciones = document.getElementById("listaDirecciones");
-
-//         // Función mostrar las direcciones guardadas en localStorage
-//         function mostrarDirecciones() {
-
-//             listaDirecciones.innerHTML = "";
-//             const direcciones = JSON.parse(localStorage.getItem("direcciones")) || [];
-//             if (direcciones.length === 0) {
-//                 listaDirecciones.innerHTML = `<li class="vacio">No hay direcciones guardadas</li>`;
-//                 return;
-//             }
-//             direcciones.forEach(direccion => {
-//                 const li = document.createElement("li");
-//                 li.textContent = direccion;
-//                 listaDirecciones.appendChild(li);
-//             });
-//         }
-
-//         //Validaciones input dirección
-//         const direccionInput = document.getElementById("inputAddress");
-//         const errorDireccion = document.getElementById("errorDireccion");
-//         direccionInput.addEventListener("input", () => {
-//             if (direccionInput.value.trim() === "") {
-//                 errorDireccion.textContent = "No puede estar vacío";
-//             } else if (!isNaN(direccionInput.value)) {
-//                 errorNombre.textContent = "El nombre no puede ser solo números";
-//             } else if (direccionInput.value.length < 15) {
-//                 errorDireccion.textContent = "Debe tener al menos 15 caracteres";
-//             } else {
-//                 errorDireccion.textContent = "";
-//             }
-//         });
-
-//         // Función agregar dirección
-//         formDireccion.addEventListener("submit", (e) => {
-//             e.preventDefault();
-
-//             const direccion = inputDireccion.value.trim();
-//             if (!direccion) {
-//                 return;
-//             }
-
-//             let direcciones = JSON.parse(localStorage.getItem("direcciones")) || [];
-
-//             direcciones.push(direccion);
-//             localStorage.setItem("direcciones", JSON.stringify(direcciones));
-//             inputDireccion.value = "";
-
-//             Swal.fire("Buen trabajo", "Dirección guardada correctamente", "success");
-
-//             mostrarDirecciones();
-//         });
-
-//         mostrarDirecciones();
-
-//         const productosCarrito = document.getElementById("productosCarrito");
-//         const totalCarrito = document.getElementById("totalCarrito");
-
-//         // Función mostrar carrito en cliente
-//         function mostrarCarrito() {
-//             productosCarrito.innerHTML = "";
-//             const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-//             if (carrito.length === 0) {
-//                 productosCarrito.innerHTML = `<p class="vacio">Tu carrito está vacío</p>`;
-//                 totalCarrito.textContent = "$0";
-//                 return;
-//             }
-//             let total = 0;
-//             carrito.forEach(producto => {
-//                 const subtotal = producto.precio * producto.cantidad;
-//                 total += subtotal;
-//                 const div = document.createElement("div");
-//                 div.classList.add("producto-carrito");
-//                 div.innerHTML = `
-//             <strong>${producto.titulo}</strong><br>
-//             Cantidad: ${producto.cantidad}<br>
-//             Precio: $${producto.precio.toLocaleString()}<br>
-//             Subtotal: $${subtotal.toLocaleString()}
-//             <hr>
-//             `;
-//                 productosCarrito.appendChild(div);
-//             });
-
-//             totalCarrito.textContent = `$${total.toLocaleString()}`;
-//         }
-//         mostrarCarrito();
-
-//         // Funcion pagar
-//         const btnPagar = document.querySelector(".btnPagar");
-
-//         if (btnPagar) {
-//             btnPagar.addEventListener("click", () => {
-//                 Swal.fire("Lo sentimos", "Estamos trabajando en esto", "error");
-//             })
-//         }
-
-//         const btnLogout = document.getElementById("btn_cerrar_sesion");
-//         const saludo = document.getElementById("saludo");
-
-//         if (btnLogout) btnLogout.style.display = "inline-block";
-//         if (saludo) saludo.textContent = `Hola, ${usuario.nombre}`;
-
-//         document.getElementById("nombre_perfil").textContent = usuario.nombre;
-//         document.getElementById("correo_perfil").textContent = usuario.correo;
-//         document.getElementById("telefono_perfil").textContent = usuario.telefono;
-//     }
-
-// });
-
-// //Funcion cerrar sesion
-// function cerrarSesion() {
-//     const btnLogout = document.getElementById("btn_cerrar_sesion");
-
-//     if (btnLogout) {
-//         btnLogout.addEventListener("click", () => {
-//             localStorage.removeItem("usuarioActivo");
-//             localStorage.removeItem("carrito");
-//             window.location.href = "/home/home.html";
-//         });
-//     }
-// }
-
-// //Comprimir imagen
-// function comprimirImagen(file, maxWidth = 600) {
-//     return new Promise(resolve => {
-//         const reader = new FileReader();
-//         reader.onload = e => {
-//             const img = new Image();
-//             img.src = e.target.result;
-//             img.onload = () => {
-//                 const scale = maxWidth / img.width;
-//                 const canvas = document.createElement("canvas");
-//                 canvas.width = maxWidth;
-//                 canvas.height = img.height * scale;
-//                 canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
-//                 resolve(canvas.toDataURL("image/jpeg", 0.7));
-//             };
-//         };
-//         reader.readAsDataURL(file);
-//     });
-
-    // const lista = document.getElementById("listaProductos");
-
-        // async function cargarProductosCliente() {
-        //     const res = await fetch(API_PRODUCTOS);
-        //     const productos = await res.json();
-
-        //     lista.innerHTML = "";
-        //     productos.forEach(p => {
-        //         const div = document.createElement("div");
-        //         div.className = "col-md-4";
-        //         div.innerHTML = `
-        //         <div class="card h-100 shadow">
-        //             <img src="${p.imagen}" class="card-img-top">
-        //             <div class="card-body">
-        //                 <h5>${p.nombre}</h5>
-        //                 <p>${p.descripcion}</p>
-        //                 <p><b>$${p.precio}</b></p>
-        //                 <button class="btn btn-primary btn-sm">Agregar al carrito</button>
-        //             </div>
-        //         </div>`;
-        //         lista.appendChild(div);
-        //     });
-        // }
-
-        // cargarProductosCliente();
-}
-
-        
-   

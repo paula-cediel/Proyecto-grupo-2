@@ -103,7 +103,7 @@ formulario.onsubmit = async (e) => {
         telefono, 
         correo,
         password,
-        rol: "ADMIN"
+        rol: "CLIENTE"
     };
 
     try {

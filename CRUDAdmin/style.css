@@ -88,38 +88,111 @@ body {
     color: #f5f5f5;
 }
 
-/* PERFIL CLIENTE */
-
+/* PERFIL CLIENTE - LAYOUT PRINCIPAL */
 .perfil-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 5rem;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas iguales */
+    gap: 2rem; /* Reducido un poco para que quepa mejor en pantallas estándar */
     max-width: 1400px;
     margin: 3rem auto;
     padding: 0 2rem;
 }
 
-/* Cards */
+/* CARDS (Contenedores base) */
 .perfil,
 .direccion,
-.carrito {
+.carrito,
+.califica-tienda {
     background: #ffffff;
     border-radius: 12px;
     padding: 1.5rem;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
 }
 
-/* Titulos cards */
+/* Títulos de las Cards */
 .perfil h1,
 .direccion h1,
-.carrito h1 {
+.carrito h1,
+.califica-tienda h1 {
     font-size: 1.4rem;
     margin-bottom: 1rem;
     border-bottom: 2px solid #bcb6b6;
     padding-bottom: 0.5rem;
 }
 
-/* Perfil */
+/* FORMULARIOS (Dirección y Calificación) */
+#formDireccion, 
+#formCalifica {
+    display: flex;
+    flex-direction: column;
+}
+
+#formDireccion label,
+#formCalifica label {
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    margin-top: 0.5rem;
+}
+
+#formDireccion input,
+#formCalifica input,
+#formCalifica textarea {
+    padding: 0.6rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-bottom: 0.75rem;
+    font-family: inherit; /* Mantiene la misma fuente en textarea */
+    font-size: 0.9rem;
+}
+
+/* ESTRELLAS DE CALIFICACIÓN */
+.rating-container {
+    margin: 0.5rem 0 1rem 0;
+}
+
+.stars {
+    font-size: 1.8rem;
+    color: #ddd; /* Estrellas vacías */
+    cursor: pointer;
+    line-height: 1;
+}
+
+.star.active {
+    color: #ffc107; /* Color dorado al seleccionar */
+}
+
+/* BOTONES (Estilo Global) */
+.btn {
+    display: inline-block;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    background-color: #240115;
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.btn:hover {
+    opacity: 0.9;
+    background-color: #591c32;
+    color: white;
+}
+
+/* Ajuste específico para que los botones no ocupen todo el ancho si no es necesario */
+#formDireccion .btn,
+#formCalifica .btn {
+    width: auto;
+    align-self: flex-start;
+}
+
+/* PERFIL (Información de usuario) */
 .info_perfil dl {
     margin-bottom: 1rem;
 }
@@ -134,28 +207,11 @@ body {
     color: #555;
 }
 
-/* Formulario dirección */
-#formDireccion {
-    display: flex;
-    flex-direction: column;
-}
-
-#formDireccion label {
-    font-weight: 600;
-    margin-bottom: 0.3rem;
-}
-
-#formDireccion input {
-    padding: 0.6rem;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    margin-bottom: 0.75rem;
-}
-
-/* Lista direccion */
+/* LISTA DE DIRECCIONES */
 #listaDirecciones {
     list-style: none;
     margin-top: 1rem;
+    padding: 0;
 }
 
 #listaDirecciones li {
@@ -166,7 +222,7 @@ body {
     font-size: 0.9rem;
 }
 
-/* Carrito */
+/* CARRITO */
 #carritoItems {
     min-height: 80px;
 }
@@ -182,34 +238,20 @@ body {
     font-size: 1.1rem;
 }
 
-#errorDireccion{
+/* ERRORES */
+#errorDireccion {
     color: red;
     font-weight: bold;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
 }
 
-/* Botones */
-.btn {
-    display: inline-block;
-    padding: 0.6rem 1rem;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-    font-weight: 600;
-    margin-top: 0.5rem;
-    background-color: #240115;
-    color: white;
-    font-size: 1rem;
-}
-
-.btn:hover {
-    opacity: 0.9;
-    background-color: #591c32;
-    color: white;
-}
-
-#formDireccion .btn {
-    width: auto;
-    align-self: flex-start;
+/* RESPONSIVO: Si la pantalla es pequeña, se apilan en una sola columna */
+@media (max-width: 992px) {
+    .perfil-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
 }
 
 
