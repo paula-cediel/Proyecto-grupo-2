@@ -15,8 +15,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
 
-    //  VISTA ADMINISTRADOR
     if (usuario.rol === "ADMIN") {
+        /* ======================================================
+           ===============   ADMINISTRADOR   ====================
+           ====================================================== */
         contenedor.innerHTML = `
         <header class="header-nav">
             <div class="container-fluid">
@@ -72,19 +74,19 @@ document.addEventListener("DOMContentLoaded", async () => {
             <div id="feed" class="row g-3"></div>
         </div>`;
 
-        const form = document.getElementById("productoForm");
+                const form = document.getElementById("productoForm");
         const feed = document.getElementById("feed");
 
+        /* ===== LISTAR PRODUCTOS ===== */
         async function cargarProductos() {
-            try {
-                const res = await fetch(API_PRODUCTOS, {
-                    headers: { Authorization: `Bearer ${token}` }
-                });
-                const productos = await res.json();
-                mostrarProductos(productos);
-            } catch (e) { console.error("Error cargando productos", e); }
+            const res = await fetch(API_PRODUCTOS, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            const productos = await res.json();
+            mostrarProductos(productos);
         }
-        // Función para mostrar productos en vista cliente para editar o borrar
+
+        /* ===== MOSTRAR ===== */
         function mostrarProductos(productos) {
             feed.innerHTML = "";
             productos.forEach(p => {
@@ -92,51 +94,84 @@ document.addEventListener("DOMContentLoaded", async () => {
                 div.className = "col-md-4";
                 div.innerHTML = `
                 <div class="card h-100 shadow">
-                    <img src="${p.imagen}" class="card-img-top" style="height:200px; object-fit:cover;">
+                    <img src="${p.imagen}" class="card-img-top">
                     <div class="card-body">
                         <h5>${p.nombre}</h5>
-                        <p class="small text-muted">${p.descripcion}</p>
-                        <p><b>$${p.precio_compra}</b> | Stock: ${p.stock}</p>
+                        <p>${p.descripcion}</p>
+                        <p><b>$${p.precio_compra}</b></p>
+                        <p>Stock: ${p.stock}</p>
+                        <button class="btn btn-warning btn-sm editar">Editar</button>
                         <button class="btn btn-danger btn-sm eliminar">Eliminar</button>
                     </div>
                 </div>`;
+
+                /* ELIMINAR */
                 div.querySelector(".eliminar").onclick = async () => {
-                    if(confirm("¿Eliminar producto?")) {
-                        await fetch(`${API_PRODUCTOS}/${p.idProducto}`, {
-                            method: "DELETE",
-                            headers: { Authorization: `Bearer ${token}` }
-                        });
-                        cargarProductos();
-                    }
+                    await fetch(`${API_PRODUCTOS}/${p.idProducto}`, {
+                        method: "DELETE",
+                        headers: { Authorization: `Bearer ${token}` }
+                    });
+                    cargarProductos();
                 };
+
+                /* EDITAR */
+                div.querySelector(".editar").onclick = async () => {
+                    const actualizado = {
+                        nombre: prompt("Nombre", p.nombre),
+                        precio_compra: Number(prompt("Precio", p.precio)),
+                        descripcion: prompt("Descripción", p.descripcion),
+                        stock: Number(prompt("Stock", p.stock)),
+                        imagen: p.imagen
+                    };
+
+                    await fetch(`${API_PRODUCTOS}/${p.idProducto}`, {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${token}`
+                        },
+                        body: JSON.stringify(actualizado)
+                    });
+
+                    cargarProductos();
+                };
+
                 feed.appendChild(div);
             });
         }
 
-        // Capturar info producto de formulario
+        /* ===== CREAR ===== */
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
-            const nuevoP = {
-                nombre: document.getElementById("nombre").value,
-                precio_compra: Number(document.getElementById("precio").value),
-                descripcion: document.getElementById("descripcion").value,
-                stock: Number(document.getElementById("stock").value),
-                imagen: document.getElementById("imagen").value
+
+            const producto = {
+                nombre: nombre.value,
+                precio_compra: Number(precio.value),
+                descripcion: descripcion.value,
+                stock: Number(stock.value),
+                imagen: imagen.value
             };
-            // Envío a backend - Método POST
+
             await fetch(`${API_PRODUCTOS}/crear`, {
                 method: "POST",
-                headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-                body: JSON.stringify(nuevoP)
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify(producto)
             });
+
             form.reset();
             cargarProductos();
         });
 
         cargarProductos();
+    
 
-        // VISTA CLIENTE
     } else {
+        /* ======================================================
+           ==================   CLIENTE   =======================
+           ====================================================== */
         contenedor.innerHTML = `
         <header class="header-nav">
             <div class="container-fluid">
@@ -332,7 +367,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         };
     }
 
-    // Botón cerrar sesión
+    // Evento cerrar sesión (común para ambos)
     document.getElementById("btn_cerrar_sesion").onclick = () => {
         localStorage.clear();
         window.location.href = "/loginSpring/login.html";
