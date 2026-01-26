@@ -193,3 +193,28 @@ footer hr {
     }
 }
 
+/*boton contactenos*/
+/* BOTÓN ENVIAR – FIX DEFINITIVO */
+#contacto .btn-enviar,
+.btn-enviar {
+    background-color: #240115 !important;
+    border: none !important;
+
+    color: #ffffff !important;   /* 🔥 TEXTO BLANCO */
+    font-size: 1rem;
+    font-weight: 600;
+
+    padding: 10px 28px;
+    border-radius: 6px;
+
+    width: auto !important;      /* 🔥 NO ancho completo */
+    display: inline-block !important;
+    text-align: center;
+
+    transition: all 0.3s ease;
+}
+
+.btn-enviar:hover {
+    background-color: #47032a !important;
+    color: #ffffff !important;
+}
