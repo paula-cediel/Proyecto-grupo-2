@@ -19,21 +19,43 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (usuario.rol === "ADMIN") {
         contenedor.innerHTML = `
         <header class="header-nav">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
-                <div class="container">
-                    <a class="navbar-brand" href="#">Panel Admin</a>
-                    <div class="navbar-nav ms-auto">
-                        <span class="nav-link text-white">Hola, Administrador</span>
-                        <button id="btn_cerrar_sesion" class="btn btn-outline-light btn-sm ms-2">Cerrar sesión</button>
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark-purple shadow-sm">
+                    <div class="top-bar d-flex justify-content-between align-items-center">
+                        <a class="navbar-brand d-flex justify-content-start" href="#">
+                            <img src="images/LogoLetra.png" alt="Letal Cosplay Logo" class="logo-navbar">
+                        </a>
                     </div>
-                </div>
-            </nav>
+
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse justify-content-center" id="navMenu">
+                        <ul class="nav-links text-center mt-3 navbar-nav ms-auto ">
+                            <li class="nav-item"><a class="nav-link" href="/home/home.html">Inicio</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/acerca_de_nosotros/about.html">Sobre
+                                    nosotros</a></li>
+                            <li class="nav-item" id="navProductos"><a class="nav-link" href="/Productos/productos.html">Productos</a></li>
+                            <li class="nav-item" id="navPerfil"><a class="nav-link" href="/CRUDAdmin/main.html">Perfil</a></li>
+                            <li class="nav-item"id="navContactenos"><a class="nav-link" href="/contactenos/contact-us.html">Contáctenos</a></li>
+                            <span class="nav-link text-white">Hola, Administrador</span>
+                            <li class="nav-item d-flex align-items-center ms-2"></li><button id="btn_cerrar_sesion";"> Cerrar sesión </button></li>
+                        </ul>
+                    </div>
+                </nav>
+
+
+            </div>
         </header>
         
         <div class="container py-4">
             <h1 class="text-center mb-4">Gestión de Productos</h1>
+
             <div class="card mb-4 shadow">
-                <div class="card-header bg-primary text-white fw-bold">Crear producto</div>
+                <div class="card-header bg-primary text-white fw-bold">
+                    Crear producto
+                </div>
                 <div class="card-body">
                     <form id="productoForm">
                         <input class="form-control mb-2" id="nombre" placeholder="Nombre" required>
@@ -41,10 +63,11 @@ document.addEventListener("DOMContentLoaded", async () => {
                         <textarea class="form-control mb-2" id="descripcion" placeholder="Descripción" required></textarea>
                         <input class="form-control mb-2" id="stock" type="number" placeholder="Stock" required>
                         <input class="form-control mb-2" id="imagen" placeholder="URL Imagen" required>
-                        <button class="btn btn-success w-100">Guardar Producto</button>
+                        <button class="btn btn-success w-100">Guardar</button>
                     </form>
                 </div>
             </div>
+
             <h3>Productos publicados</h3>
             <div id="feed" class="row g-3"></div>
         </div>`;
@@ -73,7 +96,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     <div class="card-body">
                         <h5>${p.nombre}</h5>
                         <p class="small text-muted">${p.descripcion}</p>
-                        <p><b>$${p.precio}</b> | Stock: ${p.stock}</p>
+                        <p><b>$${p.precio_compra}</b> | Stock: ${p.stock}</p>
                         <button class="btn btn-danger btn-sm eliminar">Eliminar</button>
                     </div>
                 </div>`;
@@ -95,7 +118,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             e.preventDefault();
             const nuevoP = {
                 nombre: document.getElementById("nombre").value,
-                precio: Number(document.getElementById("precio").value),
+                precio_compra: Number(document.getElementById("precio").value),
                 descripcion: document.getElementById("descripcion").value,
                 stock: Number(document.getElementById("stock").value),
                 imagen: document.getElementById("imagen").value
