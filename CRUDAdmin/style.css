@@ -315,8 +315,7 @@ footer hr {
 }
 
 .editar {
-    font-size: 20px;
-    margin-top: 15px;
+ 
     background-color: #240115;
     color: WHITE;
 }
@@ -334,5 +333,6 @@ footer hr {
 .eliminar:hover {
     background-color: #240115;
     color: WHITE;
+
 
 }
