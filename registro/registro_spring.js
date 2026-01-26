@@ -121,7 +121,7 @@ formulario.onsubmit = async (e) => {
         Swal.fire("Registro exitoso", "Usuario creado correctamente", "success");
 
         
-        window.location.href = "/home/home.html"; 
+        window.location.href = "../home/home.html"; 
 
     } catch (error) {
         Swal.fire("Error", error.message, "error");
