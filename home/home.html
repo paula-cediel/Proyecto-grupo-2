@@ -114,41 +114,14 @@
 
   <!-- CALIFICAR LA TIENDA -->
   <section class="califica-tienda py-5">
-    <h2 class="text-center mb-5">Califica la tienda</h2>
-    <div class="container gap-5">
-      <div class="row justify-content-center align-items-start g-4">
-        <!-- Columna izquierda: formulario -->
-        <div class="col-md-5">
-          <div class="card p-3 shadow">
-            <h5 class="text-center mb-3">Danos tu opinión aquí</h5>
+    <h2 class="text-center mb-5">Opiniones de nuestros clientes</h2>
 
-            <input id="name" class="form-control mb-2" placeholder="Nombre">
-            <textarea id="desc" class="form-control mb-2" placeholder="Tu opinión"></textarea>
-
-            <div class="text-center mb-2">
-              <span class="star" data-v="1">★</span>
-              <span class="star" data-v="2">★</span>
-              <span class="star" data-v="3">★</span>
-              <span class="star" data-v="4">★</span>
-              <span class="star" data-v="5">★</span>
-            </div>
-
-            <div class="text-center">
-              <button id="publicar" class="btn btn-dark w-50">Publicar</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Columna derecha: últimas 3 calificaciones -->
-        <div class="col-md-4">
-          <h5 class="text-center mb-3">Últimas calificaciones</h5>
-          <div id="ultimas-calificaciones">
-            <!-- Aquí solo se agregan las calificaciones con JS -->
-          </div>
-        </div>
+    <div class="container">
+      <div class="row justify-content-center g-4" id="ultimas-calificaciones">
+        <!-- Las cards se generan con JS (máx 3) -->
       </div>
+    </div>
   </section>
-
 
 
   <!-- FOOTER -->

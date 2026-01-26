@@ -180,90 +180,45 @@ h2:hover{
     filter: invert(100%);
 }
 
-/* CALIFICAR TIENDA */
-.card {
-    width: 420px;
-    margin: 20px auto;
-    border-radius: 15px;
-    background: #ddd
-}
+/* Calificar la tienda */
 
-.profile-pic {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    object-fit: cover;
-    cursor: pointer;
-    background: #ddd
-}
-
-.star {
-    font-size: 26px;
-    cursor: pointer;
-    color: #ccc;
-    display: inline-block;
-    transition: color 0.2s;
-}
-
-.star.active {
-    color: gold;
-}
-
-.btn-actions {
-    font-size: 20px;
-    cursor: pointer;
-    margin-right: 12px
-}
-
-#publicar {
-    font-size: 20px;
-    cursor: pointer;
-    margin-right: 12px;
-    background: #240115;
-}
-
-#publicar:hover {
-    background-color: #591c32 !important;
-}
-
-.comment {
-    background: #f3f0f5;
-    padding: 6px 10px;
-    border-radius: 10px;
-    margin-bottom: 5px;
-    word-wrap: break-word;
-}
-
+/* Contenedor general */
 .califica-tienda {
-    background-color: #ffff;
+    background-color: #fff;
 }
 
-#ultimas-calificaciones {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.calificacion-item {
+/* Card calificacion */
+.calificacion-card {
+    width: 420px;
+    border-radius: 15px;
     background: #f3f0f5;
-    padding: 10px 15px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
+/* Nombre */
+.calificacion-card h5 {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Estrellas */
+.calificacion-estrellas {
+    color: gold;
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+/* Texto */
+.calificacion-texto {
+    font-size: 15px;
+    color: #333;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-
-    .row.justify-content-center>.col-md-5 {
-        flex: 0 0 100%;
-        max-width: 100%;
-        margin-bottom: 20px;
-    }
-}
-
-@media (max-width: 480px) {
-    .card {
-        width: 95%;
-        margin: 10px auto;
+    .calificacion-card {
+        width: 100%;
     }
 }
 

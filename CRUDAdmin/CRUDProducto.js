@@ -15,10 +15,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
 
+    //  VISTA ADMINISTRADOR
     if (usuario.rol === "ADMIN") {
-        /* ======================================================
-           ===============   ADMINISTRADOR   ====================
-           ====================================================== */
         contenedor.innerHTML = `
         <header class="header-nav">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
@@ -63,7 +61,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 mostrarProductos(productos);
             } catch (e) { console.error("Error cargando productos", e); }
         }
-
+        // Función para mostrar productos en vista cliente para editar o borrar
         function mostrarProductos(productos) {
             feed.innerHTML = "";
             productos.forEach(p => {
@@ -92,6 +90,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             });
         }
 
+        // Capturar info producto de formulario
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
             const nuevoP = {
@@ -101,6 +100,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 stock: Number(document.getElementById("stock").value),
                 imagen: document.getElementById("imagen").value
             };
+            // Envío a backend - Método POST
             await fetch(`${API_PRODUCTOS}/crear`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
@@ -112,10 +112,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         cargarProductos();
 
+        // VISTA CLIENTE
     } else {
-        /* ======================================================
-           ==================   CLIENTE   =======================
-           ====================================================== */
         contenedor.innerHTML = `
         <header class="header-nav">
             <div class="container-fluid">
@@ -311,7 +309,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         };
     }
 
-    // Evento cerrar sesión (común para ambos)
+    // Botón cerrar sesión
     document.getElementById("btn_cerrar_sesion").onclick = () => {
         localStorage.clear();
         window.location.href = "/loginSpring/login.html";
