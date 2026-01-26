@@ -157,8 +157,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                         <dd id="nombre_perfil"></dd>
                         <dt>Apellido</dt>
                         <dd id="apellido_perfil"></dd>
+                        <dt>Telefono</dt>
                         <dd id="telefono_perfil"></dd>
-                        <dt>Teléfono</dt>
                         <dt>Correo</dt>
                         <dd id="correo_perfil"></dd>
                         <dt>Dirección</dt>
@@ -239,12 +239,13 @@ document.addEventListener("DOMContentLoaded", async () => {
                 const res = await fetch(`${API_USUARIOS}/${userId}`, {
                     headers: { "Authorization": `Bearer ${token}` }
                 });
-                usuarioReal = await res.json();
-                document.getElementById("_perfil").textContent = usuarioActual.correo;
-                document.getElementById("telefono_perfil").textContent = usuarioActual.telefono || "No asignado";
-                document.getElementById("saludo").textContent = `Hola, ${usuarioActual.nombre}`;
+                usuarioActual = await res.json();
+                document.getElementById("nombre_perfil").textContent = usuarioActual.nombre;
+                document.getElementById("apellido_perfil").textContent = usuarioActual.apellido || "No asignado";
+                document.getElementById("telefono_perfil").textContent = usuarioActual.telefono;
                 document.getElementById("correo_perfil").textContent = usuarioActual.correo;
-                document.getElementById("telefono_perfil").textContent = usuarioActual.telefono || "No asignado";
+                document.getElementById("direccion_perfil").textContent =usuarioActual.direccion || "No asignado";
+                document.getElementById("password_perfil").textContent = "********";
                 document.getElementById("saludo").textContent = `Hola, ${usuarioActual.nombre}`;
             } catch (err) { console.error(err); }
         }
@@ -269,7 +270,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 await fetch(`${API_USUARIOS}/${userId}/calificaciones`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
-                    body: JSON.stringify({ nombre: usuarioReal.nombre, descripcion: desc, estrellas: rating })
+                    body: JSON.stringify({ nombre: usuarioActual.nombre, descripcion: desc, estrellas: rating })
                 });
                 Swal.fire("¡Gracias!", "Calificación guardada", "success");
             } catch (e) { Swal.fire("Error", "No se pudo enviar", "error"); }
@@ -279,15 +280,31 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.querySelector(".editar_usuario").onclick = async () => {
              const { value: formValues } = await Swal.fire({
                 title: 'Editar Perfil',
-                html: `<input id="sw-nom" class="swal2-input" value="${usuarioReal.nombre}">` +
-                     `<input id="sw-tel" class="swal2-input" value="${usuarioReal.telefono || ''}">`,
-                preConfirm: () => ({ nombre: document.getElementById('sw-nom').value, telefono: document.getElementById('sw-tel').value })
+                html: 
+                    `<label class="swal-label">Nombre</label>`+
+                    `<input id="sw-nom" class="swal2-input" value="${usuarioActual.nombre}">` +
+                    `<label class="swal-label">Apellido</label>`+
+                    `<input id="sw-ape" class="swal2-input" value="${usuarioActual.apellido || ''}">`+
+                    `<label class="swal-label">Teléfono</label>`+
+                    `<input id="sw-tel" class="swal2-input" value="${usuarioActual.telefono || ''}">`+
+                    `<label class="swal-label">Dirección</label>`+
+                    `<input id="sw-dir" class="swal2-input" value="${usuarioActual.direccion || ''}">`+
+                    `<label class="swal-label">Contraseña</label>`+
+                    `<input id="sw-pass" class="swal2-input" value=" ">`,
+
+                preConfirm: () => ({
+                    nombre: document.getElementById('sw-nom').value,
+                    apellido: document.getElementById('sw-ape').value,
+                    telefono: document.getElementById('sw-tel').value,
+                    direccion: document.getElementById('sw-dir').value,
+                    password: document.getElementById('sw-pass').value
+                })
             });
             if (formValues) {
                 await fetch(`${API_USUARIOS}/${userId}`, {
                     method: "PUT",
                     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
-                    body: JSON.stringify({ ...usuarioReal, ...formValues })
+                    body: JSON.stringify({ ...usuarioActual, ...formValues })
                 });
                 cargarPerfil();
             }

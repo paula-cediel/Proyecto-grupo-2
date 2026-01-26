@@ -101,7 +101,11 @@ form.addEventListener("submit", async function (e) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("usuarioActivo", JSON.stringify({
             correo: data.correo,
-            rol: data.rol
+            rol: data.rol,
+            nombre:data.nombre,
+            id: data.id
+
+
         }));
 
         Swal.fire({
