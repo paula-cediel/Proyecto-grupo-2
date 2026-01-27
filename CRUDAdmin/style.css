@@ -192,7 +192,7 @@ body {
     align-self: flex-start;
 }
 
-/* PERFIL (Información de usuario) */
+/* INFO CLIENTE */
 .info_perfil dl {
     margin-bottom: 1rem;
 }
@@ -246,7 +246,7 @@ body {
     margin-bottom: 0.5rem;
 }
 
-/* RESPONSIVO: Si la pantalla es pequeña, se apilan en una sola columna */
+/* RESPONSIVO */
 @media (max-width: 992px) {
     .perfil-grid {
         grid-template-columns: 1fr;

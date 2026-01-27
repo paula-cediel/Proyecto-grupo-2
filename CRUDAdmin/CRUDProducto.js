@@ -217,6 +217,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     </form>
                 </div>
             </section>
+
         </main>
 
         <footer class="mt-auto">
