@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             <h1 class="text-center mb-4">Gestión de Productos</h1>
 
             <div class="card mb-4 shadow">
-                <div class="card-header bg-primary text-white fw-bold">
+                <div id="tituloForm" class="card-header bg-primary text-white fw-bold">
                     Crear producto
                 </div>
                 <div class="card-body">
