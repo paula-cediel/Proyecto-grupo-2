@@ -5,7 +5,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     
     // Configuración de APIs
     const API_PRODUCTOS = "http://localhost:8081/productos";
-    const API_USUARIOS = "http://localhost:8081/usuarios"; 
+    const API_USUARIOS = "http://localhost:8081/usuarios";
+    const API_CALIFICACION = "http://localhost:8081/calificaciones";
     const userId = usuario?.id;
     let rating = 0;
 
@@ -15,10 +16,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
 
+    //  VISTA ADMINISTRADOR
     if (usuario.rol === "ADMIN") {
-        /* ======================================================
-           ===============   ADMINISTRADOR   ====================
-           ====================================================== */
         contenedor.innerHTML = `
         <header class="header-nav">
             <div class="container-fluid">
@@ -55,7 +54,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             <h1 class="text-center mb-4">Gestión de Productos</h1>
 
             <div class="card mb-4 shadow">
-                <div id="tituloForm" class="card-header bg-primary text-white fw-bold">
+                <div class="card-header bg-primary text-white fw-bold">
                     Crear producto
                 </div>
                 <div class="card-body">
@@ -74,19 +73,19 @@ document.addEventListener("DOMContentLoaded", async () => {
             <div id="feed" class="row g-3"></div>
         </div>`;
 
-                const form = document.getElementById("productoForm");
+        const form = document.getElementById("productoForm");
         const feed = document.getElementById("feed");
 
-        /* ===== LISTAR PRODUCTOS ===== */
         async function cargarProductos() {
-            const res = await fetch(API_PRODUCTOS, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
-            const productos = await res.json();
-            mostrarProductos(productos);
+            try {
+                const res = await fetch(API_PRODUCTOS, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                const productos = await res.json();
+                mostrarProductos(productos);
+            } catch (e) { console.error("Error cargando productos", e); }
         }
-
-        /* ===== MOSTRAR ===== */
+        // Función para mostrar productos en vista cliente para editar o borrar
         function mostrarProductos(productos) {
             feed.innerHTML = "";
             productos.forEach(p => {
@@ -94,84 +93,51 @@ document.addEventListener("DOMContentLoaded", async () => {
                 div.className = "col-md-4";
                 div.innerHTML = `
                 <div class="card h-100 shadow">
-                    <img src="${p.imagen}" class="card-img-top">
+                    <img src="${p.imagen}" class="card-img-top" style="height:200px; object-fit:cover;">
                     <div class="card-body">
                         <h5>${p.nombre}</h5>
-                        <p>${p.descripcion}</p>
-                        <p><b>$${p.precio_compra}</b></p>
-                        <p>Stock: ${p.stock}</p>
-                        <button class="btn btn-warning btn-sm editar">Editar</button>
+                        <p class="small text-muted">${p.descripcion}</p>
+                        <p><b>$${p.precio_compra}</b> | Stock: ${p.stock}</p>
                         <button class="btn btn-danger btn-sm eliminar">Eliminar</button>
                     </div>
                 </div>`;
-
-                /* ELIMINAR */
                 div.querySelector(".eliminar").onclick = async () => {
-                    await fetch(`${API_PRODUCTOS}/${p.idProducto}`, {
-                        method: "DELETE",
-                        headers: { Authorization: `Bearer ${token}` }
-                    });
-                    cargarProductos();
+                    if(confirm("¿Eliminar producto?")) {
+                        await fetch(`${API_PRODUCTOS}/${p.idProducto}`, {
+                            method: "DELETE",
+                            headers: { Authorization: `Bearer ${token}` }
+                        });
+                        cargarProductos();
+                    }
                 };
-
-                /* EDITAR */
-                div.querySelector(".editar").onclick = async () => {
-                    const actualizado = {
-                        nombre: prompt("Nombre", p.nombre),
-                        precio_compra: Number(prompt("Precio", p.precio)),
-                        descripcion: prompt("Descripción", p.descripcion),
-                        stock: Number(prompt("Stock", p.stock)),
-                        imagen: p.imagen
-                    };
-
-                    await fetch(`${API_PRODUCTOS}/${p.idProducto}`, {
-                        method: "PUT",
-                        headers: {
-                            "Content-Type": "application/json",
-                            Authorization: `Bearer ${token}`
-                        },
-                        body: JSON.stringify(actualizado)
-                    });
-
-                    cargarProductos();
-                };
-
                 feed.appendChild(div);
             });
         }
 
-        /* ===== CREAR ===== */
+        // Capturar info producto de formulario
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
-
-            const producto = {
-                nombre: nombre.value,
-                precio_compra: Number(precio.value),
-                descripcion: descripcion.value,
-                stock: Number(stock.value),
-                imagen: imagen.value
+            const nuevoP = {
+                nombre: document.getElementById("nombre").value,
+                precio_compra: Number(document.getElementById("precio").value),
+                descripcion: document.getElementById("descripcion").value,
+                stock: Number(document.getElementById("stock").value),
+                imagen: document.getElementById("imagen").value
             };
-
+            // Envío a backend - Método POST
             await fetch(`${API_PRODUCTOS}/crear`, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`
-                },
-                body: JSON.stringify(producto)
+                headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+                body: JSON.stringify(nuevoP)
             });
-
             form.reset();
             cargarProductos();
         });
 
         cargarProductos();
-    
 
+        // VISTA CLIENTE
     } else {
-        /* ======================================================
-           ==================   CLIENTE   =======================
-           ====================================================== */
         contenedor.innerHTML = `
         <header class="header-nav">
             <div class="container-fluid">
@@ -219,11 +185,12 @@ document.addEventListener("DOMContentLoaded", async () => {
                         <dd id="correo_perfil"></dd>
                         <dt>Dirección</dt>
                         <dd id="direccion_perfil"></dd>
-                        <dt>Password</dt>
+                        <dt>Contraseña</dt>
                         <dd id="password_perfil"></dd>
     
                     </dl>
                     <button class="btn primary editar_usuario">Editar</button>
+                    <button id="btn_eliminar_cuenta" class="btn primary cerrar_cuenta">Cerrar cuenta</button>
                 </article>
             </section>
 
@@ -253,6 +220,15 @@ document.addEventListener("DOMContentLoaded", async () => {
                 </div>
             </section>
 
+            <section class="opinion">
+                <h1>Tu calificación</h1>
+                <div id="resumenCalificacion">
+                    <div id="opinionItems">
+                        <p class="vacio">Aún no has publicado ninguna calificación.</p>
+                    </div>
+                    
+                    </div>
+            </section>
         </main>
 
         <footer class="mt-auto">
@@ -307,7 +283,41 @@ document.addEventListener("DOMContentLoaded", async () => {
             } catch (err) { console.error(err); }
         }
 
+        async function cargarCalificacion() {
+            try {
+                const res = await fetch(`${API_USUARIOS}/${userId}/calificaciones`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+
+                const calificaciones = await res.json();
+                const contenedor = document.getElementById("opinionItems");
+
+                contenedor.innerHTML = "";
+
+                if (!calificaciones.length) {
+                    contenedor.innerHTML =
+                        `<p class="vacio">Aún no has publicado ninguna calificación.</p>`;
+                    return;
+                }
+
+                const c = calificaciones[0];
+
+                contenedor.innerHTML = `
+                    <div class="opinion-card">
+                        <h4>${c.nombre}</h4>
+                        <p>${"★".repeat(c.estrellas)}${"☆".repeat(5 - c.estrellas)}</p>
+                        <p>${c.descripcion}</p>
+                    </div>
+                `;
+                                
+            } catch (e) {
+                console.error("Error cargando calificación", e);
+            }
+        }
+
         await cargarPerfil();
+        await cargarCalificacion();
+
 
         // Lógica de estrellas
         const stars = document.querySelectorAll(".star");
@@ -330,6 +340,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     body: JSON.stringify({ nombre: usuarioActual.nombre, descripcion: desc, estrellas: rating })
                 });
                 Swal.fire("¡Gracias!", "Calificación guardada", "success");
+                await cargarCalificacion();
             } catch (e) { Swal.fire("Error", "No se pudo enviar", "error"); }
         });
 
@@ -366,6 +377,46 @@ document.addEventListener("DOMContentLoaded", async () => {
                 cargarPerfil();
             }
         };
+
+        // Eliminar usuario - cerrar cuenta
+        const btnEliminar = document.getElementById("btn_eliminar_cuenta");
+        if (btnEliminar) {
+            btnEliminar.onclick = async () => {
+                const result = await Swal.fire({
+                    title: '¿Estás completamente seguro?',
+                    text: "Tu cuenta será eliminada permanentemente y no podrás recuperarla.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Sí, eliminar cuenta',
+                    cancelButtonText: 'Cancelar'
+                });
+
+                if (result.isConfirmed) {
+                    try {
+                        const response = await fetch(`${API_USUARIOS}/${userId}`, {
+                            method: "DELETE",
+                            headers: { 
+                                "Authorization": `Bearer ${token}` 
+                            }
+                        });
+
+                        if (response.ok) {
+                            await Swal.fire('Cuenta Eliminada', 'Tu cuenta ha sido borrada con éxito.', 'success');
+                            localStorage.clear();
+                            window.location.href = "/home/home.html"; 
+                        } else {
+                            const errorData = await response.json();
+                            Swal.fire('Error', errorData.message || 'No se pudo eliminar la cuenta.', 'error');
+                        }
+                    } catch (error) {
+                        console.error("Error al eliminar cuenta:", error);
+                        Swal.fire('Error', 'Hubo un fallo de conexión con el servidor.', 'error');
+                    }
+                }
+            };
+        }
     }
 
     // Evento cerrar sesión (común para ambos)
