@@ -14,12 +14,13 @@
 
 <body>
 
+     <!-- HEADER -->
     <header class="header-nav">
         <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark-purple shadow-sm">
                 <div class="top-bar d-flex justify-content-between align-items-center">
                     <a class="navbar-brand d-flex justify-content-start" href="#">
-                        <img src="logoo.png" alt="Letal Cosplay Logo" class="logo-navbar">
+                        <img src="images/logoo.png" alt="Letal Cosplay Logo" class="logo-navbar">
                     </a>
                 </div>
 
@@ -28,7 +29,7 @@
                 </button>
 
                 <div class="collapse navbar-collapse justify-content-center" id="navMenu">
-                   <ul class="nav-links text-center mt-3 navbar-nav ms-auto ">
+                    <ul class="nav-links text-center mt-3 navbar-nav ms-auto ">
                         <li class="nav-item"><a class="nav-link" href="../home/home.html">Inicio</a></li>
                         <li class="nav-item"><a class="nav-link" href="../acerca_de_nosotros/about.html">Sobre
                                 nosotros</a></li>
@@ -48,13 +49,13 @@
                             style="display:none;"> Cerrar sesión </button></li>
                     </ul>
                 </div>
-            </nav>
+            </nav>  
             <button id="logoutBtn" class="btn btn-danger d-none">Cerrar sesión</button>
-
-
 
         </div>
     </header>
+
+
     <div class="header-contacto">
         <h1>Iniciar sesión</h1>
         <p>Accede a tu cuenta</p>
@@ -114,28 +115,16 @@
                 <div class="mb-3 password-container">
                     <label class="form-label" for="password">Contraseña</label>
 
-                    <div class="input-ojo-wrapper position-relative">
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            class="form-control"
-                            placeholder="********"
-                            required
-                        >
-                        <img
-                            id="ojito"
-                            class="ojito"
-                            src="/images/ojo_abierto.png"
-                            alt="Mostrar contraseña"
-                        >
+                    <div class="input_ojito_wrapper">
+                            <input type="password" id="password" class="form-control" placeholder="********">
+                            <img id="ojito" class="ojito" src="/images/ojo_abierto.png" alt="Mostrar contraseña" />
                     </div>
 
                     <span class="error text-danger" id="errorPassword"></span>
                 </div>
 
                 <!-- BOTÓN -->
-                <button type="submit" class="btn btn-dark w-100">
+                <button type="submit" class="btn btn-dark w-100 post">
                     Iniciar sesión
                 </button>
 

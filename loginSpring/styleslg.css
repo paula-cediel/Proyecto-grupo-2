@@ -1,67 +1,3 @@
-/*body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-}
-
-h1 {
-    color: #333;
-}
-
-form {
-    max-width: 300px;
-    margin: 0 auto;
-}
-
-input[type="text"], input[type="password"] {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-}
-
-button {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #45a049;
-}
-
-#error-message {
-    color: red;
-}*/
-/* Errores */
-.error {
-    color: red;
-    font-size: 0.9rem;
-}
-
-/* Cabecera */
-.header-contacto {
-    background: linear-gradient(to right, #240115, #3a3a3a);
-    color: white;
-    padding: 60px 0;
-    text-align: center;
-}
-
-/* Contenedor formulario */
-.form-container {
-    background: white;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px #240115;
-}
-
-/* Botón */
-.post {
-    background-color: #240115 !important;
-    border: none;
-}
-
 /* ======================
    RESET GENERAL
 ====================== */
@@ -90,7 +26,7 @@ body {
 
 /* ====== LOGO ====== */
 .logo-navbar {
-  height: 90px;
+  height: 70px;
   width: auto;
 }
 
@@ -109,9 +45,9 @@ body {
 .nav-links a {
     color: white;
     text-decoration: none;
-    margin: 0 12px;
+    margin: 0 5px;
     padding: 5px 4px;
-    font-size: 14px;
+    font-size: 16px;
     border-right: 1px solid #b3b3b3;
 }
 
@@ -122,6 +58,59 @@ body {
 .nav-links a:hover {
     border-bottom: 2px solid black;
 }
+
+/* Errores */
+.error {
+    color: red;
+    font-size: 0.9rem;
+}
+
+/* Cabecera */
+.header-contacto {
+    background: linear-gradient(to right, #240115, #3a3a3a);
+    color: white;
+    padding: 60px 0;
+}
+
+/* Contenedor formulario */
+.form-container {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px #240115;
+    text-align: center;
+}
+
+.form-label{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Botón */
+
+.post {
+    background-color: #240115 !important;
+    border: none !important;
+
+    color: #ffffff !important;   /* 🔥 TEXTO BLANCO */
+    font-size: 1rem;
+    font-weight: 600;
+
+    padding: 10px 28px;
+    border-radius: 6px;
+
+    width: auto !important;      /* 🔥 NO ancho completo */
+    display: inline-block !important;
+    text-align: center;
+
+    transition: all 0.3s ease;
+}
+
+.post:hover {
+    background-color: #47032a !important;
+    color: #ffffff !important;
+}
+
 
 /* Container constraseña y ojito */
 .input_ojito_wrapper {

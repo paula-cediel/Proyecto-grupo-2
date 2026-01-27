@@ -45,6 +45,7 @@ nombreInput.addEventListener("input", () => {
     if (nombreInput.value.trim() === "") errorNombre.textContent = "El nombre es obligatorio";
     else if (!isNaN(nombreInput.value)) errorNombre.textContent = "El nombre no puede ser solo números";
     else if (nombreInput.value.length < 3) errorNombre.textContent = "Debe tener al menos 3 caracteres";
+    else if(nombreInput.textContent = " ") errorNombre.textContent = "No pueden haber espacios";
     else errorNombre.textContent = "";
 });
 
@@ -114,17 +115,26 @@ formulario.onsubmit = async (e) => {
         });
 
         if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(errorText || "Error al registrar usuario");
-        }
-
-        Swal.fire("Registro exitoso", "Usuario creado correctamente", "success");
-
+        let mensaje = "Error al registrar usuario";
         
+        try {
+            const errorData = await response.json();
+            mensaje = errorData.message || errorData.error || mensaje;
+        } catch (jsonError) {   
+            console.error("No se pudo parsear el error del servidor", jsonError);
+        }
+        
+        throw new Error(mensaje);
+    }
+
+        await Swal.fire("Registro exitoso", "Usuario creado correctamente", "success");
         window.location.href = "../home/home.html"; 
 
     } catch (error) {
-        Swal.fire("Error", error.message, "error");
-        console.error(error);
+        Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: error.message
+    });
     }
 };

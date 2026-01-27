@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="container py-4">
             <h1 class="text-center mb-4">Crear productos</h1>
             <div class="card mb-4 shadow">
-                <div class="card-header bg-primary create text-white fw-bold">
+                <div id="titulo"class="card-header bg-primary create text-white fw-bold">
                     Crear nueva publicación
                 </div>
                 <div class="card-body">
