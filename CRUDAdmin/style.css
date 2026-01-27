@@ -65,6 +65,10 @@ body {
     border-bottom: 2px solid black;
 }
 
+#tituloForm{
+    background-color: #240115 !important;
+}
+
 /* Saludo cliente */
 #saludo {
     color: white;
@@ -313,12 +317,11 @@ footer hr {
 }
 
 .editar {
-    font-size: 20px;
-    margin-top: 15px;
+ 
     background-color: #240115;
     color: WHITE;
 }
-
+ 
 .editar:hover {
     background-color: #591c32;
     color: WHITE;
