@@ -261,7 +261,9 @@ footer .list-inline-item a {
     padding: 5px;
 }
 
-/* === CARRUSEL PRODUCTOS DESTACADOS === */
+/* ======================================================
+   CARRUSEL PRODUCTOS DESTACADOS – GENERAL
+====================================================== */
 
 #CarruselProductos .carousel-item {
     padding: 10px 0;
@@ -277,16 +279,6 @@ footer .list-inline-item a {
     transform: scale(1.03);
 }
 
-#CarruselProductos .card-img-top {
-    height: 250px;          /* 🔥 todas las imágenes igual */
-    object-fit: contain;   /* no se deforman */
-    padding: 10px;
-}
-
-#CarruselProductos .col-md-3 {
-    padding: 10px;         /* 🔥 separación entre cards */
-}
-
 #CarruselProductos .card-body {
     display: flex;
     flex-direction: column;
@@ -294,25 +286,64 @@ footer .list-inline-item a {
     min-height: 120px;
 }
 
-/* === FIX ESPACIADO CARRUSEL PRODUCTOS === */
-
-#CarruselProductos .row {
-    display: flex;
-    gap: 20px; /* 🔥 separación real entre cards */
-    justify-content: center;
-}
-
-#CarruselProductos .col-md-3 {
-    flex: 0 0 auto;
-    width: 22%; /* 🔥 antes era ~25% */
-}
-
-#CarruselProductos .card {
-    max-width: 260px; /* 🔥 controla tamaño */
-    margin: auto;
-}
-
 #CarruselProductos .card-img-top {
-    height: 220px;        /* antes 250 */
     object-fit: contain;
+    padding: 10px;
+}
+
+
+/* ======================================================
+   DESKTOP & TABLET (>= 768px)
+====================================================== */
+
+@media (min-width: 768px) {
+
+    #CarruselProductos .row {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    #CarruselProductos .col-md-3 {
+        flex: 0 0 auto;
+        width: 22%;
+        padding: 10px;
+    }
+
+    #CarruselProductos .card {
+        max-width: 260px;
+        margin: auto;
+    }
+
+    #CarruselProductos .card-img-top {
+        height: 220px;
+    }
+}
+
+
+/* ======================================================
+   MOBILE (<= 767px)
+====================================================== */
+
+@media (max-width: 767px) {
+
+    #CarruselProductos .row {
+        gap: 10px;
+        justify-content: center;
+    }
+
+    #CarruselProductos .card {
+        max-width: 100%;
+        margin: auto;
+    }
+
+    #CarruselProductos .card-img-top {
+        height: 180px;
+    }
+
+    /* Opcional: ocultar flechas en mobile */
+    #CarruselProductos .carousel-control-prev,
+    #CarruselProductos .carousel-control-next {
+        display: none;
+    }
 }

@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.removeItem("carrito");
 
       //llevar al home
-      window.location.href = "/home/home.html";
+      window.location.href = "../home/home.html";
     });
   }
 });
