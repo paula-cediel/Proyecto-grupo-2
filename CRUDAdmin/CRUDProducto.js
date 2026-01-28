@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark-purple shadow-sm">
                     <div class="top-bar d-flex justify-content-between align-items-center">
                         <a class="navbar-brand d-flex justify-content-start" href="#">
-                            <img src="images/LogoLetra.png" alt="Letal Cosplay Logo" class="logo-navbar">
+                            <img src="images/logoo.png" alt="Letal Cosplay Logo" class="logo-navbar">
                         </a>
                     </div>
  
@@ -175,7 +175,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark-purple shadow-sm">
                     <div class="top-bar d-flex justify-content-between align-items-center">
                         <a class="navbar-brand d-flex justify-content-start" href="#">
-                            <img src="images/LogoLetra.png" alt="Letal Cosplay Logo" class="logo-navbar">
+                            <img src="images/logoo.png" alt="Letal Cosplay Logo" class="logo-navbar">
                         </a>
                     </div>
 
