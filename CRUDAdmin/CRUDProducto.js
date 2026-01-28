@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                             <li class="nav-item" id="navPerfil"><a class="nav-link" href="../CRUDAdmin/main.html">Perfil</a></li>
                             <li class="nav-item"id="navContactenos"><a class="nav-link" href="../contactenos/contact-us.html">Contáctenos</a></li>
                             <span class="nav-link text-white">Hola, Administrador</span>
-                            <li class="nav-item d-flex align-items-center ms-2"></li><button id="btn_cerrar_sesion";"> Cerrar sesión </button></li>
+                            <li class="nav-item d-flex align-items-center ms-2"></li><button id="btn_cerrar_sesion"> Cerrar sesión </button></li>
                         </ul>
                     </div>
                 </nav>
@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 div.querySelector(".editar").onclick = async () => {
                     const actualizado = {
                         nombre: prompt("Nombre", p.nombre),
-                        precio_compra: Number(prompt("Precio", p.precio)),
+                        precio_compra: Number(prompt("Precio", p.precio_compra)),
                         descripcion: prompt("Descripción", p.descripcion),
                         stock: Number(prompt("Stock", p.stock)),
                         imagen: p.imagen
