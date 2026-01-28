@@ -298,7 +298,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         let usuarioActual = null;
 
-        // Cargar perfil
+        // Función cargar perfil
         async function cargarPerfil() {
             try {
                 const res = await fetch(`${API_USUARIOS}/${userId}`, {
@@ -315,7 +315,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             } catch (err) { console.error(err); }
         }
 
-        // Función cargar pefil
+        // Función cargar calificación
         async function cargarCalificacion() {
             try {
                 const res = await fetch(`${API_USUARIOS}/${userId}/calificaciones`, {
@@ -363,7 +363,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             });
         });
 
-        // Publicar calificación
+        //Función enviar calificación
         document.getElementById("publicar").addEventListener("click", async () => {
 
             if (calificacion_realizada) {
@@ -419,7 +419,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
         };
 
-        // Eliminar usuario - cerrar cuenta
+        // Funció´eliminar usuario - cerrar cuenta
         const btnEliminar = document.getElementById("btn_eliminar_cuenta");
         if (btnEliminar) {
             btnEliminar.onclick = async () => {
