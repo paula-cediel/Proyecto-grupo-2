@@ -414,6 +414,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         `;
 
         let usuarioActual = null;
+        let calificacion_realizada = false;
 
         // Función cargar perfil
         async function cargarPerfil() {
