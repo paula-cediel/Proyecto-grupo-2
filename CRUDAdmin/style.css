@@ -21,7 +21,7 @@ body {
 /* ====== HEADER ====== */
 .header-nav {
     background-color: #240115;
-    padding: 12px 20px;
+    padding: 10px 20px;
     display: flex;
 
     border-bottom: 1px solid #b3b3b3;
@@ -30,7 +30,7 @@ body {
 /* ====== LOGO ====== */
 /* LOGO */
 .logo-navbar {
-    height: 50px;
+    height: 70px;
     width: auto;
 }
 
@@ -51,7 +51,7 @@ body {
     text-decoration: none;
     margin: 0 12px;
     padding: 5px 4px;
-    font-size: 14px;
+    font-size: 16px;
     border-right: 1px solid #b3b3b3;
 }
 
@@ -336,4 +336,91 @@ footer hr {
     background-color: #240115;
     color: WHITE;
 
+}
+
+/* ============================= */
+/* === BTN CERRAR SESIÓN MOBILE */
+/* ============================= */
+
+@media (max-width: 768px) {
+
+    /* Header en columna ordenada */
+    .header-nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Menú centrado */
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    /* 🔒 Botón cerrar sesión controlado */
+    #btn_cerrar_sesion {
+        width: auto;                 /* evita que ocupe toda la pantalla */
+        max-width: 200px;
+        margin: 12px auto 0 auto;    /* centrado */
+        padding: 8px 16px;
+        font-size: 14px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+/* ===== SWEET ALERT PERSONALIZADO ===== */
+
+.swal-popup {
+    border-radius: 14px !important;
+    padding: 1.5rem !important;
+    font-family: "Poppins", sans-serif;
+}
+
+.swal-title {
+    color: #240115;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+/* Labels */
+.swal-label {
+    display: block;
+    text-align: left;
+    font-weight: 600;
+    margin-top: 0.8rem;
+    margin-bottom: 0.2rem;
+    color: #240115;
+    font-size: 0.9rem;
+}
+
+/* Inputs */
+.swal-input {
+    width: 100% !important;
+    border-radius: 6px !important;
+    border: 1px solid #ccc !important;
+    padding: 0.6rem !important;
+    font-size: 0.9rem;
+}
+
+/* Botón Guardar */
+.swal-btn-confirm {
+    background-color: #240115 !important;
+    color: white !important;
+    border-radius: 6px !important;
+    padding: 8px 16px !important;
+}
+
+.swal-btn-confirm:hover {
+    background-color: #591c32 !important;
+}
+
+/* Botón Cancelar */
+.swal-btn-cancel {
+    background-color: #9F838C !important;
+    color: black !important;
+    border-radius: 6px !important;
+    padding: 8px 16px !important;
 }

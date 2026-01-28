@@ -1,3 +1,5 @@
+
+
 document.addEventListener("DOMContentLoaded", async () => {
     const contenedor = document.getElementById("contenido_perfil");
     const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
@@ -25,7 +27,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark-purple shadow-sm">
                     <div class="top-bar d-flex justify-content-between align-items-center">
                         <a class="navbar-brand d-flex justify-content-start" href="#">
-                            <img src="images/LogoLetra.png" alt="Letal Cosplay Logo" class="logo-navbar">
+                            <img src="images/logoo.png" alt="Letal Cosplay Logo" class="logo-navbar">
                         </a>
                     </div>
  
@@ -42,7 +44,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                             <li class="nav-item" id="navPerfil"><a class="nav-link" href="../CRUDAdmin/main.html">Perfil</a></li>
                             <li class="nav-item"id="navContactenos"><a class="nav-link" href="../contactenos/contact-us.html">Contáctenos</a></li>
                             <span class="nav-link text-white">Hola, Administrador</span>
-                            <li class="nav-item d-flex align-items-center ms-2"></li><button id="btn_cerrar_sesion";"> Cerrar sesión </button></li>
+                            <li class="nav-item d-flex align-items-center ms-2"></li><button id="btn_cerrar_sesion"> Cerrar sesión </button></li>
                         </ul>
                     </div>
                 </nav>
@@ -118,7 +120,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 div.querySelector(".editar").onclick = async () => {
                     const actualizado = {
                         nombre: prompt("Nombre", p.nombre),
-                        precio_compra: Number(prompt("Precio", p.precio)),
+                        precio_compra: Number(prompt("Precio", p.precio_compra)),
                         descripcion: prompt("Descripción", p.descripcion),
                         stock: Number(prompt("Stock", p.stock)),
                         imagen: p.imagen
@@ -175,7 +177,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark-purple shadow-sm">
                     <div class="top-bar d-flex justify-content-between align-items-center">
                         <a class="navbar-brand d-flex justify-content-start" href="#">
-                            <img src="images/LogoLetra.png" alt="Letal Cosplay Logo" class="logo-navbar">
+                            <img src="images/logoo.png" alt="Letal Cosplay Logo" class="logo-navbar">
                         </a>
                     </div>
 
@@ -384,40 +386,58 @@ document.addEventListener("DOMContentLoaded", async () => {
             } catch (e) { Swal.fire("Error", "No se pudo enviar", "error"); }
         });
 
-        // Botón Editar
-        document.querySelector(".editar_usuario").onclick = async () => {
-             const { value: formValues } = await Swal.fire({
-                title: 'Editar Perfil',
-                html: 
-//EDITAR JHOANA
-                    `<label class="swal-label">Nombre</label>`+
-                    `<input id="sw-nom" class="swal2-input" value="${usuarioActual.nombre}">` +
-                    `<label class="swal-label">Apellido</label>`+
-                    `<input id="sw-ape" class="swal2-input" value="${usuarioActual.apellido || ''}">`+
-                    `<label class="swal-label">Teléfono</label>`+
-                    `<input id="sw-tel" class="swal2-input" value="${usuarioActual.telefono || ''}">`+
-                    `<label class="swal-label">Dirección</label>`+
-                    `<input id="sw-dir" class="swal2-input" value="${usuarioActual.direccion || ''}">`+
-                    `<label class="swal-label">Contraseña</label>`+
-                    `<input id="sw-pass" class="swal2-input" value=" ">`,
+      // Botón Editar
+document.querySelector(".editar_usuario").onclick = async () => {
+    const { value: formValues } = await Swal.fire({
+        title: 'Editar Perfil',
+        html:
+            `<label class="swal-label">Nombre</label>` +
+            `<input id="sw-nom" class="swal2-input swal-input" value="${usuarioActual.nombre}">` +
 
-                preConfirm: () => ({
-                    nombre: document.getElementById('sw-nom').value,
-                    apellido: document.getElementById('sw-ape').value,
-                    telefono: document.getElementById('sw-tel').value,
-                    direccion: document.getElementById('sw-dir').value,
-                    password: document.getElementById('sw-pass').value
-                })
-            });
-            if (formValues) {
-                await fetch(`${API_USUARIOS}/${userId}`, {
-                    method: "PUT",
-                    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
-                    body: JSON.stringify({ ...usuarioActual, ...formValues })
-                });
-                cargarPerfil();
-            }
-        };
+            `<label class="swal-label">Apellido</label>` +
+            `<input id="sw-ape" class="swal2-input swal-input" value="${usuarioActual.apellido || ''}">` +
+
+            `<label class="swal-label">Teléfono</label>` +
+            `<input id="sw-tel" class="swal2-input swal-input" value="${usuarioActual.telefono || ''}">` +
+
+            `<label class="swal-label">Dirección</label>` +
+            `<input id="sw-dir" class="swal2-input swal-input" value="${usuarioActual.direccion || ''}">` +
+
+            `<label class="swal-label">Contraseña</label>` +
+            `<input id="sw-pass" type="password" class="swal2-input swal-input">`,
+
+        showCancelButton: true,
+        confirmButtonText: 'Guardar',
+        cancelButtonText: 'Cancelar',
+
+        customClass: {
+            popup: 'swal-popup',
+            title: 'swal-title',
+            confirmButton: 'swal-btn-confirm',
+            cancelButton: 'swal-btn-cancel'
+        },
+
+        preConfirm: () => ({
+            nombre: document.getElementById('sw-nom').value,
+            apellido: document.getElementById('sw-ape').value,
+            telefono: document.getElementById('sw-tel').value,
+            direccion: document.getElementById('sw-dir').value,
+            password: document.getElementById('sw-pass').value
+        })
+    });
+
+    if (formValues) {
+        await fetch(`${API_USUARIOS}/${userId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify({ ...usuarioActual, ...formValues })
+        });
+        cargarPerfil();
+    }
+};
 
         // Funció´eliminar usuario - cerrar cuenta
         const btnEliminar = document.getElementById("btn_eliminar_cuenta");
