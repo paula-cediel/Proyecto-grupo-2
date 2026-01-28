@@ -39,6 +39,20 @@ mensajeInput.addEventListener("input", () => {
     mensajeInput.value.trim().length < 10 ? "El mensaje debe tener mínimo 10 caracteres." : "";
 });
 
+//Quitar las alertas tiempo real
+nombreInput.addEventListener("blur", () => {
+    errorNombre.textContent = "";
+});
+correoInput.addEventListener("blur", () => {
+    errorCorreo.textContent = "";
+});
+celularInput.addEventListener("blur", () => {
+    errorCelular.textContent = "";
+});
+mensajeInput.addEventListener("blur", () => {
+    errorMensaje.textContent = "";
+});
+
 form.addEventListener("submit", async function (e) {
   e.preventDefault();
 

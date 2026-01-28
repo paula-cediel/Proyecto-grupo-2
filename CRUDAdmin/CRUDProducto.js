@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         </header>
        
         <div class="container py-4">
-            <h1 class="text-center mb-4">Gestión de Productos</h1>
+            <h1 id="tituloFrom" class="text-center mb-4">Gestión de Productos</h1>
  
             <div class="card mb-4 shadow">
                 <div id="tituloForm" class="card-header bg-primary text-white fw-bold ">
@@ -298,6 +298,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         let usuarioActual = null;
 
+        // Cargar perfil
         async function cargarPerfil() {
             try {
                 const res = await fetch(`${API_USUARIOS}/${userId}`, {
@@ -314,6 +315,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             } catch (err) { console.error(err); }
         }
 
+        // Función cargar pefil
         async function cargarCalificacion() {
             try {
                 const res = await fetch(`${API_USUARIOS}/${userId}/calificaciones`, {
@@ -330,6 +332,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                         `<p class="vacio">Aún no has publicado ninguna calificación.</p>`;
                     return;
                 }
+
+                calificacion_realizada = true;
 
                 const c = calificaciones[0];
 
@@ -361,6 +365,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         // Publicar calificación
         document.getElementById("publicar").addEventListener("click", async () => {
+
+            if (calificacion_realizada) {
+                return Swal.fire("Aviso","Ya ingresaste tu calificación","info");
+    }
             const desc = document.getElementById("desc").value;
             if (!desc || rating === 0) return Swal.fire("Aviso", "Faltan datos", "warning");
 
@@ -371,6 +379,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     body: JSON.stringify({ nombre: usuarioActual.nombre, descripcion: desc, estrellas: rating })
                 });
                 Swal.fire("¡Gracias!", "Calificación guardada", "success");
+                calificacion_realizada = true;
                 await cargarCalificacion();
             } catch (e) { Swal.fire("Error", "No se pudo enviar", "error"); }
         });

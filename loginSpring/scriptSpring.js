@@ -59,6 +59,16 @@ ojito.addEventListener("click", () => {
     }
 });
 
+//Quitar las alertas en tiempo real
+correoInput.addEventListener("blur", () => {
+    errorCorreo.textContent = "";
+});
+
+passwordInput.addEventListener("blur", () => {
+    errorPassword.textContent = "";
+});
+
+
 // ==========================
 // LOGIN CON BACKEND (JWT)
 // ==========================
@@ -86,15 +96,6 @@ form.addEventListener("submit", async function (e) {
         }
 
         const data = await response.json();
-        /**
-         * SE ESPERA QUE EL BACKEND DEVUELVA ALGO ASÍ:
-         * {
-         *   token: "JWT...",
-         *   correo: "admin@letalcosplay.com",
-         *   rol: "ADMIN"
-         * }
-         */
-
         // ==========================
         // GUARDAR TOKEN Y USUARIO
         // ==========================

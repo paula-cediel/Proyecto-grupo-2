@@ -92,51 +92,47 @@
     </section>
  -->
     <section class="container my-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6 form-container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 form-container">
+                <form id="login-form" >
+                    <!-- CORREO -->
+                    <div class="mb-3">
+                        <label class="form-label" for="correo">Correo electrónico</label>
+                        <input
+                            type="email"
+                            id="correo"
+                            name="correo"
+                            class="form-control"
+                            placeholder="correo@ejemplo.com"
+                            required
+                        >
+                        <br>
+                        <span class="error text-danger" id="errorCorreo"></span>
+                    </div>
 
-            <form id="login-form" >
+                    <!-- CONTRASEÑA -->
+                    <div class="mb-3 password-container">
+                        <label class="form-label" for="password">Contraseña</label>
 
-                <!-- CORREO -->
-                <div class="mb-3">
-                    <label class="form-label" for="correo">Correo electrónico</label>
-                    <input
-                        type="email"
-                        id="correo"
-                        name="correo"
-                        class="form-control"
-                        placeholder="correo@ejemplo.com"
-                        required
-                    >
-                    <br>
-                    <span class="error text-danger" id="errorCorreo"></span>
-                </div>
-
-                <!-- CONTRASEÑA -->
-                <div class="mb-3 password-container">
-                    <label class="form-label" for="password">Contraseña</label>
-
-                    <div class="input_ojito_wrapper">
+                        <div class="input_ojito_wrapper">
                             <input type="password" id="password" class="form-control" placeholder="********">
                             <img id="ojito" class="ojito" src="/images/ojo_abierto.png" alt="Mostrar contraseña" />
+                            </div>
+                            <span class="indicaciones" id="indicacion">Debe contener al menos una mayúscula, una misnúscula, un número y un símbolo</span>
+                            <br>
+                            
+                            <span class="error text-danger" id="errorPassword"></span>
+                        </div>
+
+                        <!-- BOTÓN -->
+                        <button type="submit" class="btn btn-dark w-100 post">
+                            Iniciar sesión
+                        </button>
                     </div>
-                    <br>
-                    <span class="error text-danger" id="errorPassword"></span>
+                </form>
                 </div>
-
-                <!-- BOTÓN -->
-                <button type="submit" class="btn btn-dark w-100 post">
-                    Iniciar sesión
-                </button>
-
-            </form>
-
-        </div>
-    </div>
-</section>
-
-
- 
+            </div>
+        </section>
 
     <footer class="mt-auto">
         <div>

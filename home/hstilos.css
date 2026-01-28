@@ -125,6 +125,10 @@ h2:hover{
     margin-left: 40px;
 }
 
+.hero-btn:hover{
+    background-color: #47032a !important;
+}
+
 /* Imagen del hero */
 .hero-img {
     height: 500px;

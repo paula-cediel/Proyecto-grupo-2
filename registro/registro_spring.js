@@ -42,11 +42,19 @@ const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 // NOMBRE
 nombreInput.addEventListener("input", () => {
-    if (nombreInput.value.trim() === "") errorNombre.textContent = "El nombre es obligatorio";
-    else if (!isNaN(nombreInput.value)) errorNombre.textContent = "El nombre no puede ser solo números";
-    else if (nombreInput.value.length < 3) errorNombre.textContent = "Debe tener al menos 3 caracteres";
-    else if(nombreInput.textContent = " ") errorNombre.textContent = "No pueden haber espacios";
-    else errorNombre.textContent = "";
+    const valor = nombreInput.value;
+
+    if (valor.trim() === "") {
+        errorNombre.textContent = "El nombre es obligatorio";
+    } else if (!isNaN(valor)) {
+        errorNombre.textContent = "El nombre no puede ser solo números";
+    } else if (valor.length < 3) {
+        errorNombre.textContent = "Debe tener al menos 3 caracteres";
+    } else if (valor.includes(" ")) {
+        errorNombre.textContent = "No puede contener espacios";
+    } else {
+        errorNombre.textContent = "";
+    }
 });
 
 // TELÉFONO
@@ -81,6 +89,23 @@ passwordInput.addEventListener("input", () => {
 
     if(!min || !may || !num || !sim) errorPassword.textContent="Debe incluir mayúscula, minúscula, número y símbolo";
     else errorPassword.textContent="";
+});
+
+
+//Quitar las alertas tiempo real
+nombreInput.addEventListener("blur", () => {
+    errorNombre.textContent = "";
+});
+
+telefonoInput.addEventListener("blur", () => {
+    errorTelefono.textContent = "";
+});
+correoInput.addEventListener("blur", () => {
+    errorCorreo.textContent = "";
+});
+
+passwordInput.addEventListener("blur", () => {
+    errorPassword.textContent = "";
 });
 
 // ==========================

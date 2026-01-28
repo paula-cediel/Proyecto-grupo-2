@@ -1,5 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    const heroBtn = document.querySelector(".hero-btn");
+        
+    heroBtn.addEventListener("click", () => {
+        window.location.href = "../Productos/productos.html";
+    });
+    
+
     /* ================= PRODUCTOS ================= */
 
     const productos = [
