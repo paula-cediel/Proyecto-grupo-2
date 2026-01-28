@@ -156,10 +156,24 @@ formulario.onsubmit = async (e) => {
         window.location.href = "../home/home.html"; 
 
     } catch (error) {
-        Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: error.message
-    });
+    let titulo = "¡Uy! Algo salió mal";
+    let mensaje = error.message;
+
+    if (error.message === "Failed to fetch" || error.name === "TypeError") {
+        titulo = "Sin conexión con el servidor";
+        mensaje = "Intenta de nuevo en unos minutos.";
     }
+
+    Swal.fire({
+        icon: 'error',
+        title: titulo,
+        text: mensaje,
+        confirmButtonText: 'Entendido',
+        confirmButtonColor: '#591c32', 
+        background: '#f8f9fa',
+        customClass: {
+            title: 'tu-clase-personalizada'
+        }
+    });
+}
 };

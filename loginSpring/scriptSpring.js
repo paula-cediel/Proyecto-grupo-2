@@ -6,9 +6,8 @@ const logoutBtn = document.getElementById("logoutBtn");
 const errorCorreo = document.getElementById("errorCorreo");
 const errorPassword = document.getElementById("errorPassword");
 
-// ==========================
+
 // VALIDACIONES EN TIEMPO REAL
-// ==========================
 correoInput.addEventListener("input", validarCorreo);
 passwordInput.addEventListener("input", validarPassword);
 
@@ -40,9 +39,8 @@ function validarPassword() {
     }
 }
 
-// ==========================
+
 // MOSTRAR / OCULTAR PASSWORD
-// ==========================
 let mostrar = false;
 const password = document.getElementById("password");
 const ojito = document.getElementById("ojito");
@@ -69,9 +67,8 @@ passwordInput.addEventListener("blur", () => {
 });
 
 
-// ==========================
-// LOGIN CON BACKEND (JWT)
-// ==========================
+// LOGIN CON BACKEND
+
 form.addEventListener("submit", async function (e) {
     e.preventDefault();
 
@@ -96,9 +93,8 @@ form.addEventListener("submit", async function (e) {
         }
 
         const data = await response.json();
-        // ==========================
+        
         // GUARDAR TOKEN Y USUARIO
-        // ==========================
         localStorage.setItem("token", data.token);
         localStorage.setItem("usuarioActivo", JSON.stringify({
             correo: data.correo,
@@ -115,9 +111,8 @@ form.addEventListener("submit", async function (e) {
             icon: "success",
             confirmButtonText: "Continuar"
         }).then(() => {
-            // ==========================
+
             // REDIRECCIONES POR ROL
-            // ==========================
             if (data.rol === "ADMIN") {
                 window.location.href = "../CRUDAdmin/main.html";
             } else {
@@ -126,14 +121,27 @@ form.addEventListener("submit", async function (e) {
         });
 
     } catch (error) {
-        Swal.fire("Error", "Usuario o contraseña incorrectos", "error");
-        console.error(error);
+        let titulo = "Error de inicio de sesión";
+        let mensaje = error.message;
+
+        if (error.message === "Failed to fetch" || error.name === "TypeError") {
+            titulo = "Servidor fuera de servicio";
+            mensaje = "Por favor intenta mas tarde.";
+        }
+
+        Swal.fire({
+            icon: 'error',
+            title: titulo,
+            text: mensaje,
+            confirmButtonColor: '#591c32',
+            confirmButtonText: 'Entendido'
+        });
+        
+        console.error("Error detallado:", error);
     }
 });
 
-// ==========================
 // LOGOUT
-// ==========================
 if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {
         localStorage.removeItem("token");

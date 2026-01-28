@@ -56,6 +56,7 @@ function mostrarProductos() {
     const contadorBox = card.querySelector('.contador-container');
     const cantidadSpan = card.querySelector('.cantidadCompra');
 
+    // Boton agregar
     if (btnAgregar) {
       btnAgregar.addEventListener('click', () => agregarAlCarrito(prod.id));
       btnAgregar.classList.add('d-none');
@@ -63,6 +64,7 @@ function mostrarProductos() {
       if (cantidadSpan) cantidadSpan.textContent = getCantidad(prod.id);
     }
 
+    // Boton sumar
     if (btnSumar) {
       btnSumar.addEventListener('click', () => {
         if (getCantidad(prod.id) < prod.cantidad) {
@@ -71,7 +73,7 @@ function mostrarProductos() {
         }
       });
     }
-
+    //Boton restar 
     if (btnRestar) {
       btnRestar.addEventListener('click', () => {
         restarCarrito(prod.id);
@@ -91,6 +93,7 @@ function getCantidad(id) {
   return item ? item.cantidadCompra : 0;
 }
 
+// Agregar al carrito
 function agregarAlCarrito(id) {
   let item = carrito.find(p => p.id == id);
   if (!item) {
@@ -104,6 +107,7 @@ function agregarAlCarrito(id) {
   guardarCarrito();
 }
 
+// Restar en el carrito
 function restarCarrito(id) {
   let item = carrito.find(p => p.id == id);
   if (!item) return;
@@ -114,8 +118,8 @@ function restarCarrito(id) {
   guardarCarrito();
 }
 
+// Guardar en el carrito
 function guardarCarrito() {
-  // Intenta guardar en backend, fallback localStorage
   fetch('http://localhost:8080/carrito', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -127,6 +131,7 @@ function guardarCarrito() {
   actualizarCarrito();
 }
 
+// Actualizar carrito
 function actualizarCarrito() {
   carritoContainer.innerHTML = '';
   let total = 0;
@@ -153,9 +158,9 @@ btnVaciar.addEventListener('click', () => {
 // Carga inicial desde backend
 cargarProductos();
 
-// Lógica usuario (mantenida igual)
+
 const usuario = JSON.parse(localStorage.getItem('usuarioActivo'));
-const navPerfil = document.getElementById('navPerfil'); // Asume existe
+const navPerfil = document.getElementById('navPerfil'); 
 const navLogout = document.getElementById('navLogout');
 const navLogin = document.getElementById('navLogin');
 

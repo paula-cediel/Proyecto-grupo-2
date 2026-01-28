@@ -107,36 +107,151 @@ document.addEventListener("DOMContentLoaded", async () => {
                     </div>
                 </div>`;
  
-                /* ELIMINAR */
+                /* ELIMINAR CON SWEET ALERT*/
                 div.querySelector(".eliminar").onclick = async () => {
-                    await fetch(`${API_PRODUCTOS}/${p.idProducto}`, {
-                        method: "DELETE",
-                        headers: { Authorization: `Bearer ${token}` }
+                   
+                    const result = await Swal.fire({
+                        title: '¿Eliminar este producto?',
+                        text: "Esta acción no se puede deshacer.",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Sí, eliminar',
+                        cancelButtonText: 'Cancelar'
                     });
-                    cargarProductos();
+
+                    
+                    if (result.isConfirmed) {
+                        try {
+                            const response = await fetch(`${API_PRODUCTOS}/${p.idProducto}`, {
+                                method: "DELETE",
+                                headers: { 
+                                    "Authorization": `Bearer ${token}` 
+                                }
+                            });
+
+                            if (response.ok) {
+                                
+                                await Swal.fire(
+                                    'Eliminado',
+                                    'El producto ha sido borrado correctamente.',
+                                    'success'
+                                );
+                                cargarProductos(); 
+                            } else {
+                                
+                                const errorData = await response.json().catch(() => ({}));
+                                Swal.fire(
+                                    'Error', 
+                                    errorData.message || 'No se pudo eliminar el producto.', 
+                                    'error'
+                                );
+                            }
+
+                        } catch (error) {
+                            console.error("Error al eliminar producto:", error);
+                            Swal.fire(
+                                'Error de conexión', 
+                                'Hubo un fallo al contactar con el servidor.', 
+                                'error'
+                            );
+                        }
+                    }
                 };
  
-                /* EDITAR */
+                //EDITAR CON SWEETALERT
                 div.querySelector(".editar").onclick = async () => {
-                    const actualizado = {
-                        nombre: prompt("Nombre", p.nombre),
-                        precio_compra: Number(prompt("Precio", p.precio_compra)),
-                        descripcion: prompt("Descripción", p.descripcion),
-                        stock: Number(prompt("Stock", p.stock)),
-                        imagen: p.imagen
-                    };
- 
-                    await fetch(`${API_PRODUCTOS}/${p.idProducto}`, {
-                        method: "PUT",
-                        headers: {
-                            "Content-Type": "application/json",
-                            Authorization: `Bearer ${token}`
+                    const { value: formValues } = await Swal.fire({
+                        title: 'Editar Producto',
+                        html: `
+                            <div class="swal-form">
+                                <label class="swal-label">Nombre</label>
+                                <input id="sw-nombre" class="swal2-input swal-input" value="${p.nombre}">
+                                
+                                <label class="swal-label">Precio</label>
+                                <input id="sw-precio" type="number" class="swal2-input swal-input" value="${p.precio_compra}">
+                                
+                                <label class="swal-label">Descripción</label>
+                                <textarea id="sw-descripcion" class="swal2-textarea swal-input">${p.descripcion}</textarea>
+                                
+                                <label class="swal-label">Stock</label>
+                                <input id="sw-stock" type="number" class="swal2-input swal-input" value="${p.stock}">
+                                
+                                <label class="swal-label">URL Imagen</label>
+                                <input id="sw-imagen" class="swal2-input swal-input" value="${p.imagen}">
+                            </div>`,
+                        focusConfirm: false,
+                        showCancelButton: true,
+                        confirmButtonText: 'Guardar cambios',
+                        cancelButtonText: 'Cancelar',
+                        // ESTO ES LO QUE TE FALTABA:
+                        customClass: {
+                            popup: 'swal-popup',
+                            title: 'swal-title',
+                            confirmButton: 'swal-btn-confirm',
+                            cancelButton: 'swal-btn-cancel'
                         },
-                        body: JSON.stringify(actualizado)
+                        preConfirm: () => {
+                            return {
+                                nombre: document.getElementById('sw-nombre').value,
+                                precio_compra: Number(document.getElementById('sw-precio').value),
+                                descripcion: document.getElementById('sw-descripcion').value,
+                                stock: Number(document.getElementById('sw-stock').value),
+                                imagen: document.getElementById('sw-imagen').value
+                            }
+                        }
                     });
- 
-                    cargarProductos();
+
+                    if (formValues) {
+                        try {
+                            const response = await fetch(`${API_PRODUCTOS}/${p.idProducto}`, {
+                                method: "PUT",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    Authorization: `Bearer ${token}`
+                                },
+                                body: JSON.stringify(formValues)
+                            });
+
+                            if (response.ok) {
+                                Swal.fire({
+                                    title: '¡Actualizado!',
+                                    text: 'El producto ha sido modificado con éxito.',
+                                    icon: 'success',
+                                    customClass: { confirmButton: 'swal-btn-confirm' }
+                                });
+                                cargarProductos();
+                            } else {
+                                Swal.fire('Error', 'No se pudo actualizar el producto.', 'error');
+                            }
+                        } catch (error) {
+                            Swal.fire('Error', 'Hubo un problema con la conexión.', 'error');
+                        }
+                    }
                 };
+                
+                /* EDITAR */
+                // div.querySelector(".editar").onclick = async () => {
+                //     const actualizado = {
+                //         nombre: prompt("Nombre", p.nombre),
+                //         precio_compra: Number(prompt("Precio", p.precio_compra)),
+                //         descripcion: prompt("Descripción", p.descripcion),
+                //         stock: Number(prompt("Stock", p.stock)),
+                //         imagen: p.imagen
+                //     };
+ 
+                //     await fetch(`${API_PRODUCTOS}/${p.idProducto}`, {
+                //         method: "PUT",
+                //         headers: {
+                //             "Content-Type": "application/json",
+                //             Authorization: `Bearer ${token}`
+                //         },
+                //         body: JSON.stringify(actualizado)
+                //     });
+ 
+                //     cargarProductos();
+                // };
  
                 feed.appendChild(div);
             });
@@ -387,57 +502,57 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
 
       // Botón Editar
-document.querySelector(".editar_usuario").onclick = async () => {
-    const { value: formValues } = await Swal.fire({
-        title: 'Editar Perfil',
-        html:
-            `<label class="swal-label">Nombre</label>` +
-            `<input id="sw-nom" class="swal2-input swal-input" value="${usuarioActual.nombre}">` +
+        document.querySelector(".editar_usuario").onclick = async () => {
+            const { value: formValues } = await Swal.fire({
+                title: 'Editar Perfil',
+                html:
+                    `<label class="swal-label">Nombre</label>` +
+                    `<input id="sw-nom" class="swal2-input swal-input" value="${usuarioActual.nombre}">` +
 
-            `<label class="swal-label">Apellido</label>` +
-            `<input id="sw-ape" class="swal2-input swal-input" value="${usuarioActual.apellido || ''}">` +
+                    `<label class="swal-label">Apellido</label>` +
+                    `<input id="sw-ape" class="swal2-input swal-input" value="${usuarioActual.apellido || ''}">` +
 
-            `<label class="swal-label">Teléfono</label>` +
-            `<input id="sw-tel" class="swal2-input swal-input" value="${usuarioActual.telefono || ''}">` +
+                    `<label class="swal-label">Teléfono</label>` +
+                    `<input id="sw-tel" class="swal2-input swal-input" value="${usuarioActual.telefono || ''}">` +
 
-            `<label class="swal-label">Dirección</label>` +
-            `<input id="sw-dir" class="swal2-input swal-input" value="${usuarioActual.direccion || ''}">` +
+                    `<label class="swal-label">Dirección</label>` +
+                    `<input id="sw-dir" class="swal2-input swal-input" value="${usuarioActual.direccion || ''}">` +
 
-            `<label class="swal-label">Contraseña</label>` +
-            `<input id="sw-pass" type="password" class="swal2-input swal-input">`,
+                    `<label class="swal-label">Contraseña</label>` +
+                    `<input id="sw-pass" type="password" class="swal2-input swal-input">`,
 
-        showCancelButton: true,
-        confirmButtonText: 'Guardar',
-        cancelButtonText: 'Cancelar',
+                showCancelButton: true,
+                confirmButtonText: 'Guardar',
+                cancelButtonText: 'Cancelar',
 
-        customClass: {
-            popup: 'swal-popup',
-            title: 'swal-title',
-            confirmButton: 'swal-btn-confirm',
-            cancelButton: 'swal-btn-cancel'
-        },
+                customClass: {
+                    popup: 'swal-popup',
+                    title: 'swal-title',
+                    confirmButton: 'swal-btn-confirm',
+                    cancelButton: 'swal-btn-cancel'
+                },
 
-        preConfirm: () => ({
-            nombre: document.getElementById('sw-nom').value,
-            apellido: document.getElementById('sw-ape').value,
-            telefono: document.getElementById('sw-tel').value,
-            direccion: document.getElementById('sw-dir').value,
-            password: document.getElementById('sw-pass').value
-        })
-    });
+                preConfirm: () => ({
+                    nombre: document.getElementById('sw-nom').value,
+                    apellido: document.getElementById('sw-ape').value,
+                    telefono: document.getElementById('sw-tel').value,
+                    direccion: document.getElementById('sw-dir').value,
+                    password: document.getElementById('sw-pass').value
+                })
+            });
 
-    if (formValues) {
-        await fetch(`${API_USUARIOS}/${userId}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            },
-            body: JSON.stringify({ ...usuarioActual, ...formValues })
-        });
-        cargarPerfil();
-    }
-};
+            if (formValues) {
+                await fetch(`${API_USUARIOS}/${userId}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ ...usuarioActual, ...formValues })
+                });
+                cargarPerfil();
+            }
+        };
 
         // Funció´eliminar usuario - cerrar cuenta
         const btnEliminar = document.getElementById("btn_eliminar_cuenta");
