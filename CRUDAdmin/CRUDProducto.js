@@ -1,3 +1,5 @@
+
+
 document.addEventListener("DOMContentLoaded", async () => {
     const contenedor = document.getElementById("contenido_perfil");
     const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));

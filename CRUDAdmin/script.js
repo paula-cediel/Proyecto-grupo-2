@@ -1,3 +1,6 @@
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
 
   const contenedor = document.getElementById("contenido_perfil");
