@@ -386,40 +386,58 @@ document.addEventListener("DOMContentLoaded", async () => {
             } catch (e) { Swal.fire("Error", "No se pudo enviar", "error"); }
         });
 
-        // Botón Editar
-        document.querySelector(".editar_usuario").onclick = async () => {
-             const { value: formValues } = await Swal.fire({
-                title: 'Editar Perfil',
-                html: 
-//EDITAR JHOANA
-                    `<label class="swal-label">Nombre</label>`+
-                    `<input id="sw-nom" class="swal2-input" value="${usuarioActual.nombre}">` +
-                    `<label class="swal-label">Apellido</label>`+
-                    `<input id="sw-ape" class="swal2-input" value="${usuarioActual.apellido || ''}">`+
-                    `<label class="swal-label">Teléfono</label>`+
-                    `<input id="sw-tel" class="swal2-input" value="${usuarioActual.telefono || ''}">`+
-                    `<label class="swal-label">Dirección</label>`+
-                    `<input id="sw-dir" class="swal2-input" value="${usuarioActual.direccion || ''}">`+
-                    `<label class="swal-label">Contraseña</label>`+
-                    `<input id="sw-pass" class="swal2-input" value=" ">`,
+      // Botón Editar
+document.querySelector(".editar_usuario").onclick = async () => {
+    const { value: formValues } = await Swal.fire({
+        title: 'Editar Perfil',
+        html:
+            `<label class="swal-label">Nombre</label>` +
+            `<input id="sw-nom" class="swal2-input swal-input" value="${usuarioActual.nombre}">` +
 
-                preConfirm: () => ({
-                    nombre: document.getElementById('sw-nom').value,
-                    apellido: document.getElementById('sw-ape').value,
-                    telefono: document.getElementById('sw-tel').value,
-                    direccion: document.getElementById('sw-dir').value,
-                    password: document.getElementById('sw-pass').value
-                })
-            });
-            if (formValues) {
-                await fetch(`${API_USUARIOS}/${userId}`, {
-                    method: "PUT",
-                    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
-                    body: JSON.stringify({ ...usuarioActual, ...formValues })
-                });
-                cargarPerfil();
-            }
-        };
+            `<label class="swal-label">Apellido</label>` +
+            `<input id="sw-ape" class="swal2-input swal-input" value="${usuarioActual.apellido || ''}">` +
+
+            `<label class="swal-label">Teléfono</label>` +
+            `<input id="sw-tel" class="swal2-input swal-input" value="${usuarioActual.telefono || ''}">` +
+
+            `<label class="swal-label">Dirección</label>` +
+            `<input id="sw-dir" class="swal2-input swal-input" value="${usuarioActual.direccion || ''}">` +
+
+            `<label class="swal-label">Contraseña</label>` +
+            `<input id="sw-pass" type="password" class="swal2-input swal-input">`,
+
+        showCancelButton: true,
+        confirmButtonText: 'Guardar',
+        cancelButtonText: 'Cancelar',
+
+        customClass: {
+            popup: 'swal-popup',
+            title: 'swal-title',
+            confirmButton: 'swal-btn-confirm',
+            cancelButton: 'swal-btn-cancel'
+        },
+
+        preConfirm: () => ({
+            nombre: document.getElementById('sw-nom').value,
+            apellido: document.getElementById('sw-ape').value,
+            telefono: document.getElementById('sw-tel').value,
+            direccion: document.getElementById('sw-dir').value,
+            password: document.getElementById('sw-pass').value
+        })
+    });
+
+    if (formValues) {
+        await fetch(`${API_USUARIOS}/${userId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify({ ...usuarioActual, ...formValues })
+        });
+        cargarPerfil();
+    }
+};
 
         // Eliminar usuario - cerrar cuenta
         const btnEliminar = document.getElementById("btn_eliminar_cuenta");
