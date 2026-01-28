@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                             <li class="nav-item"><a class="nav-link" href="../home/home.html">Inicio</a></li>
                             <li class="nav-item"><a class="nav-link" href="../acerca_de_nosotros/about.html">Sobre
                                     nosotros</a></li>
-                            <li class="nav-item" id="navProductos"><a class="nav-link" href="/Productos/productos.html">Productos</a></li>
+                            <li class="nav-item" id="navProductos"><a class="nav-link" href="../Productos/productos.html">Productos</a></li>
                             <li class="nav-item" id="navPerfil"><a class="nav-link" href="../CRUDAdmin/main.html">Perfil</a></li>
                             <li class="nav-item"id="navContactenos"><a class="nav-link" href="../contactenos/contact-us.html">Contáctenos</a></li>
                             <span class="nav-link text-white">Hola, Administrador</span>
@@ -87,7 +87,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             const productos = await res.json();
             mostrarProductos(productos);
         }
- 
+ function formatearPrecio(valor) {
+    return Number(valor).toLocaleString("es-CO");
+}
+
         /* ===== MOSTRAR ===== */
         function mostrarProductos(productos) {
             feed.innerHTML = "";
@@ -100,7 +103,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                     <div class="card-body">
                         <h5>${p.nombre}</h5>
                         <p>${p.descripcion}</p>
-                        <p><b>$${p.precio_compra}</b></p>
+                        <p><b>$${formatearPrecio(p.precio_compra)}</b></p>
+
                         <p>Stock: ${p.stock}</p>
                         <button class="btn btn-warning btn-sm editar">Editar</button>
                         <button class="btn btn-danger btn-sm eliminar">Eliminar</button>
@@ -302,11 +306,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                     <div class="collapse navbar-collapse justify-content-center" id="navMenu">
                         <ul class="nav-links text-center mt-3 navbar-nav ms-auto ">
-                            <li class="nav-item"><a class="nav-link" href="/home/home.html">Inicio</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/acerca_de_nosotros/about.html">Sobre nosotros</a></li>
-                            <li class="nav-item" id="navProductos"><a class="nav-link" href="/Productos/productos.html">Productos</a></li>
-                            <li class="nav-item" id="navPerfil"><a class="nav-link" href="/CRUDAdmin/main.html">Perfil</a></li>
-                            <li class="nav-item" id="navContactenos"><a class="nav-link" href="/contactenos/contact-us.html">Contáctenos</a></li>
+                            <li class="nav-item"><a class="nav-link" href="../home/home.html">Inicio</a></li>
+                            <li class="nav-item"><a class="nav-link" href="../acerca_de_nosotros/about.html">Sobre nosotros</a></li>
+                            <li class="nav-item" id="navProductos"><a class="nav-link" href="../Productos/productos.html">Productos</a></li>
+                            <li class="nav-item" id="navPerfil"><a class="nav-link" href="../CRUDAdmin/main.html">Perfil</a></li>
+                            <li class="nav-item" id="navContactenos"><a class="nav-link" href="../contactenos/contact-us.html">Contáctenos</a></li>
                             <li class="nav-item d-flex align-items-center ms-2"><span id="saludo"></span></li>
                             <li class="nav-item d-flex align-items-center ms-2"><button id="btn_cerrar_sesion"> Cerrar sesión </button></li>
                         </ul>
@@ -414,7 +418,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         `;
 
         let usuarioActual = null;
-
+let calificacion_realizada = false;
         // Función cargar perfil
         async function cargarPerfil() {
             try {
@@ -581,7 +585,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                         if (response.ok) {
                             await Swal.fire('Cuenta Eliminada', 'Tu cuenta ha sido borrada con éxito.', 'success');
                             localStorage.clear();
-                            window.location.href = "/home/home.html"; 
+                            window.location.href = "../home/home.html"; 
                         } else {
                             const errorData = await response.json();
                             Swal.fire('Error', errorData.message || 'No se pudo eliminar la cuenta.', 'error');
@@ -598,6 +602,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Evento cerrar sesión (común para ambos)
     document.getElementById("btn_cerrar_sesion").onclick = () => {
         localStorage.clear();
-        window.location.href = "/loginSpring/login.html";
+        window.location.href = "../loginSpring/login.html";
     };
 }); 
