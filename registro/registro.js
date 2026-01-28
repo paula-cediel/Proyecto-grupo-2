@@ -22,11 +22,11 @@ const ojito = document.getElementById("ojito");
 ojito.addEventListener("click", () => {
   if (mostrar) {
     contrasena.type = "password";
-    ojito.src = "/images/ojo_abierto.png";
+    ojito.src = "../images/ojo_abierto.png";
     mostrar = false;
   } else {
     contrasena.type = "text";
-    ojito.src = "/images/ojo_cerrado.png";
+    ojito.src = "../images/ojo_cerrado.png";
     mostrar = true;
   }
 });
