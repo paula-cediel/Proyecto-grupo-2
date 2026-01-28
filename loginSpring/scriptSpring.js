@@ -48,11 +48,11 @@ const ojito = document.getElementById("ojito");
 ojito.addEventListener("click", () => {
     if (mostrar) {
         password.type = "password";
-        ojito.src = "/images/ojo_abierto.png";
+        ojito.src = "../images/ojo_abierto.png";
         mostrar = false;
     } else {
         password.type = "text";
-        ojito.src = "/images/ojo_cerrado.png";
+        ojito.src = "../images/ojo_cerrado.png";
         mostrar = true;
     }
 });
