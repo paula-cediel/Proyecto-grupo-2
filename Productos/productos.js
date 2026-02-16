@@ -193,13 +193,13 @@ btnPagar.addEventListener("click", comprar);
 async function comprar() {
 
     if (carrito.length === 0) {
-        alert("El carrito está vacío");
+        Swal.fire("Error", "El carrito está vacío", "error");
         return;
     }
 
     const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
     if (!usuario) {
-        alert("Debes iniciar sesión");
+        Swal.fire("Error", "Debes iniciar sesión", "error");
         return;
     }
 
@@ -236,11 +236,11 @@ async function comprar() {
 
         generarPDF(facturaCreada);
 
-        alert("Compra realizada con éxito 🛒✅");
+        Swal.fire("¡Felicitaciones!", "Compra realizada con éxito", "success");
 
     } catch (error) {
         console.error(error);
-        alert("Error al procesar la compra");
+        Swal.fire("Error", "Error al procesar la compra", "error");
     }
 }
 
