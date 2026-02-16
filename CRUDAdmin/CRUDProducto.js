@@ -69,6 +69,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                         <input class="form-control mb-2" id="imagen" placeholder="URL Imagen" required>
                         <button class="btn btn-success w-100">Guardar</button>
                     </form>
+                    <h5 class="mt-4">Vista previa</h5>
                 </div>
             </div>
  
@@ -76,8 +77,55 @@ document.addEventListener("DOMContentLoaded", async () => {
             <div id="feed" class="row g-3"></div>
         </div>`;
  
-                const form = document.getElementById("productoForm");
+        const form = document.getElementById("productoForm");
         const feed = document.getElementById("feed");
+
+        /* ===== PREVISUALIZACIÓN EN TIEMPO REAL ===== */
+
+        const nombreInput = document.getElementById("nombre");
+        const precioInput = document.getElementById("precio");
+        const descripcionInput = document.getElementById("descripcion");
+        const stockInput = document.getElementById("stock");
+        const imagenInput = document.getElementById("imagen");
+
+        const previewContainer = document.createElement("div");
+        previewContainer.className = "card mt-4 shadow";
+        previewContainer.style.maxWidth = "300px";
+        previewContainer.innerHTML = `
+            <img id="previewImg" src="https://via.placeholder.com/300x200" 
+                class="card-img-top" style="height:200px; object-fit:cover;">
+            <div class="card-body">
+                <h5 id="previewNombre">Nombre del producto</h5>
+                <p id="previewDescripcion">Descripción del producto</p>
+                <p><b>$<span id="previewPrecio">0</span></b></p>
+                <p>Stock: <span id="previewStock">0</span></p>
+            </div>
+        `;
+
+        form.parentElement.appendChild(previewContainer);
+
+        // Referencias preview
+        const previewNombre = document.getElementById("previewNombre");
+        const previewDescripcion = document.getElementById("previewDescripcion");
+        const previewPrecio = document.getElementById("previewPrecio");
+        const previewStock = document.getElementById("previewStock");
+        const previewImg = document.getElementById("previewImg");
+
+        function actualizarPreview() {
+            previewNombre.textContent = nombreInput.value || "Nombre del producto";
+            previewDescripcion.textContent = descripcionInput.value || "Descripción del producto";
+            previewPrecio.textContent = formatearPrecio(precioInput.value || 0);
+            previewStock.textContent = stockInput.value || 0;
+            previewImg.src = imagenInput.value || "https://via.placeholder.com/300x200";
+        }
+
+        // Eventos en tiempo real
+        nombreInput.addEventListener("input", actualizarPreview);
+        precioInput.addEventListener("input", actualizarPreview);
+        descripcionInput.addEventListener("input", actualizarPreview);
+        stockInput.addEventListener("input", actualizarPreview);
+        imagenInput.addEventListener("input", actualizarPreview);
+
  
         /* ===== LISTAR PRODUCTOS ===== */
         async function cargarProductos() {
