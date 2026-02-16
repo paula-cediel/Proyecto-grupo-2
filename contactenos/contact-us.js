@@ -86,20 +86,60 @@ form.addEventListener("submit", async function (e) {
 
   if (!valido) return;
 
-  Swal.fire("Envío exitoso", "Información enviada correctamente", "success");
-
   const contacto = {
     nombre: nombreInput.value.trim(),
     correo: correoInput.value.trim(),
-    celular: celularInput.value.trim(),
+    telefono: celularInput.value.trim(),
     tipoSolicitud: tipoInput.value,
     mensaje: mensajeInput.value.trim(),
     fecha: new Date().toISOString()
   };
 
-  const contactosGuardados = JSON.parse(localStorage.getItem("contactos")) || [];
-  contactosGuardados.push(contacto);
-  localStorage.setItem("contactos", JSON.stringify(contactosGuardados));
+  try{
+    const response = await fetch("http://localhost:8081/contactos/crear",{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(contacto)
+    });
+    if(!response.ok){
+      throw new Error("No se puedo enviar la información")
+    }
+    const data = await response.json();
+  Swal.fire({
+            title: "Envío exitoso",
+            text: "Pronto te contactaremos",
+            icon: "success",
+            confirmButtonText: "Continuar"
+        }).then(() => {
+          form.reset()
+        });
+  } catch (error){
+    let titulo = "Error al enviar información";
+        let mensaje = error.message;
+
+        if (error.message === "Failed to fetch" || error.name === "TypeError") {
+            titulo = "Servidor fuera de servicio";
+            mensaje = "Por favor intenta mas tarde.";
+        }
+
+        Swal.fire({
+            icon: 'error',
+            title: titulo,
+            text: mensaje,
+            confirmButtonColor: '#591c32',
+            confirmButtonText: 'Entendido'
+        });
+        
+        console.error("Error detallado:", error);
+
+  }
+  
+
+  // const contactosGuardados = JSON.parse(localStorage.getItem("contactos")) || [];
+  // contactosGuardados.push(contacto);
+  // localStorage.setItem("contactos", JSON.stringify(contactosGuardados));
 
   form.reset();
 });
