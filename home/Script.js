@@ -1,5 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    function formatearPrecio(valor) {
+        return Number(valor).toLocaleString("es-CO", {
+            style: "currency",
+            currency: "COP",
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+    }
+
     const heroBtn = document.querySelector(".hero-btn");
         
     heroBtn.addEventListener("click", () => {
@@ -10,22 +19,22 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ================= PRODUCTOS ================= */
 
     const productos = [
-        { id: 1, nombre: "Luffy", precio: 80000, img: "imagenes/lufy.png" },
-        { id: 2, nombre: "Cosplay", precio: 120000, img: "imagenes/Cosplay.png" },
-        { id: 3, nombre: "Zorro Hada", precio: 150000, img: "imagenes/Zorro.png" },
-        { id: 4, nombre: "Anime outfits", precio: 200000, img: "imagenes/gotica.png" },
-        { id: 5, nombre: "Katana", precio: 80000, img: "imagenes/KATANA.jpg" },
-        { id: 6, nombre: "Lentes", precio: 120000, img: "imagenes/lentes.jpeg" },
-        { id: 7, nombre: "Peluca Kira", precio: 150000, img: "imagenes/peluca kira.jpg" },
-        { id: 8, nombre: "Lentes", precio: 200000, img: "imagenes/lentes2.jpeg" },
-        { id: 9, nombre: "Curly Hair", precio: 80000, img: "imagenes/dandan.png" },
-        { id: 10, nombre: "Choker", precio: 120000, img: "imagenes/choker.png" },
-        { id: 11, nombre: "Adults Nezuko Kamado", precio: 150000, img: "imagenes/kimesu.png" },
-        { id: 12, nombre: "Adult Tomioka Giyuu", precio: 200000, img: "imagenes/kimesu1.png" },
-        { id: 13, nombre: "Dandadan Okarun", precio: 80000, img: "imagenes/Dandadan.png" },
-        { id: 14, nombre: "Oshi no Ko Hoshino", precio: 120000, img: "imagenes/Oshi.png" },
-        { id: 15, nombre: "Star Wars", precio: 150000, img: "imagenes/Star.png" },
-        { id: 16, nombre: "Takerlama X-Men 97", precio: 200000, img: "imagenes/Takerlama.png" }
+        { id: 1, nombre: "Luffy", precio: 80000.00, img: "imagenes/lufy.png" },
+        { id: 2, nombre: "Cosplay", precio: 120000.00, img: "imagenes/Cosplay.png" },
+        { id: 3, nombre: "Zorro Hada", precio: 150000.00, img: "imagenes/Zorro.png" },
+        { id: 4, nombre: "Anime outfits", precio: 200000.00, img: "imagenes/gotica.png" },
+        { id: 5, nombre: "Katana", precio: 80000.00, img: "imagenes/KATANA.jpg" },
+        { id: 6, nombre: "Lentes", precio: 120000.00, img: "imagenes/lentes.jpeg" },
+        { id: 7, nombre: "Peluca Kira", precio: 150000.00, img: "imagenes/peluca kira.jpg" },
+        { id: 8, nombre: "Lentes", precio: 200000.00, img: "imagenes/lentes2.jpeg" },
+        { id: 9, nombre: "Curly Hair", precio: 80000.00, img: "imagenes/dandan.png" },
+        { id: 10, nombre: "Choker", precio: 120000.00, img: "imagenes/choker.png" },
+        { id: 11, nombre: "Adults Nezuko Kamado", precio: 150000.00, img: "imagenes/kimesu.png" },
+        { id: 12, nombre: "Adult Tomioka Giyuu", precio: 200000.00, img: "imagenes/kimesu1.png" },
+        { id: 13, nombre: "Dandadan Okarun", precio: 80000.00, img: "imagenes/Dandadan.png" },
+        { id: 14, nombre: "Oshi no Ko Hoshino", precio: 120000.00, img: "imagenes/Oshi.png" },
+        { id: 15, nombre: "Star Wars", precio: 150000.00, img: "imagenes/Star.png" },
+        { id: 16, nombre: "Takerlama X-Men 97", precio: 200000.00, img: "imagenes/Takerlama.png" }
     ];
 
     const contenedor = document.getElementById("contenedor-carrusel");
@@ -48,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <img src="${prod.img}" class="card-img-top" alt="${prod.nombre}">
                         <div class="card-body text-center">
                             <h5>${prod.nombre}</h5>
-                            <p>$${prod.precio}</p>
+                            <p style="font-weight: bold">${formatearPrecio(prod.precio)}</p>
                         </div>
                     </div>
                 </a>

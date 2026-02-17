@@ -11,6 +11,18 @@ let productos = [];
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 // ===============================
+// FUNCIONES UTILES
+// ===============================
+function formatearPrecio(valor) {
+    return Number(valor).toLocaleString("es-CO", {
+        style: "currency",
+        currency: "COP",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
+}
+
+// ===============================
 // ELEMENTOS DOM
 // ===============================
 const listaProductos = document.getElementById("lista-productos");
@@ -50,7 +62,7 @@ function mostrarProductos() {
             <img src="${prod.imagen}" class="card-img-top">
             <div class="card-body text-center">
                 <h5>${prod.nombre}</h5>
-                <p class="fw-bold">$${prod.precio_compra}</p>
+                <p class="fw-bold">${formatearPrecio(prod.precio_compra)}</p>
                 <p>${prod.descripcion}</p>
                 <p class="text-success fw-bold">Stock: ${prod.stock}</p>
 
@@ -162,7 +174,7 @@ function actualizarCarrito() {
     <span>${prod.nombre} x${item.cantidad}</span>
 
     <div class="d-flex gap-2 align-items-center">
-        <strong>$${subtotalItem}</strong>
+        <strong>${formatearPrecio(subtotalItem)}</strong>
         <button class="btn btn-sm btn-outline-danger"
             onclick="eliminarProducto(${item.idProducto})">
             <i class="bi bi-trash"></i>
@@ -172,7 +184,7 @@ function actualizarCarrito() {
 
     });
 
-    subtotal.textContent = total;
+    subtotal.textContent = formatearPrecio(total);
     contador.textContent = items;
 }
 
@@ -204,7 +216,7 @@ async function comprar() {
     }
 
     const facturaDTO = {
-        valorEnvio: 8500,
+        valorEnvio: 8500.00,
         detalles: carrito.map(item => ({
             cantidadVendida: item.cantidad,
             producto: {
@@ -264,18 +276,14 @@ function generarPDF(factura) {
     y += 10;
 
     factura.detalles.forEach(det => {
-        doc.text(
-            `${det.producto.nombre} x${det.cantidadVendida} - $${det.precioUnitario * det.cantidadVendida}`,
-            20,
-            y
-        );
+        doc.text(`${det.producto.nombre} x${det.cantidadVendida} - ${formatearPrecio(det.precioUnitario * det.cantidadVendida)}`, 20, y);
         y += 8;
     });
 
     y += 10;
-    doc.text(`Envío: $${factura.valorEnvio}`, 20, y);
+    doc.text(`Envío: ${formatearPrecio(factura.valorEnvio)}`, 20, y);
     y += 8;
-    doc.text(`TOTAL: $${factura.total}`, 20, y);
+    doc.text(`TOTAL: ${formatearPrecio(factura.total)}`, 20, y);;
 
     doc.save(`factura_${factura.idFactura}.pdf`);
 }

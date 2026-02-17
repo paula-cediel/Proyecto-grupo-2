@@ -136,7 +136,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             mostrarProductos(productos);
         }
  function formatearPrecio(valor) {
-    return Number(valor).toLocaleString("es-CO");
+    return Number(valor).toLocaleString("es-CO", { 
+        minimumFractionDigits: 2, 
+        maximumFractionDigits: 2 
+    });
 }
 
         /* ===== MOSTRAR ===== */
