@@ -1,0 +1,19 @@
+/* global.css */
+
+:root {
+    --main-font: "Nunito", sans-serif;
+}
+
+/* Aplicación global */
+body {
+    font-family: var(--main-font);
+}
+
+/* Formularios heredan */
+button,
+input,
+select,
+textarea,
+form {
+    font-family: inherit;
+}
